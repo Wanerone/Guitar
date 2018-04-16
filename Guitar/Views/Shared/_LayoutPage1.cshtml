@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>指弹吉他吧</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bootstrap-3.3.7-dist/css/bootstrap.min.css")
+    @Scripts.Render("~/bootstrap-3.3.7-dist/js/bootstrap.min.js")
+    @Styles.Render("~/font-awesome-4.7.0/css/font-awesome.min.css")
+    @Scripts.Render("~/Scripts/jquery-3.3.1.min.js")
+    <style type="text/css">
+        .navbar .nav > li .dropdown-menu {
+            margin: 0;
+        }
+
+        .navbar .nav > li:hover .dropdown-menu {
+            display: block;
+        }
+    </style>
+  
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header ">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               @Html.ActionLink("Fp-Guitar", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "font-size:30px;color:#84B9EF" })
+                
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
+                    <li class="dropdown">
+                        @Html.ActionLink("乐谱", "Contact", "Home")
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("热门谱子", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("最新谱子", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("热门关注", "Contact", "Home")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("视频", "About", "Home")</li>
+                    <li>@Html.ActionLink("攻略", "Contact", "Home")</li>
+                </ul>
+               
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
