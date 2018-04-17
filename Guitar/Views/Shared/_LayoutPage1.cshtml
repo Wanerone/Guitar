@@ -18,20 +18,65 @@
         .navbar .nav > li:hover .dropdown-menu {
             display: block;
         }
+
+        .headimg .userin {
+            height:200px;
+            display: none;
+            float:left;
+            position: absolute;
+            /*right: 12%;*/
+            width: 200px;
+            border: none;
+            background-color:#E7EFF3;
+            overflow:visible;
+            margin-left: -100px;
+            width: 240px;
+            padding: 20px 0 0;
+            background: #fff;
+            -webkit-box-shadow: rgba(0,0,0,.16) 0 2px 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.16);
+            border-radius: 0 0 4px 4px;
+            line-height: normal;
+        }
+        .userin a{
+            text-decoration:none;
+        }
+        .footuse{
+            width:100%;
+        }
+        .footuse a{
+            float:right;
+            padding-right:10px;
+        }
+        .headimg a:hover {
+            margin: 0;
+        }
+
+        .headimg:hover .userin {
+            display: block;
+        }
+        .name{
+            text-align:center;
+            width:100%;
+            height:30px;
+            font-size:20px;
+        }
+        .use{
+            width:100%;
+            padding-top:10px;
+        }
     </style>
-  
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header ">
+            <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-               @Html.ActionLink("Fp-Guitar", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "font-size:30px;color:#84B9EF" })
-                
+                @Html.ActionLink("Guitar", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "font-size:30px;color:#84B9EF" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -47,21 +92,82 @@
                     <li>@Html.ActionLink("视频", "About", "Home")</li>
                     <li>@Html.ActionLink("攻略", "Contact", "Home")</li>
                 </ul>
-               
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </li>
+                    <li class="dropdown">
+                        @Html.ActionLink("发布乐谱", "Contact", "Home", new { @class = "navbar-brand", @style = "font-size:15px;color:#C00000;" })
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("发布乐谱", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("发布视频", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("发布帖子", "Contact", "Home")</li>
+                        </ul>
+                    </li>
+                </ul>
+
+
+                @if (Session["UserName"] == null)
+                {
+                    using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-form navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="headimg">
+                            <a><img src="~/Images/head.jpg" class="img-circle img-responsive" style="height:34px;width:34px;" /></a>
+                            <div class="userin">
+                                <div class="name"><a>Hengist</a></div>
+                                <div class="use">
+                                    <div class="list-group" style="width:50%; float:left;">
+                                        <a href="#" class="list-group-item"><i class="fa fa-user-o fa-fw"></i> 我的空间</a>
+                                        <a href="#" class="list-group-item"><i class="fa fa-music fa-fw"></i> 我的乐谱</a>
+                                    </div>
+                                    <div class="list-group" style="width:50%; float:left;">
+                                        <a href="#" class="list-group-item"><i class="fa fa-file-text-o fa-fw"></i> 发布管理</a>
+                                        <a href="#" class="list-group-item"><i class="fa fa-cog fa-fw"></i> 设置中心</a>
+                                    </div>
+                                </div>
+                                <div class="footuse">
+                                    <a>退出</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("注册", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink("登录", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                }
+
+                @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { id = "search", @class = "navbar-form navbar-right" }))
+                {
+                    <div class="input-group">
+
+                        <input type="text" class="form-control" placeholder="搜乐谱,视频..." style="border:none" />@*<i class="fa fa-search fa-2x" aria-hidden="true"></i>*@
+                        @*<input type="submit" value="search" />*@
+                        <span class="input-group-addon" style="border:none"><i class="fa fa-search" aria-hidden="true"></i></span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                }
+
             </div>
+
         </div>
     </div>
-
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
-        </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <div class="footer">
+        <div class="container">
+        </div>
+    </div>
+
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
 </body>
 </html>

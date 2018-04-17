@@ -366,6 +366,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="bootstrap-3.3.7-dist\" />
     <Folder Include="font-awesome-4.7.0\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
