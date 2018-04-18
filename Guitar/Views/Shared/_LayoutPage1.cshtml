@@ -65,6 +65,31 @@
             width:100%;
             padding-top:10px;
         }
+        .fo-left{
+            width:30%;
+            float:left;
+        }
+        .aboutus{
+            padding-bottom:30px;
+        }
+        .abouthead{
+            font-size:20px;
+            text-decoration:none;
+            color:#808080;
+        }
+        .aboutlist{
+            margin:10px 0px;
+
+        }
+        .aboutlist a{
+            cursor:pointer;
+            text-decoration:none;
+            font-size:15px;
+            padding-right: 30px;
+        }
+        .fo-right{
+            float:left;
+        }
     </style>
 </head>
 <body>
@@ -107,7 +132,7 @@
                 </ul>
 
 
-                @if (Session["UserName"] == null)
+                @if (Session["UserName"] != null)
                 {
                     using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-form navbar-right" }))
                     {
@@ -162,7 +187,30 @@
     </div>
 
     <div class="footer">
-        <div class="container">
+        <div class="container" >
+            <div class="fo-left">
+                <div class="aboutus">
+                    <div class="abouthead">关于我们</div>
+                    <div class="aboutlist">
+                        <a>关于我们</a>
+                        <a>联系我们</a>
+                        <a>您的建议</a>
+                        <a>免责声明</a>
+                    </div>
+                </div>
+                <div class="aboutus">
+                    <div class="abouthead">友情链接</div>
+                    <div class="aboutlist">
+                        <a>弹吉吧</a>
+                        <a>音乐人网</a>
+                        <a>找歌谱网</a>
+                        <a>吉他堂</a>
+                    </div>
+                </div>
+            </div>
+            <div class="fo-right">
+                <img class="img-responsive" src="http://www.jitaba.cn/newcss/jtb.gif" border="0">
+            </div>
         </div>
     </div>
 
