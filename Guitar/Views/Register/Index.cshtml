@@ -1,4 +1,4 @@
-﻿
+﻿@model Guitar.Models.RegisterModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
@@ -6,6 +6,13 @@
 
 @Styles.Render("~/Content/Login.css")
 @Scripts.Render("~/Scripts/Register.js")
+<script>
+    $.getJSON("/Register/CheckUser/?username=" + username, function (data) {
+        if (data) {
+            //用户名存在
+        }
+    });
+</script>
 
 <div class="content">
     <ul id="myTab" class="nav nav-tabs">
@@ -20,55 +27,63 @@
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="home">
             <div class="login">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">用户名</label>
-                        <div class="col-sm-6">
-                            <input style="width: 300px;" class="form-control" id="username">
-                            <span id="codenameTip"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
-                        <div class="col-sm-6">
-                            <input type="password" style="width: 300px;" class="form-control" id="" placeholder="Password">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
-                        <div class="col-sm-6">
-                            <input type="password" style="width: 300px;" class="form-control" id="" placeholder="Password">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">邮箱号</label>
-                        <div class="col-sm-6">
-                            <div style="float: left;">
-                                <input id="phonum" type="text" class="form-control" style="width: 300px;">
-                            </div>
-                            <div style="float: left;">
-                                <input class="btn btn-info" type="button" id="getcode" value="点击获取手机验证码" />
-                                <span id="telephonenameTip"></span>
+                @using (Html.BeginForm("Register", "Register", FormMethod.Post, new { @class = "form-horizontal", role="form" }))
+                {
+                    @*<form class="form-horizontal" role="form">*@
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户名</label>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(model => model.User_name, new { @class = "form-control", id = "username",style= "width: 300px;"})
+                                @*<input style="width: 300px;" class="form-control" id="username">*@
+                                <span id="codenameTip"></span>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">验证码</label>
-                        <div class="col-sm-6">
-                            <input style="width: 300px;" class="form-control" id="codename">
-                            <span id="codenameTip"></span>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Password", type = "password", id = "", style = "width: 300px;" })
+                                @*<input type="password" style="width: 300px;" class="form-control" id="" placeholder="Password">*@
+                            </div>
                         </div>
-                    </div>
-
-
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-6">
-                            <button type="button" id="submit" class="btn btn-primary">立即注册</button>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "ConfirmPassword", type = "password", id = "", style = "width: 300px;" })
+                                @*<input type="password" style="width: 300px;" class="form-control" id="" placeholder="Password">*@
+                            </div>
                         </div>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">邮箱号</label>
+                            <div class="col-sm-6">
+                                <div style="float: left;">
+                                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "text", id = "phonum", style = "width: 300px;" })
+                                    @*<input id="phonum" type="text" class="form-control" style="width: 300px;">*@
+                                </div>
+                                <div style="float: left;">
+                                    <input class="btn btn-info" type="button" id="getcode" value="点击获取邮箱验证码" />
+                                    <span id="telephonenameTip"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">验证码</label>
+                            <div class="col-sm-6">
+                                <input style="width: 300px;" class="form-control" id="codename">
+                                <span id="codenameTip"></span>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-6">
+                                <button type="button" id="submit" class="btn btn-primary">立即注册</button>
+                            </div>
+                        </div>
+                }
+                
+
             </div>
 
         </div>

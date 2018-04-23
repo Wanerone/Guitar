@@ -6,19 +6,27 @@ using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Model;
+using Guitar.Models;
 
 namespace Guitar.Controllers
 {
     public class RegisterController : Controller
     {
         // GET: Register
-
+        GuitarEntities db = new GuitarEntities();
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult SendEmial()
+        [HttpGet]
+          public JsonResult CheckUser(string username)
+          {
+             var exists = db.Users.Where(a => a.User_name == username).Count() != 0;
+ 
+             return Json(exists, JsonRequestBehavior.AllowGet);
+         }
+    public ActionResult SendEmial()
         {
             int customerID = 1;
             string validataCode = System.Guid.NewGuid().ToString();
@@ -42,7 +50,7 @@ namespace Guitar.Controllers
                 System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
                 client.Host = "smtp.163.com";
                 //填写服务器地址相关的用户名和密码信息
-                client.Credentials = new System.Net.NetworkCredential("xxxxxxxx@163.com", "xxxxxx");
+                client.Credentials = new System.Net.NetworkCredential("hengist123@163.com", "whz1008611");
                 //发送邮件
                 client.Send(mail);
             }
