@@ -7,7 +7,8 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Model;
-using Guitar.Models;
+
+using System.Net.Mail;
 
 namespace Guitar.Controllers
 {
@@ -26,37 +27,136 @@ namespace Guitar.Controllers
  
              return Json(exists, JsonRequestBehavior.AllowGet);
          }
-    public ActionResult SendEmial()
+
+        public ActionResult SendEmail(string mailTo, string mailSubject, string mailContent)
         {
-            int customerID = 1;
-            string validataCode = System.Guid.NewGuid().ToString();
+
+            //设置发送方的邮件信息
+
+            string smtpServer = "smtp.qq.com";//SMTP服务器(qq邮箱)
+
+            string mailFrom = "2644897370@qq.com";//登录名称
+
+            string userPassword = "mhrqevlwdskkeaea";//登录密码新版之后的QQ邮箱都是使用授权码,需要到邮箱-设置-账户里面找到-生成授权码-复制进来
+
+            //邮件服务设置
+
+            SmtpClient smtpClient = new SmtpClient();
+
+            smtpClient.EnableSsl = true;//使用了授权码必须设置为true
+
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;//指定电子邮件发送方式
+
+            smtpClient.Host = smtpServer;
+
+            smtpClient.Credentials = new System.Net.NetworkCredential(mailFrom, userPassword);//用户名密码
+
+            //发送邮件设置
+
+            MailMessage mailMessage = new MailMessage();
+
+            mailMessage.From = new MailAddress(mailFrom, "发件人内容", System.Text.Encoding.UTF8);//发送人
+
+            mailMessage.To.Add(mailTo);//收件人；
+
+            mailMessage.Subject = mailSubject;//主题
+
+            mailMessage.Body = mailContent;//内容
+
+            mailMessage.BodyEncoding = Encoding.UTF8;//正文编码
+
+            mailMessage.IsBodyHtml = true;//设置为Html格式
+
+            mailMessage.Priority = MailPriority.Low;//优先级
+
+            try
+
+            {
+
+                smtpClient.Send(mailMessage);
+
+                return View();
+
+            }
+
+            catch (Exception)
+
+            {
+
+                return View();
+
+                throw;
+
+            }
+
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(Users user, string returnUrl)
+        {
+            //string email=Request["ChkUserPwd"].ToString();
+            //if (string.IsNullOrEmpty(user.User_email))
+            //{
+            //    ModelState.AddModelError("User_email", "'User_email'是必需字段");
+            //}
+            //if (string.IsNullOrEmpty(user.User_password))
+            //{
+            //    ModelState.AddModelError("User_password", "'User_password'是必需字段");
+            //}
+            string ValidateCode = Request["txtverifcode"];
+            if (ValidateCode != Session["ValidateCode"].ToString())
+            {
+                //return Content("<script>;alert('验证码错误！');history.go(-1)</script>");
+            }
             try
             {
-                System.Net.Mail.MailAddress from = new System.Net.Mail.MailAddress("xxxxxxxx@163.com", "wode"); //填写电子邮件地址，和显示名称
-                System.Net.Mail.MailAddress to = new System.Net.Mail.MailAddress("xxxxx@qq.com", "nide"); //填写邮件的收件人地址和名称
-                //设置好发送地址，和接收地址，接收地址可以是多个
-                System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
-                mail.From = from;
-                mail.To.Add(to);
-                mail.Subject = "主题内容";
+                //if (ModelState.IsValid)
+                //{
+                var users = db.Users.Where(o => o.User_email == user.User_email).Where(o => o.User_password == user.User_password).FirstOrDefault();
+                if (users != null)
+                {
 
-                System.Text.StringBuilder strBody = new System.Text.StringBuilder();
-                strBody.Append("点击下面链接激活账号，48小时生效，否则重新注册账号，链接只能使用一次，请尽快激活！</br>");
-                strBody.Append("<a href='http://localhost:3210/Order/ActivePage?customerID=" + customerID + "&validataCode =" + validataCode + "'>点击这里</a></br>");
+                    //以下代码将权限保存到Session
+                    // var current_user = db.Users.Where(o => o.UserName == user.UserName).FirstOrDefault();
+                    HttpContext.Session["Users_id"] = users.User_id;
+                    HttpContext.Session["User_name"] = users.User_name;
+                    HttpContext.Session["User_email"] = users.User_email;
+                    HttpContext.Session["User_img"] = users.User_img;
 
-                mail.Body = strBody.ToString();
-                mail.IsBodyHtml = true;//设置显示htmls
-                //设置好发送邮件服务地址
-                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
-                client.Host = "smtp.163.com";
-                //填写服务器地址相关的用户名和密码信息
-                client.Credentials = new System.Net.NetworkCredential("hengist123@163.com", "whz1008611");
-                //发送邮件
-                client.Send(mail);
+                    return Content("<script>;alert('登录成功!返回首页!');window.location.href='/Home/Test'</script>");
+
+                }
+                else
+                {
+                    return Content("<script>;alert('该账号不存在!');history.go(-1)</script>");
+                }
+
+                //}
+                //else
+                //{
+
+                //}
+
+                //return RedirectToAction("Index");
             }
-            catch { }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
 
-            return new EmptyResult();
+
+
         }
+
     }
 }

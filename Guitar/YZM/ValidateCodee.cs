@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
 using System.Web;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Web.UI;
+using System.Drawing.Drawing2D;
+using System.IO;
 
 namespace Guitar.YZM
 {
@@ -75,11 +76,11 @@ namespace Guitar.YZM
 
             #endregion
 
-            char[] constant =
-            {
-            '0','1','2','3','4','5','6','7','8','9',
-            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-            'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
+            char[] constant =   
+            {   
+            '0','1','2','3','4','5','6','7','8','9',  
+            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',   
+            'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'   
             };
             System.Text.StringBuilder newRandom = new System.Text.StringBuilder(62);
             Random rd = new Random();

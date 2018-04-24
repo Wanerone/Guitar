@@ -159,7 +159,7 @@
                 </ul>
 
 
-                @if (Session["UserName"] != null)
+                @if (Session["User_name"] != null)
                 {
                     using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-form navbar-right" }))
                     {
