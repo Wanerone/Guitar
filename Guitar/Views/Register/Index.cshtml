@@ -24,12 +24,12 @@
 
     $(function () {
 
-        // 为看不清楚绑定事件  
+        // 为看不清楚绑定事件
         $("#see").click(function () {
             $("#validimg").attr("src", "@Url.Content("~/YZM/GetYZM?")" + Math.random());
         });
 
-        // 为验证码绑定click与mouseover  
+        // 为验证码绑定click与mouseover
         $("#validimg").mouseover(function () {
             $(this).css("cursor", "pointer");
         }).click(function () {
@@ -41,23 +41,28 @@
         verify.setAttribute('src', '@Url.Content("/YZM/GetYZM?")' + Math.random());
     }
 
+    function reloadcodes() {
+        var verify = document.getElementById('validimgs');
+        verify.setAttribute('src', '@Url.Content("/YZM/GetYZM?")' + Math.random());
+    }
+
     function getFile(obj, inputName) {
         var file_name = $(obj).val();
         $("input[name='" + inputName + "']").val(file_name);
     }
         var formValidate = function () {
-        //// 添加自定义校验（邮政编码验证）  
+        //// 添加自定义校验（邮政编码验证）
         //jQuery.validator.addMethod("isZipCode", function (value, element) {
         //    var zipCode = /^[0-9]{6}$/;
         //    return this.optional(element) || (zipCode.test(value));
         //}, "请正确填写您的邮政编码");
 
-        $("#addForm").validate({  // #JQForm是form表单的ID  
+        $("#addForm").validate({  // #JQForm是form表单的ID
                 rules: {
-                    phonum: {  // 要验证的表单的id  
-                    required: true, // 是否是必填项  
-                    minlength: 2,  // 最小长度  
-                    //remote: "/JQValidate/ValidateName"// 返回 true 就会出现错误信息  
+                    phonum: {  // 要验证的表单的id
+                    required: true, // 是否是必填项
+                    minlength: 2,  // 最小长度
+                    //remote: "/JQValidate/ValidateName"// 返回 true 就会出现错误信息
                 },
                 txtpassword: {
                         required: true,
@@ -69,10 +74,10 @@
                     //isZipCode: true,
                 },
             },
-            messages: {// 如果没有给属性错误提示，就会用默认提示  
+            messages: {// 如果没有给属性错误提示，就会用默认提示
                     phonum: {
-                    required: "请输入邮箱",  // 如果提交的时候没有填写提示的文字  
-                    minlength: "邮箱的长度不能小于2位", // 如果输入的长度小于2提示的文字  
+                    required: "请输入邮箱",  // 如果提交的时候没有填写提示的文字
+                    minlength: "邮箱的长度不能小于2位", // 如果输入的长度小于2提示的文字
                     remote: "用户名重复"
                     },
                 txtpassword: {
@@ -84,7 +89,7 @@
                 },
             },
 
-            errorPlacement: function (error, element) { // 自定义错误信息放置的位置  
+            errorPlacement: function (error, element) { // 自定义错误信息放置的位置
                     error.appendTo(element.next("span"));
                 },
         })
@@ -175,79 +180,7 @@
         </div>
         <div class="tab-pane fade" id="ios">
             <div class="login">
-                @using (Html.BeginForm("Register", "Register", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
-                    @*<form class="form-horizontal" role="form">*@
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">用户名</label>
-                        <div class="col-sm-6">
-                            @Html.TextBoxFor(model => model.User_name, new { @class = "form-control", id = "username", style = "width: 300px;" })
-                            @*<input style="width: 300px;" class="form-control" id="username">*@
-                           @Html.ValidationMessageFor(model => model.User_name)
-                        </div>
-                    </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
-                            <div class="col-sm-6">
-                                @Html.TextBoxFor(model => model.User_password, new { @class = "form-control", placeholder = "Password", type = "password", id = "R_password", style = "width: 300px;" })
-                                @*<input type="password" style="width: 300px;" class="form-control" id="" placeholder="Password">*@
-                                @Html.ValidationMessageFor(model => model.User_password)
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
-                            <div class="col-sm-6">
-                                @*@Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "ConfirmPassword", type = "password", id = "", style = "width: 300px;" })*@
-                                <input type="password" style="width: 300px;" class="form-control" id="ChkUserPwd" name="ChkUserPwd" placeholder="Password">
-                                @*@Html.ValidationMessageFor()*@
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">邮箱号</label>
-                            <div class="col-sm-6">
-                                <div style="float: left;">
-                                    @Html.TextBoxFor(model => model.User_email, new { @class = "form-control", type = "text", id = "phonum", style = "width: 300px;" })
-                                    @Html.ValidationMessageFor(model => model.User_email)
-                                    @*<input id="phonum" type="text" class="form-control" style="width: 300px;">*@
-                                </div>
-                                @*<div style="float: left;">
-                                    <input class="btn btn-info" type="button" id="getcode" value="点击获取邮箱验证码" />
-                                    <span id="telephonenameTip"></span>
-                                </div>*@
-                            </div>
-                        </div>
-
-                        @*<div class="form-group">
-                            <label class="col-sm-2 control-label">验证码</label>
-                            <div class="col-sm-6">
-                                <input style="width: 300px;" class="form-control" id="codename">
-                                <span id="codenameTip"></span>
-                            </div>
-                        </div>*@
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">验证码</label>
-                        <div class="col-sm-6">
-                            <div style="float: left;">
-                                <input style="width: 200px;" class="form-control" id="txtverifcode1" name="txtverifcode1" type="text">
-                                @*<input id="txtverifcode" name="txtverifcode" class="login_verifcode" placeholder="验证码" type="text" />*@
-                                @*<span id="codenameTip">*@
-
-                            </div>
-                            <div style="float: left;">
-                                <span id="txtverifcod2"><img id="validimg" src="@Url.Action("GetYZM", "YZM")" alt="看不清，点击换一张" /><a style="text-decoration:none;cursor:pointer" id="seee" onclick="reloadcode()">换一张</a></span>
-                            </div>
-                        </div>
-                    </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-6">
-                                @*<button type="button" id="submit" class="btn btn-primary">立即注册</button>*@
-                                <input type="submit" class="btn btn-info" value="立即注册" />
-                            </div>
-                        </div>
-                }
+              @Html.Partial("Register")
 
 
             </div>

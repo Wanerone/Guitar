@@ -33,9 +33,10 @@ namespace Guitar.Controllers
   public ActionResult Register(Users userInfo, HttpPostedFileBase file)
   {
       string checkPwd = Request["ChkUserPwd"].ToString();
-      string vCode = Request["txtverifcode1"].ToString().ToLower();
- 
-     if(string.IsNullOrEmpty(checkPwd))
+      //string vCode = Request["txtverifcode1"].ToString().ToLower();
+            string vCode= Request.Form["txtverifcode1"];
+
+            if (string.IsNullOrEmpty(checkPwd))
      {
          ModelState.AddModelError("ChkUserPwd", "确认密码不能为空");
      }
@@ -50,27 +51,33 @@ namespace Guitar.Controllers
 
      if (vCode != Session["ValidateCode"].ToString())
      {
-          ModelState.AddModelError("vCode", "验证码不正确");
-     }
+          //ModelState.AddModelError("vCode", "验证码不正确");
+                return Content("<script>;alert('验证码错误！');history.go(-1)</script>");
+            }
  
      bool isUserExists = db.Users.Where(a => a.User_name == userInfo.User_name).Count() != 0;
      bool isEmailExists = db.Users.Where(a => a.User_email == userInfo.User_email).Count() != 0;
  
-     if (isUserExists) ModelState.AddModelError("UserName", "用户名已被占用");
-     if (isEmailExists) ModelState.AddModelError("UserEmail", "邮箱已被注册");
+     if (isUserExists) ModelState.AddModelError("User_name", "用户名已被占用");
+     if (isEmailExists) ModelState.AddModelError("User_email", "邮箱已被注册");
  
              
      if(!ModelState.IsValid)
      {
-         return View(userInfo);
+         return View("Index");
      }
      userInfo.User_addtime= DateTime.Now;
      userInfo.User_password = userInfo.User_password;
+     userInfo.User_img = "~/Images/head.jpg";
      try
      {
          db.Users.Add(userInfo);        
          db.SaveChanges();
-         return RedirectToAction("Index", "Home");
+        HttpContext.Session["Users_id"] = userInfo.User_id;
+        HttpContext.Session["User_name"] = userInfo.User_name;
+        HttpContext.Session["User_email"] = userInfo.User_email;
+        HttpContext.Session["User_img"] = userInfo.User_img;
+        return RedirectToAction("Test", "Home");
      }
      catch (DbEntityValidationException dbEx)
      {
