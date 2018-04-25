@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="957f2a0a698a4eb29b95bd4385ef5985" Name="Diagram1">
+        <EntityTypeShape EntityType="GuitarModel.Friend" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.MusicScore" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.MusicScoreCollection" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.MusicScoreComment" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.MusicScoreCommentRelation" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.Post" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.PostCollection" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.PostComment" Width="1.5" PointX="8.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.PostCommentRelation" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.PostStatistics" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.t_comment" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.t_customer" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.t_item" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.Users" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.Video" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.VideoCollection" Width="1.5" PointX="8.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.VideoComment" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.MusicScoreStatistics" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.VideoCommentRelation" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.VideoStatistics" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="GuitarModel.FK_MusicScore_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GuitarModel.FK_MusicScoreCollection_MusicScore" ManuallyRouted="false" />
+        <AssociationConnector Association="GuitarModel.FK_MusicScoreComment_MusicScore" ManuallyRouted="false" />
+        <AssociationConnector Association="GuitarModel.FK_MusicScoreCollection_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GuitarModel.FK_MusicScoreComment_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GuitarModel.FK_Post_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GuitarModel.FK_PostCollection_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="GuitarModel.FK_PostComment_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="GuitarModel.FK_PostCollection_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GuitarModel.FK_PostComment_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GuitarModel.FK_Video_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GuitarModel.FK_VideoCollection_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GuitarModel.FK_VideoComment_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GuitarModel.FK_VideoCollection_Video" ManuallyRouted="false" />
+        <AssociationConnector Association="GuitarModel.FK_VideoComment_Video" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

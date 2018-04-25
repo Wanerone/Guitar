@@ -6,9 +6,11 @@ using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using Model;
+
 
 using System.Net.Mail;
+using Guitar.Models;
+using System.Data.Entity.Validation;
 
 namespace Guitar.Controllers
 {
@@ -20,6 +22,71 @@ namespace Guitar.Controllers
         {
             return View();
         }
+        public ActionResult Register()
+        {
+            return View();
+        }
+   [HttpPost]
+  //[AllowAnonymous]
+  //[ValidateAntiForgeryToken]
+          
+  public ActionResult Register(Users userInfo, HttpPostedFileBase file)
+  {
+      string checkPwd = Request["ChkUserPwd"].ToString();
+      string vCode = Request["txtverifcode1"].ToString().ToLower();
+ 
+     if(string.IsNullOrEmpty(checkPwd))
+     {
+         ModelState.AddModelError("ChkUserPwd", "确认密码不能为空");
+     }
+     else
+ {
+     if ((checkPwd) != (userInfo.User_password).ToString())
+         {
+               ModelState.AddModelError("PwdRepeatError", "确认密码不正确");
+         }
+     }
+             
+
+     if (vCode != Session["ValidateCode"].ToString())
+     {
+          ModelState.AddModelError("vCode", "验证码不正确");
+     }
+ 
+     bool isUserExists = db.Users.Where(a => a.User_name == userInfo.User_name).Count() != 0;
+     bool isEmailExists = db.Users.Where(a => a.User_email == userInfo.User_email).Count() != 0;
+ 
+     if (isUserExists) ModelState.AddModelError("UserName", "用户名已被占用");
+     if (isEmailExists) ModelState.AddModelError("UserEmail", "邮箱已被注册");
+ 
+             
+     if(!ModelState.IsValid)
+     {
+         return View(userInfo);
+     }
+     userInfo.User_addtime= DateTime.Now;
+     userInfo.User_password = userInfo.User_password;
+     try
+     {
+         db.Users.Add(userInfo);        
+         db.SaveChanges();
+         return RedirectToAction("Index", "Home");
+     }
+     catch (DbEntityValidationException dbEx)
+     {
+         foreach (var validationErrors in dbEx.EntityValidationErrors)
+         {
+            foreach (var validationError in validationErrors.ValidationErrors)
+             {
+             System.Diagnostics.Trace.TraceInformation("Property: {0} Error: {1}",
+             validationError.PropertyName,
+             validationError.ErrorMessage);
+             }
+         }
+         throw;
+     }
+ }
+
         [HttpGet]
           public JsonResult CheckUser(string username)
           {
@@ -104,19 +171,15 @@ namespace Guitar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(Users user, string returnUrl)
         {
-            //string email=Request["ChkUserPwd"].ToString();
-            //if (string.IsNullOrEmpty(user.User_email))
+            //if (!ModelState.IsValid)
             //{
-            //    ModelState.AddModelError("User_email", "'User_email'是必需字段");
+            //    return View("Index");
             //}
-            //if (string.IsNullOrEmpty(user.User_password))
-            //{
-            //    ModelState.AddModelError("User_password", "'User_password'是必需字段");
-            //}
-            string ValidateCode = Request["txtverifcode"];
+            string ValidateCode = Request.Form["txtverifcode"];
+            //string ValidateCode = Request["txtverifcode"];
             if (ValidateCode != Session["ValidateCode"].ToString())
             {
-                //return Content("<script>;alert('验证码错误！');history.go(-1)</script>");
+                return Content("<script>;alert('验证码错误！');history.go(-1)</script>");
             }
             try
             {
@@ -147,7 +210,7 @@ namespace Guitar.Controllers
 
                 //}
 
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {

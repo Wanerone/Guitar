@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Guitar.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BLL;
-using Model;
+//using BLL;
+//using Model;
 
 namespace Guitar.Controllers
 {
     public class UsersController : Controller
     {
-        public UsersBll usersBll = new UsersBll();
+        //public UsersBll usersBll = new UsersBll();
         // GET: Users
         public ActionResult Index()
         {
@@ -30,7 +31,7 @@ namespace Guitar.Controllers
         [HttpPost]
         public ActionResult Add(Users users)
         {
-            usersBll.Add(users);
+            //usersBll.Add(users);
             return Redirect(Url.Action("Index"));
         }
         // GET: Users/Create
