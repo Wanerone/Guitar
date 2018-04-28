@@ -1,8 +1,8 @@
-﻿
-@model Guitar.Models.Users
+﻿@model Guitar.Models.Users
 
-@using (Html.BeginForm("Register", "Register", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Register", "Login", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
+    @Html.ValidationSummary()
     @Html.AntiForgeryToken()
     @*<form class="form-horizontal" role="form">*@
     <div class="form-group">
@@ -13,22 +13,22 @@
             @Html.ValidationMessageFor(model => model.User_name)
         </div>
     </div>
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(model => model.User_password, new { @class = "form-control", placeholder = "Password", type = "password", id = "R_password", style = "width: 300px;" })
+            @*<input type="password" style="width: 300px;" class="form-control" id="" placeholder="Password">*@
+            @Html.ValidationMessageFor(model => model.User_password)
+        </div>
+    </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+                        <label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
                         <div class="col-sm-6">
-                            @Html.TextBoxFor(model => model.User_password, new { @class = "form-control", placeholder = "Password", type = "password", id = "R_password", style = "width: 300px;" })
-                            @*<input type="password" style="width: 300px;" class="form-control" id="" placeholder="Password">*@
-                            @Html.ValidationMessageFor(model => model.User_password)
+                            @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "ConfirmPassword", type = "password", id = "ChkUserPwd", name = "ChkUserPwd", style = "width: 300px;" })
+                            @*<input type="password" style="width: 300px;" class="form-control" id="ChkUserPwd" name="ChkUserPwd" placeholder="Password">*@
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword)
                         </div>
                     </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
-                            <div class="col-sm-6">
-                                @*@Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "ConfirmPassword", type = "password", id = "", style = "width: 300px;" })*@
-                                <input type="password" style="width: 300px;" class="form-control" id="ChkUserPwd" name="ChkUserPwd" placeholder="Password">
-                                @*@Html.ValidationMessageFor()*@
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">邮箱号</label>
                             <div class="col-sm-6">

@@ -161,13 +161,13 @@
 
                 @if (Session["User_name"] != null)
                 {
-                    using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-form navbar-right" }))
+                    using (Html.BeginForm("LogOff", "LoginRegister", FormMethod.Post, new { id = "logoutForm", @class = "navbar-form navbar-right" }))
                     {
                         @Html.AntiForgeryToken()
                         <div class="headimg">
-                            <a><img src="~/Images/head.jpg" class="img-circle img-responsive" style="height:34px;width:34px;" /></a>
+                            <a><img src="@Session["User_img"]" class="img-circle img-responsive" style="height:34px;width:34px;" /></a>
                             <div class="userin">
-                                <div class="name"><a>Hengist</a></div>
+                                <div class="name"><a>[@Session["User_name"]]</a></div>
                                 <div class="use">
                                     <div class="list-group" style="width:50%; float:left;">
                                         <a href="#" class="list-group-item"><i class="fa fa-user-o fa-fw"></i> 我的空间</a>
@@ -179,7 +179,8 @@
                                     </div>
                                 </div>
                                 <div class="footuse">
-                                    <a>退出</a>
+                                    @*<a>退出</a>*@
+                                    <input type="submit" value="退出" />
                                 </div>
                             </div>
                         </div>
@@ -188,8 +189,8 @@
                 else
                 {
                     <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink("注册", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                        <li>@Html.ActionLink("登录", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                        <li>@Html.ActionLink("注册", "Register", "LoginRegister", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink("登录", "Login", "LoginRegister", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                     </ul>
                 }
 

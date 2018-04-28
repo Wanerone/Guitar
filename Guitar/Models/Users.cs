@@ -34,9 +34,16 @@ namespace Guitar.Models
         [MaxLength(8, ErrorMessage = "昵称不超过8个字符!")]
         public string User_name { get; set; }
         [Required]
+        [Display(Name = "密码")]
         [StringLength(100, MinimumLength = 6, ErrorMessage = "密码必须至少包含6个字符!")]
         [DataType(DataType.Password)]
         public string User_password { get; set; }
+
+        [Display(Name = "确认密码")]
+        [Required(ErrorMessage = "确认密码必填")]
+        [DataType(DataType.Password)]
+        [Compare("User_password",ErrorMessage ="密码和确认密码不正确")]
+        public string ConfirmPassword { get; set; }
         //[Required]
         [Display(Name = "邮箱")]
         [Required(ErrorMessage = "邮箱必填")]
