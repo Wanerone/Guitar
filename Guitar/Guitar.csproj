@@ -199,10 +199,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LoginRegisterController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\MusicScoresController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\YZMController.cs" />
     <Compile Include="Global.asax.cs">
@@ -404,17 +403,20 @@
     <Content Include="Views\Home\ViewPage1.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Users\Add.cshtml" />
-    <Content Include="Views\Register\Index.cshtml" />
-    <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\Login\Register.cshtml" />
-    <Content Include="Views\Register\Login.cshtml" />
     <Content Include="Views\LoginRegister\Login.cshtml" />
     <Content Include="Views\LoginRegister\Register.cshtml" />
+    <Content Include="Views\MusicScores\Create.cshtml" />
+    <Content Include="Views\MusicScores\Delete.cshtml" />
+    <Content Include="Views\MusicScores\Details.cshtml" />
+    <Content Include="Views\MusicScores\Edit.cshtml" />
+    <Content Include="Views\MusicScores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bootstrap-3.3.7-dist\" />
     <Folder Include="font-awesome-4.7.0\" />
+    <Folder Include="MusicScore\" />
+    <Folder Include="ueditor\" />
     <Folder Include="Views\YZM\" />
   </ItemGroup>
   <ItemGroup>

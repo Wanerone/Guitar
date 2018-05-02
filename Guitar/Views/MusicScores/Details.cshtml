@@ -1,0 +1,75 @@
+﻿@model Guitar.Models.MusicScore
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MusicScore</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ms_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ms_title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ms_img)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ms_img)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ms_label)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ms_label)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ms_description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ms_description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ms_addtime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ms_addtime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.User_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.User_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Ms_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
