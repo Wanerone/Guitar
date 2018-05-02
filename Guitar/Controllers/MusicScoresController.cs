@@ -53,6 +53,7 @@ namespace Guitar.Controllers
         {
             if (ModelState.IsValid)
             {
+                //var score = musicScore["Score"];
                 db.MusicScore.Add(musicScore);
                 db.SaveChanges();
                 return RedirectToAction("Index");
