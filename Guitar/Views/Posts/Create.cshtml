@@ -1,40 +1,39 @@
-﻿@model Guitar.Models.MusicScore
+﻿@model Guitar.Models.Post
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "发布帖子";
     Layout = "~/Views/Shared/_LayoutPage2.cshtml";
 }
+
 <script src="~/ueditor/ueditor.all.js"></script>
 <script src="~/ueditor/ueditor.config.js"></script>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <link href="~/ueditor/themes/default/css/ueditor.css" rel="stylesheet" />
 <script src="~/ueditor/lang/zh-cn/zh-cn.js"></script>
 <style>
-    .fab {
-        border-bottom: 2px solid #e8e8e8;
-        color: #222;
-        font-size: 16px;
-        height: 64px;
-        list-style: none;
-    }
-
-    .fabiao {
-        display: inline-block;
-        margin-right: 30px;
-        line-height: 52px;
-        cursor: pointer;
-    }
-
-        .fabiao a {
+     .fab {
+            border-bottom: 2px solid #e8e8e8;
+            color: #222;
+            font-size: 16px;
+            height: 64px;
+            list-style: none;
+        }
+        .fabiao {
+            display: inline-block;
+            margin-right: 30px;
+            line-height: 52px;
+            cursor: pointer;
+        }
+        .fabiao  a{
             text-decoration: none;
         }
 </style>
 <ul class="fab">
-    <li class="fabiao"><a href="~/Views/MusicScores/Create.cshtml"  style="color:#090909">发布吉他谱</a></li>
+    <li class="fabiao"><a href="~/Views/MusicScores/Create.cshtml">发布吉他谱</a></li>
     <li class="fabiao"><a href="">发表视频</a></li>
-    <li class="fabiao"><a href="~/Views/Posts/Create.cshtml">发表帖子</a></li>
+    <li class="fabiao"><a href="~/Views/Posts/Create.cshtml" style="color:#090909">发表帖子</a></li>
 </ul>
-@using (Html.BeginForm("Create", "MusicScore", new { area = "" }, FormMethod.Post, new { id = "", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "Posts", new { area = "" }, FormMethod.Post, new { id = "", enctype = "multipart/form-data" })) 
 {
     @Html.AntiForgeryToken()
     @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
@@ -43,14 +42,14 @@
             <tbody>
                 <tr>
                     <td colspan="3">
-                        @Html.EditorFor(model => model.Ms_title, new { htmlAttributes = new { @class = "form-control", @placeholder = "歌曲名称(简单描述)" } })
-                        @Html.ValidationMessageFor(model => model.Ms_title, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Po_title, new { htmlAttributes = new { @class = "form-control", @placeholder = "帖子标题" } })
+                        @Html.ValidationMessageFor(model => model.Po_title, "", new { @class = "text-danger" })
                     </td>
                 </tr>
                 <tr>
                     <td colspan="3">
-                        @Html.TextAreaFor(model => model.Score, htmlAttributes: new { @id = "Score" })
-                        @Html.ValidationMessageFor(model => model.Score, "", new { @class = "text-danger" })
+                        @Html.TextAreaFor(model => model.Po_content, htmlAttributes: new { @id = "Po_content" })
+                        @Html.ValidationMessageFor(model => model.Po_content, "", new { @class = "text-danger" })
                     </td>
                 </tr>
                 <tr>
@@ -84,7 +83,7 @@
                         </div>
                         <br />
                         <br />
-                        <a style="color:black;text-decoration:none;">你的选择:</a><label for="lab" id="lab"></label>
+                        <a style="color:black;text-decoration:none;">你的选择:</a><label for="lab" id="lab"></label><input type="hidden" name="sel" id="sel" />
                         <br />
                     </td>
                 </tr>
@@ -109,16 +108,20 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
 <script>
     $(document).ready(function () {
 
         $("#bu2").click(function () {
             $("#lab").html("  古典吉他");
             $("#sel").val("  古典吉他");
-            //$.post("/MusciScore/Create", { frontViewData: data }, function () {
+            //$.post("/Posts/Create", { frontViewData: data }, function () {
             //    //alert("submit data is OK!");
             //});
+            //location.href = "/home/getvalue?method=querystring";
+        });
+        $("#bu3").click(function () {
+            $("#lab").html("  民谣吉他");
+            $("#sel").val("  民谣吉他");
         });
         $("#bu4").click(function () {
             $("#lab").html("  电吉他");
@@ -135,19 +138,19 @@
     });
 </script>
 @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval", "~/ueditor/ueditor.config.js", "~/ueditor/ueditor.all.js") 
-        @*<script type="text/javascript">
+    @Scripts.Render("~/bundles/jqueryval", "~/ueditor/ueditor.config.js", "~/ueditor/ueditor.all.js")
+    @*<script type="text/javascript">
 
         var nreditor = UE.getEditor('Score');
         </script>*@
-        <script type="text/javascript">
+    <script type="text/javascript">
         var editorOption = {
         initialFrameWidth: 800,
         initialFrameHeight: 600,
         iframeCssUrl: '/ueditor/themes/iframe.css',//样式路径
         };
         var editor = new baidu.editor.ui.Editor(editorOption);
-        editor.render('Score');
+        editor.render('Po_content');
 
-        </script>
-    }
+    </script>
+}

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GuitarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GuitarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Friend">
           <Key>
             <PropertyRef Name="id" />
@@ -23,7 +23,6 @@
           <Property Name="Score" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Ms_img" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Ms_label" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Ms_description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Ms_addtime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="MusicScoreCollection">
@@ -167,6 +166,7 @@
           <Property Name="Vi_description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Vi_img" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Vi_addtime" Type="datetime" Nullable="false" />
+          <Property Name="Vi_label" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="VideoCollection">
           <Key>
@@ -491,8 +491,7 @@
             <End Role="VideoComment" EntitySet="VideoComment" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GuitarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -514,7 +513,6 @@
           <Property Name="Score" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Ms_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Ms_label" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Ms_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Ms_addtime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Users" Relationship="Self.FK_MusicScore_Users" FromRole="MusicScore" ToRole="Users" />
           <NavigationProperty Name="MusicScoreCollection" Relationship="Self.FK_MusicScoreCollection_MusicScore" FromRole="MusicScore" ToRole="MusicScoreCollection" />
@@ -672,6 +670,7 @@
           <NavigationProperty Name="Users" Relationship="Self.FK_Video_Users" FromRole="Video" ToRole="Users" />
           <NavigationProperty Name="VideoCollection" Relationship="Self.FK_VideoCollection_Video" FromRole="Video" ToRole="VideoCollection" />
           <NavigationProperty Name="VideoComment" Relationship="Self.FK_VideoComment_Video" FromRole="Video" ToRole="VideoComment" />
+          <Property Name="Vi_label" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="VideoCollection">
           <Key>
@@ -1012,7 +1011,6 @@
                 <ScalarProperty Name="Score" ColumnName="Score" />
                 <ScalarProperty Name="Ms_img" ColumnName="Ms_img" />
                 <ScalarProperty Name="Ms_label" ColumnName="Ms_label" />
-                <ScalarProperty Name="Ms_description" ColumnName="Ms_description" />
                 <ScalarProperty Name="Ms_addtime" ColumnName="Ms_addtime" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1150,6 +1148,7 @@
           <EntitySetMapping Name="Video">
             <EntityTypeMapping TypeName="GuitarModel.Video">
               <MappingFragment StoreEntitySet="Video">
+                <ScalarProperty Name="Vi_label" ColumnName="Vi_label" />
                 <ScalarProperty Name="Vi_id" ColumnName="Vi_id" />
                 <ScalarProperty Name="User_id" ColumnName="User_id" />
                 <ScalarProperty Name="Vi_url" ColumnName="Vi_url" />

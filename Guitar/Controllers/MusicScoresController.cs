@@ -39,7 +39,6 @@ namespace Guitar.Controllers
         // GET: MusicScores/Create
         public ActionResult Create()
         {
-            ViewBag.User_id = new SelectList(db.Users, "User_id", "User_name");
             return View();
         }
 
@@ -48,19 +47,58 @@ namespace Guitar.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateInput(false)]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Ms_id,User_id,Ms_title,Score,Ms_img,Ms_label,Ms_description,Ms_addtime")] MusicScore musicScore)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create(MusicScore musicScore, string frontViewData)
         {
+            HttpPostedFileBase postimageBase = Request.Files["Image1"];
+            //HttpFileCollectionBase files = Request.Files;
+            //HttpPostedFileBase postimageBase = files["Image1"];//获取上传的文件
             if (ModelState.IsValid)
             {
+                try
+                {
+                    if (ModelState.IsValid)
+                    {
+                        if (postimageBase != null)
+                        {
+                            string filePath = postimageBase.FileName;
+                            string filename = filePath.Substring(filePath.LastIndexOf("\\") + 1);
+                            string serverpath = Server.MapPath(@"/MusicScore/FM/") + filename;
+                            string relativepath = @"/MusicScore/FM/" + filename;
+                            postimageBase.SaveAs(serverpath);
+                            musicScore.Ms_img = relativepath;
+                        }
+
+                        else
+                        {
+                            return Content("<script>;alert('请先上传封面！');history.go(-1)</script>");
+
+                        }
+                        musicScore.User_id = 1;/*Convert.ToInt32(Session["Users_id"].ToString());*/
+                        //publish_food.Amount = 0;
+                        musicScore.Ms_addtime = System.DateTime.Now;
+                        musicScore.Ms_label = frontViewData;
+                        db.MusicScore.Add(musicScore);
+                        db.SaveChanges();
+                        //return Content("<script>;alert('发布成功!');window.location.href='/Publish_Food/Index_PF'</script>");
+                        return Content("<script>;alert('发布成功!');history.go(-1)</script>");
+                    }
+                    else
+                    {
+                        return Content("<script>;alert('发布失败！');history.go(-1)</script>");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return Content(ex.Message);
+                }
                 //var score = musicScore["Score"];
-                db.MusicScore.Add(musicScore);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //db.MusicScore.Add(musicScore);
+                //db.SaveChanges();
+                //return RedirectToAction("Index");
             }
 
-            ViewBag.User_id = new SelectList(db.Users, "User_id", "User_name", musicScore.User_id);
-            return View(musicScore);
+            return View();
         }
 
         // GET: MusicScores/Edit/5
@@ -129,6 +167,69 @@ namespace Guitar.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        // POST: MusicScores/Create
+        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
+        // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
+        [HttpPost]
+        [ValidateInput(false)]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Add(MusicScore musicScore, string frontViewData)
+        {
+            HttpPostedFileBase postimageBase = Request.Files["Image1"];
+            //HttpFileCollectionBase files = Request.Files;
+            //HttpPostedFileBase postimageBase = files["Image1"];//获取上传的文件
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (ModelState.IsValid)
+                    {
+                        if (postimageBase != null)
+                        {
+                            string filePath = postimageBase.FileName;
+                            string filename = filePath.Substring(filePath.LastIndexOf("\\") + 1);
+                            string serverpath = Server.MapPath(@"/MusicScore/FM/") + filename;
+                            string relativepath = @"/MusicScore/FM/" + filename;
+                            postimageBase.SaveAs(serverpath);
+                            musicScore.Ms_img = relativepath;
+                        }
+
+                        else
+                        {
+                            return Content("<script>;alert('请先上传封面！');history.go(-1)</script>");
+
+                        }
+                        musicScore.User_id = 1;/*Convert.ToInt32(Session["Users_id"].ToString());*/
+                        //publish_food.Amount = 0;
+                        musicScore.Ms_addtime = System.DateTime.Now;
+                        musicScore.Ms_label = frontViewData;
+                        db.MusicScore.Add(musicScore);
+                        db.SaveChanges();
+                        //return Content("<script>;alert('发布成功!');window.location.href='/Publish_Food/Index_PF'</script>");
+                        return Content("<script>;alert('发布成功!');history.go(-1)</script>");
+                    }
+                    else
+                    {
+                        return Content("<script>;alert('发布失败！');history.go(-1)</script>");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return Content(ex.Message);
+                }
+                //var score = musicScore["Score"];
+                //db.MusicScore.Add(musicScore);
+                //db.SaveChanges();
+                //return RedirectToAction("Index");
+            }
+
+            return View();
         }
     }
 }

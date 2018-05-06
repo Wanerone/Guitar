@@ -28,6 +28,7 @@ namespace Guitar.Models
         public string Vi_description { get; set; }
         public string Vi_img { get; set; }
         public System.DateTime Vi_addtime { get; set; }
+        public string Vi_label { get; set; }
     
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -9,32 +9,8 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <link href="~/ueditor/themes/default/css/ueditor.css" rel="stylesheet" />
 <script src="~/ueditor/lang/zh-cn/zh-cn.js"></script>
-<style>
-    .fab {
-        border-bottom: 2px solid #e8e8e8;
-        color: #222;
-        font-size: 16px;
-        height: 64px;
-        list-style: none;
-    }
 
-    .fabiao {
-        display: inline-block;
-        margin-right: 30px;
-        line-height: 52px;
-        cursor: pointer;
-    }
-
-        .fabiao a {
-            text-decoration: none;
-        }
-</style>
-<ul class="fab">
-    <li class="fabiao"><a href="~/Views/MusicScores/Create.cshtml"  style="color:#090909">发布吉他谱</a></li>
-    <li class="fabiao"><a href="">发表视频</a></li>
-    <li class="fabiao"><a href="~/Views/Posts/Create.cshtml">发表帖子</a></li>
-</ul>
-@using (Html.BeginForm("Create", "MusicScore", new { area = "" }, FormMethod.Post, new { id = "", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Add", "MusicScore", FormMethod.Post, new { id = "", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
@@ -115,39 +91,40 @@
 
         $("#bu2").click(function () {
             $("#lab").html("  古典吉他");
-            $("#sel").val("  古典吉他");
-            //$.post("/MusciScore/Create", { frontViewData: data }, function () {
-            //    //alert("submit data is OK!");
-            //});
+            $.post("/MusciScore/Create", { frontViewData: data }, function () {
+                //alert("submit data is OK!");
+            });
+        });
+        $("#bu3").click(function () {
+            $("#lab").html("  民谣吉他");
         });
         $("#bu4").click(function () {
             $("#lab").html("  电吉他");
-            $("#sel").val("  电吉他");
         });
         $("#bu5").click(function () {
             $("#lab").html("  尤克里里")
-            $("#sel").val("  尤克里里");
         });
         $("#bu6").click(function () {
             $("#lab").html("  其他")
-            $("#sel").val("  其他");
         });
     });
 </script>
 @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval", "~/ueditor/ueditor.config.js", "~/ueditor/ueditor.all.js") 
-        @*<script type="text/javascript">
+    @Scripts.Render("~/bundles/jqueryval", "~/ueditor/ueditor.config.js", "~/ueditor/ueditor.all.js")
+    @*<script type="text/javascript">
 
         var nreditor = UE.getEditor('Score');
         </script>*@
-        <script type="text/javascript">
+    <script type="text/javascript">
         var editorOption = {
-        initialFrameWidth: 800,
+        initialFrameWidth: 784,
         initialFrameHeight: 600,
         iframeCssUrl: '/ueditor/themes/iframe.css',//样式路径
         };
         var editor = new baidu.editor.ui.Editor(editorOption);
         editor.render('Score');
 
-        </script>
-    }
+    </script>
+}
+
+
