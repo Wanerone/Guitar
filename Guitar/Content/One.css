@@ -23,8 +23,8 @@ img{ border:none;}
 .products{ height: 600px; position: relative; overflow: hidden; display: none; margin-top: 20px;}
 .products ul{ position: absolute; left: 0px;}
 .product-wraps .showw{ display: block;}
-.product-wraps .products li{ float: left; display: inline; margin-left: 30px;background: #f3f3f3;border: 2px solid #fafafa; transition:0.4s;-webkit-transition:0.4s;-moz-transition: 0.4s;-o-transition: 0.4s;-ms-transition: 0.4s;}
-.product-wraps .products li.ml0{margin-left:0px;}
+.product-wraps .products li{ float: left; display: inline; margin-right: 16px;background: #f3f3f3;border: 2px solid #fafafa; transition:0.4s;-webkit-transition:0.4s;-moz-transition: 0.4s;-o-transition: 0.4s;-ms-transition: 0.4s;}
+/*.product-wraps .products li.ml0{margin-left:0px;}*/
 .product-wraps .products li a.imgwrap{ display: block; width: 200px; height: 148px; background: #fff; text-align:center;}
 .product-wraps .products li p{padding-left: 15px;color: #666666;line-height: 22px;}
 .product-wraps .products li p a{ color: #666666; text-decoration: none;}

@@ -317,6 +317,7 @@
     <Content Include="Content\leftnav.css" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\One.css" />
+    <Content Include="Content\port.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -333,6 +334,7 @@
     <Content Include="Images\g5.jpg" />
     <Content Include="Images\g6.jpg" />
     <Content Include="Images\head.jpg" />
+    <Content Include="Images\img-1.jpg" />
     <Content Include="Images\jtb.gif" />
     <Content Include="Images\noimage.png" />
     <Content Include="Images\qq.png" />
@@ -343,6 +345,8 @@
     <Content Include="Images\s3.jpg" />
     <Content Include="Images\s4.png" />
     <Content Include="Images\s5.jpg" />
+    <Content Include="Images\weixin.jpg" />
+    <Content Include="Images\weixin.png" />
     <Content Include="Images\微信.png" />
     <Content Include="Images\微博.png" />
     <Content Include="Images\手机.png" />
