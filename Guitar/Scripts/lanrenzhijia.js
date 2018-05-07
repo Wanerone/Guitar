@@ -1,4 +1,4 @@
-/* 代码整理：懒人之家 www.lanrenzhijia.com */
+/* 代码整理：懒人之�?www.lanrenzhijia.com */
 $(function(){		
 	//设计案例切换
 	$('.title-list li').mouseover(function(){
@@ -20,4 +20,4 @@ $(function(){
 	});
 
 
-/* 代码整理：懒人之家 www.lanrenzhijia.com */
+/* 代码整理：懒人之�?www.lanrenzhijia.com */

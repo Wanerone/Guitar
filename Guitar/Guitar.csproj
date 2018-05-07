@@ -201,7 +201,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginRegisterController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MusicScoresController.cs" />
+    <Compile Include="Controllers\MusicScoreController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
@@ -301,11 +301,22 @@
     <Compile Include="YZM\ValidateCode.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bootstrap-3.3.7-dist\css\bootstrap-fileinput.css" />
+    <Content Include="bootstrap-3.3.7-dist\css\bootstrap-theme.css" />
+    <Content Include="bootstrap-3.3.7-dist\css\bootstrap-theme.min.css" />
+    <Content Include="bootstrap-3.3.7-dist\css\bootstrap.css" />
+    <Content Include="bootstrap-3.3.7-dist\css\bootstrap.min.css" />
+    <Content Include="bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="bootstrap-3.3.7-dist\js\bootstrap-fileinput.js" />
+    <Content Include="bootstrap-3.3.7-dist\js\bootstrap.js" />
+    <Content Include="bootstrap-3.3.7-dist\js\bootstrap.min.js" />
+    <Content Include="bootstrap-3.3.7-dist\js\npm.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\lanrenzhijia.css" />
     <Content Include="Content\leftnav.css" />
     <Content Include="Content\Login.css" />
+    <Content Include="Content\One.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -323,6 +334,7 @@
     <Content Include="Images\g6.jpg" />
     <Content Include="Images\head.jpg" />
     <Content Include="Images\jtb.gif" />
+    <Content Include="Images\noimage.png" />
     <Content Include="Images\qq.png" />
     <Content Include="Images\s1.jpg" />
     <Content Include="Images\s11.jpg" />
@@ -359,6 +371,14 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="bootstrap-3.3.7-dist\css\bootstrap-theme.css.map" />
+    <Content Include="bootstrap-3.3.7-dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="bootstrap-3.3.7-dist\css\bootstrap.css.map" />
+    <Content Include="bootstrap-3.3.7-dist\css\bootstrap.min.css.map" />
+    <Content Include="bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -374,6 +394,7 @@
     <Content Include="Scripts\lanrenzhijia.js" />
     <Content Include="Scripts\leftnav.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\One.js" />
     <Content Include="Scripts\Register.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -688,11 +709,6 @@
     <Content Include="Views\Users\Add.cshtml" />
     <Content Include="Views\LoginRegister\Login.cshtml" />
     <Content Include="Views\LoginRegister\Register.cshtml" />
-    <Content Include="Views\MusicScores\Create.cshtml" />
-    <Content Include="Views\MusicScores\Delete.cshtml" />
-    <Content Include="Views\MusicScores\Details.cshtml" />
-    <Content Include="Views\MusicScores\Edit.cshtml" />
-    <Content Include="Views\MusicScores\Index.cshtml" />
     <Content Include="ueditor\net\config.json" />
     <Content Include="ueditor\net\controller.ashx" />
     <Content Include="ueditor\net\README.md" />
@@ -703,7 +719,6 @@
     <Content Include="ueditor\third-party\video-js\font\vjs.woff" />
     <Content Include="Views\Shared\_LayoutPage2.cshtml" />
     <Content Include="Views\Shared\_LayoutPage3.cshtml" />
-    <Content Include="Views\MusicScores\Add.cshtml" />
     <Content Include="Views\Posts\Create.cshtml" />
     <Content Include="Views\Posts\Delete.cshtml" />
     <Content Include="Views\Posts\Details.cshtml" />
@@ -714,11 +729,16 @@
     <Content Include="Views\Video\Details.cshtml" />
     <Content Include="Views\Video\Edit.cshtml" />
     <Content Include="Views\Video\Index.cshtml" />
+    <Content Include="Views\MusicScore\Create.cshtml" />
+    <Content Include="Views\MusicScore\Delete.cshtml" />
+    <Content Include="Views\MusicScore\Details.cshtml" />
+    <Content Include="Views\MusicScore\Edit.cshtml" />
+    <Content Include="Views\MusicScore\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="bootstrap-3.3.7-dist\" />
     <Folder Include="font-awesome-4.7.0\" />
+    <Folder Include="Images\FM\" />
     <Folder Include="MusicScore\FM\" />
     <Folder Include="ueditor\net\upload\image\" />
     <Folder Include="Video\" />

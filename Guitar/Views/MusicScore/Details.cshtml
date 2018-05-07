@@ -1,13 +1,12 @@
 ﻿@model Guitar.Models.MusicScore
 
 @{
-    ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Details</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>MusicScore</h4>
     <hr />
@@ -45,14 +44,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Ms_description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ms_description)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Ms_addtime)
         </dt>
 
@@ -69,13 +60,8 @@
         </dd>
 
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
 </div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Ms_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

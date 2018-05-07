@@ -64,8 +64,8 @@ namespace Guitar.Controllers
                         {
                             string filePath = postimageBase.FileName;
                             string filename = filePath.Substring(filePath.LastIndexOf("\\") + 1);
-                            string serverpath = Server.MapPath(@"/MusicScore/FM/") + filename;
-                            string relativepath = @"/MusicScore/FM/" + filename;
+                            string serverpath = Server.MapPath(@"/Images/FM/") + filename;
+                            string relativepath = @"/Images/FM/" + filename;
                             postimageBase.SaveAs(serverpath);
                             post.Po_img = relativepath;
                         }

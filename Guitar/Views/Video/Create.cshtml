@@ -9,6 +9,9 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <link href="~/ueditor/themes/default/css/ueditor.css" rel="stylesheet" />
 <script src="~/ueditor/lang/zh-cn/zh-cn.js"></script>
+<link href="~/bootstrap-3.3.7-dist/css/bootstrap-fileinput.css" rel="stylesheet" />
+<script src="~/bootstrap-3.3.7-dist/js/bootstrap-fileinput.js"></script>
+<link href="~/Content/One.css" rel="stylesheet" />
 <style>
     .fab {
         border-bottom: 2px solid #e8e8e8;
@@ -30,9 +33,9 @@
         }
 </style>
 <ul class="fab">
-    <li class="fabiao"><a href="~/Views/MusicScores/Create.cshtml">发布吉他谱</a></li>
-    <li class="fabiao"><a href="~/Views/Video/Create.cshtml" style="color:#090909">发表视频</a></li>
-    <li class="fabiao"><a href="~/Views/Posts/Create.cshtml">发表帖子</a></li>
+    <li class="fabiao"><a href="@Url.Action("Create","MusicScore")">发布吉他谱</a></li>
+    <li class="fabiao"><a href="@Url.Action("Create","Video")" style="color:#090909">发表视频</a></li>
+    <li class="fabiao"><a href="@Url.Action("Create","Posts")">发表帖子</a></li>
 </ul>
 @using (Html.BeginForm("Create", "Video", new { area = "" }, FormMethod.Post, new { id = "", enctype = "multipart/form-data" }))
 {
@@ -43,7 +46,8 @@
                 <tr>
                     <td colspan="1"><h4>视频标题</h4></td>
                     <td colspan="3">
-                        @Html.EditorFor(model => model.Vi_title, new { htmlAttributes = new { @class = "form-control", @placeholder = "视频标题" } })
+                        @*@Html.EditorFor(model => model.Vi_title, new { htmlAttributes = new { @class = "form-control", @placeholder = "视频标题" } })*@
+                        @Html.TextBoxFor(model => model.Vi_title, new { @class = "form-control", @placeholder = "视频标题" })
                         @Html.ValidationMessageFor(model => model.Vi_title, "", new { @class = "text-danger" })
                     </td>
                 </tr>
@@ -62,12 +66,29 @@
                 </tr>
                 <tr>
                     <td>
-                        <h4>封面</h4>
+                        <h4>选择封面</h4>
                     </td>
                     <td>
-                        <input type="file" name="Image1" />
+                        @*<input type="file" name="Image1" />*@
                         @*@Html.EditorFor(model => model.Ms_img, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Ms_img, "", new { @class = "text-danger" })*@
+                        <div class="form-group" id="uploadForm" enctype='multipart/form-data'>
+                            <div class="h4">图片预览</div>
+                            <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
+                                <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                                    <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" src="images/noimage.png" alt="" />
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                                <div>
+                                    <span class="btn btn-primary btn-file">
+                                        <span class="fileinput-new">选择文件</span>
+                                        <span class="fileinput-exists">换一张</span>
+                                        <input type="file" name="Image1" id="Image1" accept="image/gif,image/jpeg,image/x-png">
+                                    </span>
+                                    <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 <tr>
