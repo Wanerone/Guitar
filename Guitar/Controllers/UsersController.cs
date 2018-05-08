@@ -1,4 +1,5 @@
 ﻿using Guitar.Models;
+using Guitar.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,72 @@ namespace Guitar.Controllers
 {
     public class UsersController : Controller
     {
+        private GuitarEntities db = new GuitarEntities();
         //public UsersBll usersBll = new UsersBll();
         // GET: Users
         public ActionResult Index()
         {
             return View();
         }
+        //获得乐谱
+        public ActionResult DisplayScore()
+        {
+            var score = (from s in (from p in db.MusicScore join o in db.MusicScoreStatistics on p.Ms_id equals o.Ms_id select new { p.Ms_id, p.Ms_title, p.Ms_img, p.Ms_label, o.ReadCount }) orderby s.ReadCount descending select s).Take(3).ToList();
+            var score1 = from s in score
+                         select new
+                         {
+                             Ms_id = s.Ms_id,
+                             Ms_title = s.Ms_title,
+                             Ms_img = s.Ms_img,
+                             Ms_label = s.Ms_label,
+                             ReadCount = s.ReadCount
+                         };
+            List<MusicViewModel> lstProduct = new List<MusicViewModel>();
+            foreach (var s in score1)
+            {
+                MusicViewModel p = new MusicViewModel();
+                p.Ms_id = s.Ms_id;
+                p.Ms_title = s.Ms_title;
+                p.Ms_img = s.Ms_img;
+                p.Ms_label = s.Ms_label;
+                p.ReadCount = s.ReadCount;
+                lstProduct.Add(p);
+            }
+            //var score = (from s in (from p in db.MusicScore
+            //                        join o in db.MusicScoreStatistics on p.Ms_id equals o.Ms_id
+            //                        select new
+            //                        {
+            //                            Ms_id = p.Ms_id,
+            //                            Ms_title = p.Ms_title,
+            //                            Ms_img = p.Ms_img,
+            //                            Ms_label = p.Ms_label,
+            //                            ReadCount = o.ReadCount
+            //                        })
+            //             orderby s.ReadCount descending
+            //             select s).Take(3).ToList();
+            //var score1 = new Guitar.ViewModel.MusicViewModel();
+            //score1 = score;
+            //{
+            //    //Score = score;
+            //    Ms_id = score.Ms_id,
+            //    Ms_title = x.Ms_title,
+            //    Ms_img = x.Ms_img,
+            //    Ms_label = x.Ms_label,
+            //    ReadCount = x.ReadCount
+            //};
+            //List<MusicScore> musicView = new List<MusicScore>();
+            //var score = (new MusicViewModel()
+            //{
+            //    //Ms_id = x.Ms_id,
+            //    //Ms_title = x.Ms_title,
+            //    //Ms_img = x.Ms_img,
+            //    //Ms_label = x.Ms_label,
+            //    //ReadCount = x.ReadCount
+            //    Score = score;
+            //    });
 
+            return View(lstProduct);
+        }
         // GET: Users/Details/5
         public ActionResult Details(int id)
         {

@@ -4,6 +4,8 @@ body{ font-size:12px;}
 img{ border:none;}
 /*public*/
 .fl{display:inline;text-decoration:none;font-size:20px;}
+.fl a{color:#000000;}
+.fl a:hover{color:#58D5D3}
 .fr{display:inline;float:right}
 .cf:after{content:"";clear:both;display:block;height:0;overflow:hidden}
 .cf{zoom:1}

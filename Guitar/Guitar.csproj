@@ -298,6 +298,7 @@
     <Compile Include="ueditor\net\App_Code\NotSupportedHandler.cs" />
     <Compile Include="ueditor\net\App_Code\PathFormater.cs" />
     <Compile Include="ueditor\net\App_Code\UploadHandler.cs" />
+    <Compile Include="ViewModel\MusicViewModel.cs" />
     <Compile Include="YZM\ValidateCode.cs" />
   </ItemGroup>
   <ItemGroup>
