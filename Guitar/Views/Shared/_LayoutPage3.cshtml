@@ -10,8 +10,7 @@
     @Scripts.Render("~/bootstrap-3.3.7-dist/js/bootstrap.min.js")
     @Styles.Render("~/font-awesome-4.7.0/css/font-awesome.min.css")
     @Scripts.Render("~/Scripts/jquery-3.3.1.min.js")
-    <script src="~/Scripts/leftnav.js"></script>
-    <link href="~/Content/leftnav.css" rel="stylesheet" />
+
     <style type="text/css">
         .navbar .nav > li .dropdown-menu {
             margin: 0;
@@ -20,8 +19,11 @@
         .navbar .nav > li:hover .dropdown-menu {
             display: block;
         }
-
-        .headimg .userin {
+        /*.headimg{
+            height:40px;
+            width:45px;
+        }*/
+         .userin {
             height: 200px;
             display: none;
             float: left;
@@ -52,9 +54,13 @@
             margin: 14px 9px;
         }
 
-            .listall a {
+        .listall a {
                 font-size: 15px;
             }
+        .listall a:hover{
+            /*font-size: 17px;*/
+            color:#BBBBBB;
+        }
 
         .footuse {
             width: 90%;
@@ -154,6 +160,13 @@
             font-size: 15px;
             color: #000000;
         }
+        .headimage img{
+           height:34px;width:34px;
+        }
+        .headimage img:hover {
+            /*height:40px;width:40px;*/
+            opacity:0.8;
+        }
     </style>
     <meta name="description" content="The description of my page" />
 </head>
@@ -203,9 +216,9 @@
                     {
                         @Html.AntiForgeryToken()
                         <div class="headimg">
-                            <a><img src="@Session["User_img"]" class="img-circle img-responsive" style="height:34px;width:34px;" /></a>
+                            <a class="headimage"><img src="~/Images/head.jpg" class="img-circle img-responsive"  /></a>
                             <div class="userin">
-                                <div class="name"><a>[@Session["User_name"]]</a></div>
+                                <div class="name"><a>@*[@Session["User_name"]]*@[慧然肯来]</a></div>
                                 <div class="use">
                                     <div class="list-left" style="width:50%; float:left;">
                                         <div class="listall"><a href="#"><i class="fa fa-user-o fa-fw"></i> 我的空间</a></div>
