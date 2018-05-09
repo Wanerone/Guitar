@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>指弹吉他吧</title>
+    <title></title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/bootstrap-3.3.7-dist/css/bootstrap.min.css")
@@ -178,9 +178,9 @@
                     <li class="dropdown">
                         @Html.ActionLink("发布乐谱", "Contact", "Home", new { @class = "navbar-brand", @style = "font-size:15px;color:#C00000;" })
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("发布乐谱", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("发布视频", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("发布帖子", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("发布乐谱", "Create", "MusicScore")</li>
+                            <li>@Html.ActionLink("发布视频", "Create", "Video")</li>
+                            <li>@Html.ActionLink("发布帖子", "Create", "Posts")</li>
                         </ul>
                     </li>
                 </ul>

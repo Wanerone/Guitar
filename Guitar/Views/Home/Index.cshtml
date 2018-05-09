@@ -1,5 +1,6 @@
 ﻿@using Guitar.Models
-@model  Guitar.ViewModel.MusicViewModel
+@using Guitar.ViewModel
+@model  Guitar.ViewModel.IndexViewModel
 @{
     ViewBag.Title = "Guitar";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
@@ -77,8 +78,8 @@
         <div class="title cf">
             <a class="f1" style="text-decoration:none;display:inline;font-size:25px;cursor:pointer;">乐谱</a>
             <ul class="title-list fr cf ">
-                <li class="on">热门</li>
-                <li>最新</li>
+                <li class="on">最新</li>
+                <li>热门</li>
                 <li>关注</li>
                 <p><b></b></p>
             </ul>
@@ -86,125 +87,42 @@
         <div class="product-wrap">
             
             <div class="product showw">
-            @foreach (MusicScore p in Model.MScore1)
-            {
+            
                 <ul class="cf">
+                @foreach (MusicScore p in Model.MScore1)
+                    {
                     <li >
                         <a href="" class="imgwrap"> <img class="img-responsive" src="@p.Ms_img"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com">@p.Ms_title</a></p>
-                        <p class="pb10"> p.Ms_label</p>
-                    </li>
+                        <p class="mt10"> <a href="">@p.Ms_title</a></p>
+                        <p class="pb10"> @p.Ms_label</p>
+                    </li>  }
                 </ul>
-            }
+          
             </div>
             <!--案例2-->
             <div class="product">
                 <ul class="cf">
-                    <li >
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img class="img-responsive" src="~/Images/3.jpg"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com">站长素材网站logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/s22.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/s22.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li class="ml0">
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img class="img-responsive" src="~/Images/3.jpg"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com">站长素材网站logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/s22.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
+@foreach (MusicViewModel p in Model.MusicViewModel1)
+{
+    <li>
+        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img class="img-responsive" src="@p.Ms_img"> </a>
+        <p class="mt10"> <a href="">@p.Ms_title</a></p>
+        <p class="pb10">@p.Ms_label</p>
+    </li>
+}
+                  
+                    
                 </ul>
             </div>
             <!--案例3-->
             <div class="product">
                 <ul class="cf">
                     <li >
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img class="img-responsive" src="~/Images/s22.jpg"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com">站长素材网站logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
+                        <a href="" class="imgwrap"> <img class="img-responsive" src="~/Images/s22.jpg"> </a>
+                        <p class="mt10"> <a href="">站logo... </a></p>
+                        <p class="pb10">行业类</p>
                     </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/s22.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/s22.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li class="ml0">
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img class="img-responsive" src="~/Images/3.jpg"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com">站长素材网站logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/s22.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
+
                 </ul>
             </div>
         </div>
@@ -304,54 +222,9 @@
             <div class="products">
                 <ul class="cf">
                     <li class="ml0">
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img class="img-responsive" src="~/Images/s22.jpg"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com">站长素材网站logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/s22.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/s22.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/s22.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/s22.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li class="ml0">
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img class="img-responsive" src="~/Images/3.jpg"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com">站长素材网站logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/s22.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
+                        <a href="h" class="imgwrap"> <img class="img-responsive" src="~/Images/s22.jpg"> </a>
+                        <p class="mt10"> <a href="">站长logo... </a></p>
+                        <p class="pb10">行业类别：</p>
                     </li>
                 </ul>
             </div>
@@ -359,55 +232,11 @@
             <div class="products">
                 <ul class="cf">
                     <li class="ml0">
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img class="img-responsive" src="~/Images/3.jpg"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com">站长素材网站logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
+                        <a href="" class="imgwrap"> <img class="img-responsive" src="~/Images/3.jpg"> </a>
+                        <p class="mt10"> <a href="">站logo... </a></p>
+                        <p class="pb10">行业类别：</p>
                     </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/s22.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li class="ml0">
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img class="img-responsive" src="~/Images/3.jpg"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com">站长素材网站logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/3.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
-                    <li>
-                        <a href="http://www.lanrenzhijia.com" class="imgwrap"> <img src="~/Images/s22.jpg" class="img-responsive"> </a>
-                        <p class="mt10"> <a href="http://www.lanrenzhijia.com"> 深圳达文影视传媒有限公司logo... </a></p>
-                        <p class="pb10">行业类别：艺术摄影,文化体育</p>
-                    </li>
+
                 </ul>
             </div>
         </div>

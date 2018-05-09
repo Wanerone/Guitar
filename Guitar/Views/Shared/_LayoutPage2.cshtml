@@ -125,7 +125,7 @@
         .copyright{
             clear:both;
             width:100%;
-            text-align:center;
+            /*text-align:center;*/
             font-size:15px;
             padding:20px 0px;
             color:#B8B0B0;
@@ -147,6 +147,11 @@
         .fabiao  a{
             text-decoration: none;
         }
+        .navfont a{
+            font-size:15px;
+            color:#000000;
+        }
+
     </style>
     <meta name="description" content="The description of my page" />
 </head>
@@ -163,8 +168,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
-                    <li class="dropdown">
+                    <li class="navfont">@Html.ActionLink("主页", "Index", "Home")</li>
+                    <li class="dropdown navfont">
                         @Html.ActionLink("乐谱", "Contact", "Home")
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("热门谱子", "Contact", "Home")</li>
@@ -172,8 +177,8 @@
                             <li>@Html.ActionLink("热门关注", "Contact", "Home")</li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("视频", "About", "Home")</li>
-                    <li>@Html.ActionLink("攻略", "Contact", "Home")</li>
+                    <li class="navfont">@Html.ActionLink("视频", "About", "Home")</li>
+                    <li class="navfont">@Html.ActionLink("攻略", "Contact", "Home")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -182,9 +187,9 @@
                     <li class="dropdown">
                         @Html.ActionLink("发布乐谱", "Contact", "Home", new { @class = "navbar-brand", @style = "font-size:15px;color:#C00000;" })
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("发布乐谱", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("发布视频", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("发布帖子", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("发布乐谱", "Create", "MusicScore")</li>
+                            <li>@Html.ActionLink("发布视频", "Create", "Video")</li>
+                            <li>@Html.ActionLink("发布帖子", "Create", "Posts")</li>
                         </ul>
                     </li>
                 </ul>

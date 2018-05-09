@@ -14,23 +14,40 @@ namespace Guitar.Controllers
         public ActionResult Index()
         {
             var scores = db.MusicScore.OrderByDescending(p => p.Ms_addtime).FirstOrDefault();
+            var score1 = (from p in db.MusicScore select p).OrderByDescending(p => p.Ms_addtime).Take(10);
+            var musicviewmodel = (from s in (from p in db.MusicScore
+                                    join o in db.MusicScoreStatistics on p.Ms_id equals o.Ms_id
+                                    select new
+                                    {
+                                        Ms_id = p.Ms_id,
+                                        Ms_title = p.Ms_title,
+                                        Ms_img = p.Ms_img,
+                                        Ms_label = p.Ms_label,
+                                        User_id = p.User_id,
+                                        ReadCount = o.ReadCount
+                                    })
+                         select s).OrderByDescending(s => s.ReadCount).Take(10);
+            var musicviewmodel1 = (from s in musicviewmodel
+                                   select new MusicViewModel
+                          {
+                              Ms_id = s.Ms_id,
+                              Ms_title = s.Ms_title,
+                              Ms_img = s.Ms_img,
+                              Ms_label = s.Ms_label,
+                              User_id = s.User_id,
+                              ReadCount = s.ReadCount
+                          });
+            var score2 = new Guitar.ViewModel.IndexViewModel()
+            {
+                MScore = scores,
+                MScore1 = score1,
+                MusicViewModel1=musicviewmodel1,
+            };
             //var score = (from s in (from p in db.MusicScore join o in db.MusicScoreStatistics on p.Ms_id equals o.Ms_id select new { p.Ms_id, p.Ms_title, p.Ms_img, p.Ms_label, o.ReadCount }) orderby s.ReadCount descending select s).Take(3).ToList();
-            //var score = (from s in (from p in db.MusicScore
-            //                        join o in db.MusicScoreStatistics on p.Ms_id equals o.Ms_id
-            //                        select new
-            //                        {
-            //                            Ms_id = p.Ms_id,
-            //                            Ms_title = p.Ms_title,
-            //                            Ms_img = p.Ms_img,
-            //                            Score = p.Score,
-            //                            Ms_label = p.Ms_label,
-            //                            User_id = p.User_id,
-            //                            Ms_addtime = p.Ms_addtime,
-            //                            ReadCount = o.ReadCount
-            //                        })
-            //             select s).OrderByDescending(s => s.ReadCount).Take(3);
-            ////orderby s.ReadCount descending
-            ////select s).Take(3);
+
+            //ViewData["ss"] = score;
+            //orderby s.ReadCount descending
+            //select s).Take(10);
             //var score1 = (from s in score
             //              select new
             //              {
@@ -43,12 +60,7 @@ namespace Guitar.Controllers
             //                  Ms_addtime = s.Ms_addtime,
             //                  //ReadCount = s.ReadCount
             //              }).ToList();
-            var score1 = (from p in db.MusicScore select p).OrderByDescending(p => p.Ms_addtime).Take(3);
-            var score2 = new Guitar.ViewModel.MusicViewModel()
-            {
-                MScore = scores,
-                MScore1 = score1,
-            };
+
             //ViewData["scored"] = score;
             //List<MusicViewModel> lstProduct = new List<MusicViewModel>();
             //foreach (var s in score1)
@@ -87,6 +99,7 @@ namespace Guitar.Controllers
             return View(score2);
             //return View();
         }
+
         //public IList<MusicViewModel> GetMusic()
         //{
         //    IList<MusicViewModel> list = (from s in (from p in db.MusicScore

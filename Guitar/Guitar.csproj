@@ -298,6 +298,7 @@
     <Compile Include="ueditor\net\App_Code\NotSupportedHandler.cs" />
     <Compile Include="ueditor\net\App_Code\PathFormater.cs" />
     <Compile Include="ueditor\net\App_Code\UploadHandler.cs" />
+    <Compile Include="ViewModel\IndexViewModel.cs" />
     <Compile Include="ViewModel\MusicViewModel.cs" />
     <Compile Include="YZM\ValidateCode.cs" />
   </ItemGroup>
@@ -570,6 +571,16 @@
     <Content Include="ueditor\net\Bin\Newtonsoft.Json.pdb" />
     <Content Include="ueditor\net\Bin\Newtonsoft.Json.xml" />
     <Content Include="ueditor\net\net.sln" />
+    <Content Include="ueditor\net\upload\image\20180503\6366097756076207736095371.jpg" />
+    <Content Include="ueditor\net\upload\image\20180505\6366112414033474758381198.png" />
+    <Content Include="ueditor\net\upload\image\20180506\6366121738866638963087545.jpeg" />
+    <Content Include="ueditor\net\upload\image\20180506\6366121738874444999830116.jpeg" />
+    <Content Include="ueditor\net\upload\image\20180506\6366121738881850434343441.jpeg" />
+    <Content Include="ueditor\net\upload\image\20180506\6366121739958643362451080.jpeg" />
+    <Content Include="ueditor\net\upload\image\20180506\6366121739966949559193650.jpeg" />
+    <Content Include="ueditor\net\upload\image\20180506\6366121739972854453706976.jpeg" />
+    <Content Include="ueditor\net\upload\image\20180507\6366128073598594169974694.png" />
+    <Content Include="ueditor\net\upload\image\20180507\6366128097621398573881054.png" />
     <Content Include="ueditor\themes\default\css\ueditor.css" />
     <Content Include="ueditor\themes\default\css\ueditor.min.css" />
     <Content Include="ueditor\themes\default\dialogbase.css" />
@@ -739,13 +750,13 @@
     <Content Include="Views\MusicScore\Details.cshtml" />
     <Content Include="Views\MusicScore\Edit.cshtml" />
     <Content Include="Views\MusicScore\Index.cshtml" />
+    <Content Include="Views\MusicScore\Display.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="font-awesome-4.7.0\" />
     <Folder Include="Images\FM\" />
     <Folder Include="MusicScore\FM\" />
-    <Folder Include="ueditor\net\upload\image\" />
     <Folder Include="Video\" />
     <Folder Include="Views\YZM\" />
   </ItemGroup>

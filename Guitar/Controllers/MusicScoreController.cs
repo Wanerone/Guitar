@@ -169,5 +169,9 @@ namespace Guitar.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult Display()
+        {
+            return View();
+        }
     }
 }
