@@ -169,9 +169,30 @@ namespace Guitar.Controllers
             }
             base.Dispose(disposing);
         }
-        public ActionResult Display()
+        public ActionResult Display(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            MusicScore ms = db.MusicScore.Find(id);
+            MusicScoreStatistics msta = db.MusicScoreStatistics.Find(id);
+            Users us = db.Users.Find(id);
+            if (ms == null)
+            {
+                return HttpNotFound();
+            }
+            var ms1 = from m in db.MusicScore.OrderByDescending(p => p.Ms_addtime) select m;
+            //var msta = from m in db.MusicScoreStatistics.Where(p => p.Ms_id == id) select m;
+            //var msta = from m in db.MusicScoreStatistics where m.Ms_id == id select m;
+            var index = new Guitar.ViewModel.MusicDetailsViewModel()
+            {
+                Us=us,
+                MScore = ms,
+                MScore1 = ms1,
+                MSStatistics = msta,
+            };
+            return View(index);
         }
     }
 }
