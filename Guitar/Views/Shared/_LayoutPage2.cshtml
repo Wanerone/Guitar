@@ -77,6 +77,9 @@
             height:30px;
             font-size:20px;
         }
+         .name a{
+            text-decoration:none;
+        }
         .use{
             width:100%;
             padding-top:10px;
@@ -195,7 +198,7 @@
                 </ul>
 
 
-                @if (Session["User_naame"] == null)
+                @if (Session["User_name"] != null)
                 {
                     using (Html.BeginForm("LogOff", "LoginRegister", FormMethod.Post, new { id = "logoutForm", @class = "navbar-form navbar-right" }))
                     {

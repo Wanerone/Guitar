@@ -91,7 +91,9 @@
             height: 30px;
             font-size: 20px;
         }
-
+         .name a{
+            text-decoration:none;
+        }
         .use {
             width: 100%;
             padding-top: 10px;
@@ -210,7 +212,7 @@
                 </ul>
 
 
-                @if (Session["User_naame"] == null)
+                @if (Session["User_name"] != null)
                 {
                     using (Html.BeginForm("LogOff", "LoginRegister", FormMethod.Post, new { id = "logoutForm", @class = "navbar-form navbar-right" }))
                     {
@@ -218,7 +220,7 @@
                         <div class="headimg">
                             <a class="headimage"><img src="~/Images/head.jpg" class="img-circle img-responsive"  /></a>
                             <div class="userin">
-                                <div class="name"><a>@*[@Session["User_name"]]*@[慧然肯来]</a></div>
+                                <div class="name"><a>[@Session["User_name"]]@*[慧然肯来]*@</a></div>
                                 <div class="use">
                                     <div class="list-left" style="width:50%; float:left;">
                                         <div class="listall"><a href="#"><i class="fa fa-user-o fa-fw"></i> 我的空间</a></div>

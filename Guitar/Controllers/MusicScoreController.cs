@@ -198,5 +198,22 @@ namespace Guitar.Controllers
             };
             return View(index);
         }
+        [HttpPost]
+        public ActionResult Comment(MusicScoreComment msc)
+        {
+            string pingluntextarea = Request["pingluntextarea"];
+            int Ms_id = Convert.ToInt32(Request["Ms_id"]);
+            if (ModelState.IsValid)
+            {
+                msc.Ms_id = Ms_id;
+                msc.content = pingluntextarea;
+                msc.User_id = Convert.ToInt32(Session["Users_id"].ToString());
+                msc.Addtime = System.DateTime.Now;
+                db.MusicScoreComment.Add(msc);
+                db.SaveChanges();
+                return Content("<script>;alert('评论成功!');history.go(-1)</script>");
+            }
+            return RedirectToAction("Display", "MusicScore");
+        }
     }
 }
