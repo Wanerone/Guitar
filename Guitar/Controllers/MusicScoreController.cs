@@ -177,12 +177,16 @@ namespace Guitar.Controllers
             }
             MusicScore ms = db.MusicScore.Find(id);
             MusicScoreStatistics msta = db.MusicScoreStatistics.Find(id);
-            Users us = db.Users.Find(id);
-            if (ms == null)
+            var usid = (from m in db.MusicScore.Where(p => p.Ms_id == id) select m.User_id).FirstOrDefault();
+            Users us = db.Users.Find(usid);
+            //MusicScoreStatistics msta = db.MusicScoreStatistics.Find(id);
+            if (ms == null&&msta==null&&us==null)
             {
                 return HttpNotFound();
             }
-            var ms1 = from m in db.MusicScore.OrderByDescending(p => p.Ms_addtime) select m;
+          
+            //var us=from m in db.Users.Where(p=>p.User_id==usid) select m;
+            var ms1 = (from m in db.MusicScore.Where(p => p.User_id == usid).OrderByDescending(p => p.Ms_addtime) select m).Take(5);
             //var msta = from m in db.MusicScoreStatistics.Where(p => p.Ms_id == id) select m;
             //var msta = from m in db.MusicScoreStatistics where m.Ms_id == id select m;
             var index = new Guitar.ViewModel.MusicDetailsViewModel()

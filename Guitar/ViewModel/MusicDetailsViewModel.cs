@@ -10,6 +10,8 @@ namespace Guitar.ViewModel
     {
         public Users Us { set; get; }
         public MusicScore MScore { set; get; }
+        //public IEnumerable<Users> Us { set; get; }
+        //public IEnumerable<MusicScoreStatistics> MSStatistics { get; set; }
         public MusicScoreStatistics MSStatistics { get; set; }
         public IEnumerable<MusicScore> MScore1 { get; set; }
         //public IEnumerable<MusicScoreStatistics> MSStatistics { get; set; }

@@ -161,6 +161,147 @@
     max-width: 100%;
     height: auto;
   }
+  .clearr{clear:both;}
+  .pinlun{
+      margin-top:40px;
+  }
+  .pinlun table{
+    table-layout: fixed;
+    width: 100%;
+    background-color: transparent;
+
+  }
+  .ta1{
+      width: 130px;
+      border-right: none;
+      overflow: hidden;
+      vertical-align: top;
+  }
+  .taimg{
+     margin: 0 20px 0 20px;
+  }
+  .taname{
+    margin: 5px 0;
+    padding: 0;
+    height: auto;
+    text-align: center;
+    border-bottom: none;
+    font-size: 14px;
+    overflow: hidden;
+    color:#369;
+  }
+  .ta2{
+    padding: 20px;
+    background-color: #F5F5F5;
+    border-radius: 5px;
+    vertical-align: top;
+  }
+  .textera{
+      padding:4px;
+  }
+  .textarea{
+     width: 100%;
+     height:100px;
+    margin-right: 0;
+    padding: 0 !important;
+    border: none;
+    background: #FFF none;
+    max-width:100%;
+    resize: none;
+    line-height: 30px;
+    font: 15px/1.5 Tahoma,'Microsoft Yahei','Simsun';
+  }
+  .fabaio{
+      margin:4px;
+  }
+  .taa1{
+
+      color: #999;
+  }
+  .taa2{
+      margin:10px 0px;
+       min-height: 60px;
+       font-size:14px;
+  }
+  .huifu a{
+      text-decoration:none;
+      cursor:pointer;
+      height:20px;
+  }
+  .huifui1{
+    position: relative;
+    margin: 5px -20px 0;
+    padding: 10px 20px;
+    background: #EDEDF1;
+    border-radius: 0 0 5px 5px;
+    border-top: 1px solid #DFDFDF
+  }
+  .huifui1 dl{
+        border-bottom: 1px dashed #DFDFDF;
+  }
+  .hui1{   
+       zoom: 1;
+  }
+  .huiimg{
+      width:48px;
+      float:left;
+  }
+  .huiother{
+      float:left;
+      margin-left:10px;
+  }
+  .r1{
+     color: #999;
+     font-size:14px;
+  }
+  .r1 a{
+      text-decoration:none;
+      cursor:pointer;
+  }
+  .r2{
+      min-height:28px;
+  }
+  .m{
+      margin:10px 0px;
+  }
+  .m a{
+      text-decoration:none;
+      cursor:pointer;
+  }
+  .myreply{
+      padding-left: 10px;
+    padding-right: 10px;
+    display:none;
+  }
+  .myimg{
+      width:48px;
+      display:inline;
+      float:left;
+      width:5%;
+  }
+  .myimg img{
+      border-radius: 5px;
+  }
+  .mycontent{
+      width:80%;
+      float:left;
+      padding:0px 10px;
+  }
+  .textarea2{
+      width: 100%;
+     height:48px;
+    margin-right: 0;
+    padding: 0 !important;
+    border: none;
+    background: #FFF none;
+    max-width:100%;
+    resize: none;
+    line-height: 30px;
+    font: 15px/1.5 Tahoma,'Microsoft Yahei','Simsun';
+  }
+  .fabiao2{
+      padding-top:4px;
+  }
 </style>
 <p></p>
 
@@ -188,20 +329,16 @@
         
     </div>
         <div class="morehead">
-            <h3>Ta的视频<span class="s1"><a>查看更多</a></span></h3>
+            <h3>Ta的曲谱<span class="s1"><a>查看更多</a></span></h3>
             <ul style="margin:0;padding:0;">
-                <li class="shili">
-                    <a class="shia"><img src="~/Images/s1.jpg"  class="img-responsive"/></a>
-                    <a class="shititle" target="_blank" href="">天空之城 </a>
-                </li>
-                <li class="shili">
-                    <a class="shia"><img src="~/Images/s1.jpg" class="img-responsive" /></a>
-                    <a class="shititle" target="_blank" href="">天空之城事件会给我没问呢ggdgdgdgdgdgdgdgdgd</a>
-                </li>
-                <li class="shili">
-                    <a class="shia"><img src="~/Images/s1.jpg" class="img-responsive" /></a>
-                    <a class="shititle" target="_blank" href="">天空之城 </a>
-                </li>
+                @foreach (MusicScore p in Model.MScore1)
+                {
+                    <li class="shili">
+                        <a class="shia"><img src="@p.Ms_img" class="img-responsive" /></a>
+                        <a class="shititle" target="_blank" href="">@p.Ms_title </a>
+                    </li>
+                }
+                
             </ul>
             <div class="cl"></div>
         </div>
@@ -274,6 +411,7 @@
             </div>
         </div>
     </div>
+    <div class="clearr"></div>
     <script type="text/javascript">
 	$(function () { $('#collapseFour').collapse({
 		toggle: false
@@ -283,4 +421,123 @@
 	$(function () { $('#collapseThree').collapse('show') });
 	//$(function () { $('#collapseThree').collapse('toggle')});
     </script>  
+    <div class="pinlun">
+        <table cellspacing="0" cellpadding="0">
+            <tbody>
+                <tr>
+                    <td class="ta1">
+                        <div class="taimg">
+                            <img src="~/Images/head.jpg" class="img-responsive img-rounded" />
+                        </div>
+                        <div class="taname">@Model.Us.User_name</div>
+                    </td>
+                    <td class="ta2">
+                        @using (Html.BeginForm("Comment", "Food", FormMethod.Post, new { id = "pinglun", @class = "postbox" }))
+                        {
+                            <div class="textera">
+                                <textarea class="textarea" name="pingluntextarea"></textarea>
+                            </div>
+                            <input type="hidden" name="Ms_id" value="@Model.MScore.Ms_id" />
+                            <div class="fabaio">
+                                <a onclick="display()" class="btn btn-info">发表评论</a>
+                            </div>
+                        }
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="pinlun">
+        <table cellspacing="0" cellpadding="0">
+            <tbody>
+                <tr>
+                    <td class="ta1">
+                        <div class="taimg">
+                            <img src="~/Images/head.jpg" class="img-responsive img-rounded" />
+                        </div>
+                        <div class="taname">@Model.Us.User_name</div>
+                    </td>
+                    <td class="ta2">
+                        <div class="taa1">
+                            <i class="fa fa-user-circle" aria-hidden="true"></i> 发表于  2015奶奶vvvvvvvv
+                        </div>
+                        <div class="taa2">
+                            dfgdfgdfgdfgd
+                        </div>
+                            <input type="hidden" name="Ms_id" value="@Model.MScore.Ms_id" />
+
+                            <div class="fabiao huifu aclick">
+                                <div style="float:right"><a  class="">回复</a></div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        <div class="comment">
+                            <div class="huifui1">
+                                <div class="hui1">
+                                    <div class="huiimg">
+                                        <a><img src="~/Images/head.jpg" class="img-responsive img-rounded" /></a>
+                                    </div>
+                                    <div class="huiother">
+                                        <div class="r1"><a>天行九歌</a>  发表于  2014-8-10 16:35</div>
+                                        <div class="r2">dsfdsfdsfffffffffffffffffffffffffffffffffffffffffffffffffffff</div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                            </div>
+                            <div class="huifui1">
+                                <div class="hui1">
+                                    <div class="huiimg">
+                                        <a><img src="~/Images/head.jpg" class="img-responsive img-rounded" /></a>
+                                    </div>
+                                    <div class="huiother">
+                                        <div class="r1"><a>天行九歌</a>  发表于  2014-8-10 16:35</div>
+                                        <div class="r2">dsfdsfdsfffffffffffffffffffffffffffffffffffffffffffffffffffff</div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                            </div>
+                            <div class="huifui1">
+                                <div class="hui1">
+                                    <div class="huiimg">
+                                        <a><img src="~/Images/head.jpg" class="img-responsive img-rounded" /></a>
+                                    </div>
+                                    <div class="huiother">
+                                        <div class="r1"><a>天行九歌</a>  发表于  2014-8-10 16:35</div>
+                                        <div class="r2">dsfdsfdsfffffffffffffffffffffffffffffffffffffffffffffffffffff</div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                            </div>
+                            <div class="m aclick">
+                                <div style="float:right"><a  class="">我也来说一句</a></div>
+                                <div style="clear:both"></div>
+                            </div>
+                            <div class="myreply">
+                                <div class="myimg">
+                                    <img src="~/Images/head.jpg" class="img-responsive img-rounded" />
+                                </div>
+                                <div class="mycontent">
+                                    <textarea class="textarea2" name="pingluntextarea2"></textarea>
+                                    <div class="fabiao2">
+                                        <a href="javascript:document.getElementById('pinglun').submit()" class="btn btn-info">回复</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
 </div>
+<script>
+    $(document).ready(function () {
+        $(".aclick a").click(function () {
+            $(".myreply").toggle();
+        });
+    });
+</script>

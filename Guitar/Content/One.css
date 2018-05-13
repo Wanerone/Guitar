@@ -22,7 +22,7 @@ img{ border:none;}
 .lanrenzhijias .title-lists b{display:inline-block;width:0;height:0;margin-top:-3px;border-style:solid dashed dashed dashed;border-width:9px;border-color: #ff6600 #fff #fff #fff;overflow: hidden;zoom: 1;font-size: 0;}
 
 
-.products{ height: 600px; position: relative; overflow: hidden; display: none; margin-top: 20px;}
+.products{ height: 450px; position: relative; overflow: hidden; display: none; margin-top: 20px;}
 .products ul{ position: absolute; left: 0px;}
 .product-wraps .showw{ display: block;}
 .product-wraps .products li{ float: left; display: inline; margin-right: 16px;background: #f3f3f3;border: 2px solid #fafafa; transition:0.4s;-webkit-transition:0.4s;-moz-transition: 0.4s;-o-transition: 0.4s;-ms-transition: 0.4s;}
