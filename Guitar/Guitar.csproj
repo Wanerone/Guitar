@@ -339,6 +339,7 @@
     <Content Include="Images\g5.jpg" />
     <Content Include="Images\g6.jpg" />
     <Content Include="Images\head.jpg" />
+    <Content Include="Images\head2.jpg" />
     <Content Include="Images\img-1.jpg" />
     <Content Include="Images\jtb.gif" />
     <Content Include="Images\lunbo.jpg" />
@@ -354,6 +355,7 @@
     <Content Include="Images\s5.jpg" />
     <Content Include="Images\weixin.jpg" />
     <Content Include="Images\weixin.png" />
+    <Content Include="Images\小埋.jpg" />
     <Content Include="Images\微信.png" />
     <Content Include="Images\微博.png" />
     <Content Include="Images\手机.png" />

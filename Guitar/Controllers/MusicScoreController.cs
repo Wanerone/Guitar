@@ -190,7 +190,7 @@ namespace Guitar.Controllers
             //var us=from m in db.Users.Where(p=>p.User_id==usid) select m;
             var ms1 = (from m in db.MusicScore.Where(p => p.User_id == usid).OrderByDescending(p => p.Ms_addtime) select m).Take(5);
             var msc = from m in db.MusicScoreComment.Where(p => p.Ms_id == id).OrderByDescending(p => p.Addtime) select m;
-            var msr = from n in db.MusicScoreReply
+            var msr =( from n in db.MusicScoreReply
                       join m in msc on n.Ms_commentid equals m.Ms_commentid
                       join q in db.Users on n.User_id equals q.User_id
                       select new MusicCommentReplyViewModel
@@ -203,7 +203,7 @@ namespace Guitar.Controllers
                           User_id=n.User_id,
                           User_name=q.User_name,
                           User_img=q.User_img
-                      };
+                      });
             int commentid = Convert.ToInt32(Request["Commentid1"]);
             var msrr= from m in db.MusicScoreReply.Where(p=>p.Ms_commentid==commentid).OrderByDescending(p => p.Addtime) select m;
             //var msta = from m in db.MusicScoreStatistics.Where(p => p.Ms_id == id) select m;
