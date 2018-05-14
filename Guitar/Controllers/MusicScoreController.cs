@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Guitar.Models;
+using Guitar.ViewModel;
 
 namespace Guitar.Controllers
 {
@@ -180,6 +181,7 @@ namespace Guitar.Controllers
             var usid = (from m in db.MusicScore.Where(p => p.Ms_id == id) select m.User_id).FirstOrDefault();
             Users us = db.Users.Find(usid);
             //MusicScoreStatistics msta = db.MusicScoreStatistics.Find(id);
+
             if (ms == null&&msta==null&&us==null)
             {
                 return HttpNotFound();
@@ -187,6 +189,23 @@ namespace Guitar.Controllers
           
             //var us=from m in db.Users.Where(p=>p.User_id==usid) select m;
             var ms1 = (from m in db.MusicScore.Where(p => p.User_id == usid).OrderByDescending(p => p.Ms_addtime) select m).Take(5);
+            var msc = from m in db.MusicScoreComment.Where(p => p.Ms_id == id).OrderByDescending(p => p.Addtime) select m;
+            var msr = from n in db.MusicScoreReply
+                      join m in msc on n.Ms_commentid equals m.Ms_commentid
+                      join q in db.Users on n.User_id equals q.User_id
+                      select new MusicCommentReplyViewModel
+                      {
+                          Ms_replyid = n.Ms_replyid,
+                          Ms_commentid = m.Ms_commentid,
+                          content = n.content,
+                          Addtime = n.Addtime,
+                          Ms_id = m.Ms_id,
+                          User_id=n.User_id,
+                          User_name=q.User_name,
+                          User_img=q.User_img
+                      };
+            int commentid = Convert.ToInt32(Request["Commentid1"]);
+            var msrr= from m in db.MusicScoreReply.Where(p=>p.Ms_commentid==commentid).OrderByDescending(p => p.Addtime) select m;
             //var msta = from m in db.MusicScoreStatistics.Where(p => p.Ms_id == id) select m;
             //var msta = from m in db.MusicScoreStatistics where m.Ms_id == id select m;
             var index = new Guitar.ViewModel.MusicDetailsViewModel()
@@ -195,6 +214,9 @@ namespace Guitar.Controllers
                 MScore = ms,
                 MScore1 = ms1,
                 MSStatistics = msta,
+                MSC=msc,
+                MSR=msr,
+                Msr=msrr,
             };
             return View(index);
         }
@@ -215,5 +237,37 @@ namespace Guitar.Controllers
             }
             return RedirectToAction("Display", "MusicScore");
         }
+        [HttpPost]
+        public ActionResult Reply(MusicScoreReply msr)
+        {
+            string pingluntextarea = Request["pingluntextarea2"];
+            int Ms_id = Convert.ToInt32(Request["Ms_id2"]);
+            int commentid= Convert.ToInt32(Request["Commentid"]);
+            if (ModelState.IsValid)
+            {
+                msr.Ms_id = Ms_id;
+                msr.content = pingluntextarea;
+                msr.Ms_commentid = commentid;
+                msr.User_id = Convert.ToInt32(Session["Users_id"].ToString());
+                msr.Addtime = System.DateTime.Now;                
+                db.MusicScoreReply.Add(msr);
+                db.SaveChanges();               
+                return Content("<script>;alert('回复成功!');history.go(-1)</script>");
+            }
+
+                return RedirectToAction("Display", "MusicScore");
+        }
+        public ActionResult UserIndex(int User_Id)
+        {
+            Users users = db.Users.Find(User_Id);
+            var index = new Guitar.ViewModel.UsersViewModel
+            {
+                Us=users,
+
+            };
+
+            return View(index);
+        }
+
+        }
     }
-}

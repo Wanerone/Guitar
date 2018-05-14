@@ -12,10 +12,17 @@ namespace Guitar.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MusicScoreCommentRelation
+    public partial class PostReply
     {
-        public int id { get; set; }
-        public int Parent_id { get; set; }
-        public int Child_id { get; set; }
+        public int Po_replyid { get; set; }
+        public int Po_commentid { get; set; }
+        public int Po_id { get; set; }
+        public string content { get; set; }
+        public System.DateTime Addtime { get; set; }
+        public int User_id { get; set; }
+    
+        public virtual Post Post { get; set; }
+        public virtual PostComment PostComment { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

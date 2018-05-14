@@ -3,10 +3,10 @@
 body{ font-size:12px;}
 img{ border:none;}
 /*public*/
-.fl{display:inline;text-decoration:none;font-size:20px;}
+.fl{text-decoration:none;font-size:20px;}
 .fl a{color:#000000;}
 .fl a:hover{color:#58D5D3}
-.fr{display:inline;float:right}
+.fr{float:right}
 .cf:after{content:"";clear:both;display:block;height:0;overflow:hidden}
 .cf{zoom:1}
 .pb10{padding-bottom:10px}
@@ -24,7 +24,7 @@ img{ border:none;}
 .product{ height: 450px; position: relative; overflow: hidden; display: none; margin-top: 20px;}
 .product ul{ position: absolute; left: 0px;}
 .product-wrap .showw{ display: block;}
-.product-wrap .product li{ float: left; display: inline; margin-right: 24px;background: #f3f3f3;border: 2px solid #fafafa; transition:0.4s;-webkit-transition:0.4s;-moz-transition: 0.4s;-o-transition: 0.4s;-ms-transition: 0.4s;}
+.product-wrap .product li{ float: left;  margin-right: 24px;background: #f3f3f3;border: 2px solid #fafafa; transition:0.4s;-webkit-transition:0.4s;-moz-transition: 0.4s;-o-transition: 0.4s;}
 /*.product-wrap .product li.ml0{margin-left:0px;}*/
 .product-wrap .product li a.imgwrap{ display: block; width: 200px; height: 113px; background: #fff; text-align:center;overflow:hidden;}
 .product-wrap .product li p{padding-left: 7px;color: #8EA6B4;line-height: 22px;}

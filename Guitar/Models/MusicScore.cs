@@ -19,6 +19,7 @@ namespace Guitar.Models
         {
             this.MusicScoreCollection = new HashSet<MusicScoreCollection>();
             this.MusicScoreComment = new HashSet<MusicScoreComment>();
+            this.MusicScoreReply = new HashSet<MusicScoreReply>();
         }
     
         public int Ms_id { get; set; }
@@ -28,11 +29,15 @@ namespace Guitar.Models
         public string Ms_img { get; set; }
         public string Ms_label { get; set; }
         public System.DateTime Ms_addtime { get; set; }
+        public int ReadCount { get; set; }
+        public int Collection { get; set; }
     
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MusicScoreCollection> MusicScoreCollection { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MusicScoreComment> MusicScoreComment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MusicScoreReply> MusicScoreReply { get; set; }
     }
 }

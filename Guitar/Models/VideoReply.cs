@@ -12,10 +12,17 @@ namespace Guitar.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class VideoCommentRelation
+    public partial class VideoReply
     {
-        public int id { get; set; }
-        public int Parent_id { get; set; }
-        public int Child_id { get; set; }
+        public int Vi_replyid { get; set; }
+        public int Vi_commentid { get; set; }
+        public int Vi_id { get; set; }
+        public string content { get; set; }
+        public System.DateTime Addtime { get; set; }
+        public int User_id { get; set; }
+    
+        public virtual Users Users { get; set; }
+        public virtual Video Video { get; set; }
+        public virtual VideoComment VideoComment { get; set; }
     }
 }

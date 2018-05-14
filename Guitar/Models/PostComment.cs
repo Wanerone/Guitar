@@ -14,7 +14,13 @@ namespace Guitar.Models
     
     public partial class PostComment
     {
-        public int id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PostComment()
+        {
+            this.PostReply = new HashSet<PostReply>();
+        }
+    
+        public int Po_commentid { get; set; }
         public int Po_id { get; set; }
         public string content { get; set; }
         public System.DateTime Addtime { get; set; }
@@ -22,5 +28,7 @@ namespace Guitar.Models
     
         public virtual Post Post { get; set; }
         public virtual Users Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PostReply> PostReply { get; set; }
     }
 }

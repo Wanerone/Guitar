@@ -14,6 +14,9 @@ namespace Guitar.ViewModel
         //public IEnumerable<MusicScoreStatistics> MSStatistics { get; set; }
         public MusicScoreStatistics MSStatistics { get; set; }
         public IEnumerable<MusicScore> MScore1 { get; set; }
+        public IEnumerable<MusicScoreComment> MSC { get; set; }
+        public IEnumerable<MusicScoreReply> Msr { get; set; }
+        public IEnumerable<MusicCommentReplyViewModel> MSR { get; set; }
         //public IEnumerable<MusicScoreStatistics> MSStatistics { get; set; }
         //public IEnumerable<MusicViewModel> MusicViewModel1 { get; set; }
 

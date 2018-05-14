@@ -239,7 +239,7 @@
     <Compile Include="Models\MusicScoreComment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MusicScoreCommentRelation.cs">
+    <Compile Include="Models\MusicScoreReply.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MusicScoreStatistics.cs">
@@ -254,7 +254,7 @@
     <Compile Include="Models\PostComment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PostCommentRelation.cs">
+    <Compile Include="Models\PostReply.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PostStatistics.cs">
@@ -282,7 +282,7 @@
     <Compile Include="Models\VideoComment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\VideoCommentRelation.cs">
+    <Compile Include="Models\VideoReply.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VideoStatistics.cs">
@@ -299,8 +299,10 @@
     <Compile Include="ueditor\net\App_Code\PathFormater.cs" />
     <Compile Include="ueditor\net\App_Code\UploadHandler.cs" />
     <Compile Include="ViewModel\IndexViewModel.cs" />
+    <Compile Include="ViewModel\MusicCommentReplyViewModel.cs" />
     <Compile Include="ViewModel\MusicDetailsViewModel.cs" />
     <Compile Include="ViewModel\MusicViewModel.cs" />
+    <Compile Include="ViewModel\UsersViewModel.cs" />
     <Compile Include="YZM\ValidateCode.cs" />
   </ItemGroup>
   <ItemGroup>

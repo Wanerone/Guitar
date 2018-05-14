@@ -1,4 +1,5 @@
 ﻿@using Guitar.Models
+@using Guitar.ViewModel
 @model Guitar.ViewModel.MusicDetailsViewModel
 @{
     ViewBag.Title = "Display";
@@ -165,6 +166,10 @@
   .pinlun{
       margin-top:40px;
   }
+  .pinlun a{
+      cursor:pointer;
+      text-decoration:none;
+  }
   .pinlun table{
     table-layout: fixed;
     width: 100%;
@@ -192,7 +197,8 @@
   }
   .ta2{
     padding: 20px;
-    background-color: #F5F5F5;
+    /*background-color: #F5F5F5;*/
+    background-color:#DDDDDD;
     border-radius: 5px;
     vertical-align: top;
   }
@@ -215,7 +221,6 @@
       margin:4px;
   }
   .taa1{
-
       color: #999;
   }
   .taa2{
@@ -232,7 +237,7 @@
     position: relative;
     margin: 5px -20px 0;
     padding: 10px 20px;
-    background: #EDEDF1;
+    background: #C1C1C1;
     border-radius: 0 0 5px 5px;
     border-top: 1px solid #DFDFDF
   }
@@ -429,11 +434,11 @@
                         @if (Session["User_name"] != null)
                         {
                         <div class="taimg">
-                            <img src="~/Images/head.jpg" class="img-responsive img-rounded" />
-                            @*<img src="@Session["User_img"]" class="img-responsive img-rounded" />*@                          
+                            @*<img src="~/Images/head.jpg" class="img-responsive img-rounded" />*@
+                            <img src="@Session["User_img"]" class="img-responsive img-rounded" />                          
                         </div>
-                        @*<div class="taname">@Session["User_name"]</div>*@
-                            <div class="taname">慧然肯来</div>
+                        <div class="taname">@Session["User_name"]</div>
+                            @*<div class="taname">慧然肯来</div>*@
                         }
                         else
                         {
@@ -457,6 +462,83 @@
             </tbody>
         </table>
     </div>
+    @foreach (MusicScoreComment p in Model.MSC)
+    {
+        <div class="pinlun">
+            <table cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td class="ta1">
+                            <div class="taimg">
+                                <a href="@Url.Action("UserIndex", new { User_Id = p.Users.User_id })"><img src="@p.Users.User_img" class="img-responsive img-rounded" /></a>
+                                
+                            </div>
+                            <div class="taname"><a href="@Url.Action("UserIndex", new { User_Id = p.Users.User_id })"></a>@p.Users.User_name</div>
+                        </td>
+                        <td class="ta2">
+                            <div class="taa1">
+                                <i class="fa fa-user-circle" aria-hidden="true"></i> 发表于  @p.Addtime
+                            </div>
+                            <div class="taa2">
+                                @p.content
+                            </div>
+
+                            <input type="hidden" name="Ms_id" value="@Model.MScore.Ms_id" />
+                            
+
+                            <div class="fabiao huifu aclick">
+                                <div style="float:right"><a class="">回复</a></div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                            <div class="comment">
+                                @foreach (MusicCommentReplyViewModel m in Model.MSR)
+                                {
+                                    <input type="hidden" name="Commentid1" value="@p.Ms_commentid" />
+                                    <div class="huifui1">
+                                        <div class="hui1">
+                                            <div class="huiimg">
+                                                <a><img src="@m.User_img" class="img-responsive img-rounded" /></a>
+                                            </div>
+                                            <div class="huiother">
+                                                <div class="r1"><a>@m.User_name</a>  发表于  @m.Addtime</div>
+                                                <div class="r2">@m.content</div>
+                                            </div>
+                                            <div style="clear:both"></div>
+                                        </div>
+                                    </div>
+                                }
+                                
+                                
+                                <div class="m aclick">
+                                    <div style="float:right"><a class="">我也来说一句</a></div>
+                                    <div style="clear:both"></div>
+                                </div>
+                                <div class="myreply">
+                                    @using (Html.BeginForm("Reply", "MusicScore", FormMethod.Post, new { id = "pinglung", @class = "postbox" }))
+                                    {
+                                        <div class="myimg">
+                                            <img src="@Session["User_img"]" class="img-responsive img-rounded" />
+                                        </div>
+                                        <input type="hidden" name="Ms_id2" value="@Model.MScore.Ms_id" />
+                                        <input type="hidden" name="Commentid" value="@p.Ms_commentid" />
+                                        <div class="mycontent">
+                                            <textarea class="textarea2" name="pingluntextarea2"></textarea>
+                                            <div class="fabiao2">
+                                                <a href="javascript:document.getElementById('pinglung').submit()" class="btn btn-info">回复</a>
+                                            </div>
+                                        </div>
+                                    }
+                                    
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
     <div class="pinlun">
         <table cellspacing="0" cellpadding="0">
             <tbody>

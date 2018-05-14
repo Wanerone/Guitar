@@ -19,6 +19,7 @@ namespace Guitar.Models
         {
             this.VideoCollection = new HashSet<VideoCollection>();
             this.VideoComment = new HashSet<VideoComment>();
+            this.VideoReply = new HashSet<VideoReply>();
         }
     
         public int Vi_id { get; set; }
@@ -27,13 +28,17 @@ namespace Guitar.Models
         public string Vi_title { get; set; }
         public string Vi_description { get; set; }
         public string Vi_img { get; set; }
-        public System.DateTime Vi_addtime { get; set; }
         public string Vi_label { get; set; }
+        public System.DateTime Vi_addtime { get; set; }
+        public int ReadCount { get; set; }
+        public int Collection { get; set; }
     
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VideoCollection> VideoCollection { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VideoComment> VideoComment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VideoReply> VideoReply { get; set; }
     }
 }

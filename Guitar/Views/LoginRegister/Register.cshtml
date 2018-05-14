@@ -55,6 +55,7 @@
     }
 
 </script>
+<div class="container">
 <div class="loginimg"><img src="~/Images/注册.png" class="img-responsive" /></div>
 <div class="login">
     @using (Html.BeginForm("Register", "LoginRegister", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -131,6 +132,7 @@
                             </div>
                         </div>
     }
+    </div>
     </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -14,7 +14,13 @@ namespace Guitar.Models
     
     public partial class MusicScoreComment
     {
-        public int id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MusicScoreComment()
+        {
+            this.MusicScoreReply = new HashSet<MusicScoreReply>();
+        }
+    
+        public int Ms_commentid { get; set; }
         public int Ms_id { get; set; }
         public string content { get; set; }
         public System.DateTime Addtime { get; set; }
@@ -22,5 +28,7 @@ namespace Guitar.Models
     
         public virtual MusicScore MusicScore { get; set; }
         public virtual Users Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MusicScoreReply> MusicScoreReply { get; set; }
     }
 }

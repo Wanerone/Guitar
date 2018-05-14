@@ -14,7 +14,13 @@ namespace Guitar.Models
     
     public partial class VideoComment
     {
-        public int id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public VideoComment()
+        {
+            this.VideoReply = new HashSet<VideoReply>();
+        }
+    
+        public int Vi_commentid { get; set; }
         public int Vi_id { get; set; }
         public string content { get; set; }
         public System.DateTime Addtime { get; set; }
@@ -22,5 +28,7 @@ namespace Guitar.Models
     
         public virtual Users Users { get; set; }
         public virtual Video Video { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VideoReply> VideoReply { get; set; }
     }
 }

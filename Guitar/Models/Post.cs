@@ -19,6 +19,7 @@ namespace Guitar.Models
         {
             this.PostCollection = new HashSet<PostCollection>();
             this.PostComment = new HashSet<PostComment>();
+            this.PostReply = new HashSet<PostReply>();
         }
     
         public int Po_id { get; set; }
@@ -28,11 +29,15 @@ namespace Guitar.Models
         public string Po_img { get; set; }
         public System.DateTime Po_addtime { get; set; }
         public string Po_label { get; set; }
+        public int ReadCount { get; set; }
+        public int Collection { get; set; }
     
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PostCollection> PostCollection { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PostComment> PostComment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PostReply> PostReply { get; set; }
     }
 }
