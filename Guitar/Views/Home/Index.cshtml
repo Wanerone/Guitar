@@ -91,7 +91,7 @@
                 @foreach (MusicScore p in Model.MScore1)
                     {
                     <li >
-                        <a href="@Url.Action("Display","MusicScore", new { id = @p.Ms_id})" class="imgwrap"> <img class="img-responsive" src="@p.Ms_img"> </a>
+                        <a href="@Url.Action("Display","MusicScore", new { id = @p.Ms_id,name=@p.Ms_title})" class="imgwrap"> <img class="img-responsive" src="@p.Ms_img"> </a>
                         <p class="mt10"> <a href="">@p.Ms_title</a></p>
                         <p class="pb10"> @p.Ms_label</p>
                     </li>  }

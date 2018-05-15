@@ -1,4 +1,4 @@
-﻿
+﻿@using MvcSiteMapProvider.Web.Html
 @model Guitar.Models.MusicScore
 
 @{
@@ -32,6 +32,7 @@
             text-decoration: none;
         }
 </style>
+<div>@Html.MvcSiteMap().SiteMapPath()</div>
 <ul class="fab">
     <li class="fabiao"><a href="@Url.Action("Create","MusicScore")" style="color:#090909">发布吉他谱</a></li>
     <li class="fabiao"><a href="@Url.Action("Create","Video")">发表视频</a></li>
