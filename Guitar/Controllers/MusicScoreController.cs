@@ -221,7 +221,7 @@ namespace Guitar.Controllers
             return View(index);
         }
         [HttpPost]
-        public ActionResult Comment(MusicScoreComment msc)
+        public ActionResult Comment(MusicScoreComment msc,MusicScoreStatistics mss)
         {
             string pingluntextarea = Request["pingluntextarea"];
             int Ms_id = Convert.ToInt32(Request["Ms_id"]);
@@ -235,6 +235,7 @@ namespace Guitar.Controllers
                 db.SaveChanges();
                 return Content("<script>;alert('评论成功!');history.go(-1)</script>");
             }
+            
             return RedirectToAction("Display", "MusicScore");
         }
         [HttpPost]
@@ -243,6 +244,8 @@ namespace Guitar.Controllers
             string pingluntextarea = Request["pingluntextarea2"];
             int Ms_id = Convert.ToInt32(Request["Ms_id2"]);
             int commentid= Convert.ToInt32(Request["Commentid"]);
+            int commentid1 = Convert.ToInt32(Request["Commentid1"]);
+            int commentid2 = Convert.ToInt32(Request["Commentid2"]);
             if (ModelState.IsValid)
             {
                 msr.Ms_id = Ms_id;
@@ -256,6 +259,23 @@ namespace Guitar.Controllers
             }
 
                 return RedirectToAction("Display", "MusicScore");
+        }
+        [HttpPost]
+        public ActionResult Collection(MusicScoreCollection msc)
+        {
+            int Ms_id = Convert.ToInt32(Request["Ms_id3"]);
+            int User_id = Convert.ToInt32(Session["User_id"]);
+            if (ModelState.IsValid)
+            {
+                msc.Ms_id = Ms_id;
+                msc.User_id = User_id;
+                msc.State = 1;
+                db.MusicScoreCollection.Add(msc);
+                db.SaveChanges();
+                return Content("<script>;alert('收藏成功!');history.go(-1)</script>");
+            }
+
+            return RedirectToAction("Display", "MusicScore");
         }
         public ActionResult UserIndex(int User_Id)
         {

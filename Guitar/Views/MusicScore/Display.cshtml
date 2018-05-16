@@ -182,6 +182,11 @@
       overflow: hidden;
       vertical-align: top;
   }
+  .taaa img{
+      width:90px;
+      height:90px;
+      margin:0 20px;
+  }
   .taimg{
      margin: 0 20px 0 20px;
   }
@@ -317,14 +322,17 @@
         @Html.Raw(@Model.MScore.Score)
         @*<img src="~/Images/head.jpg" class="img img-responsive"/>*@
     </div>
+    @*@Ajax.ActionLink("收藏", "Collection", new AjaxOptions { UpdateTargetId = "collection", InsertionMode = InsertionMode.Replace,HttpMethod="get" });*@
+    <input type="hidden" name="Ms_id3" value="@Model.MScore.Ms_id" />
+
     <div class="details">
         <div class="loca">
             <div class="btn btn-default bt" href="#">
                 <i class="fa fa-eye" aria-hidden="true"></i> 阅读 <a>@Model.MSStatistics.ReadCount</a>
             </div>
 
-            <div class="btn btn-default bt" href="#">
-                <i class="fa fa-star" aria-hidden="true"></i> 收藏 <a>@Model.MSStatistics.Collection</a>
+            <div class="btn btn-default bt coll" href="#">
+                <i class="fa fa-star" aria-hidden="true"></i>  @Ajax.ActionLink("收藏", "Collection", new AjaxOptions { UpdateTargetId = "collection", InsertionMode = InsertionMode.Replace, HttpMethod = "get" })<a>@Model.MSStatistics.Collection</a>
             </div>
             <div class="btn btn-default bt" href="#">
                 <i class="fa fa-reply-all" aria-hidden="true"></i> 回复
@@ -432,7 +440,7 @@
         <table cellspacing="0" cellpadding="0">
             <tbody>
                 <tr>
-                    <td class="ta1">
+                    <td class="ta1 taaa">
                         @if (Session["User_name"] != null)
                         {
                         <div class="taimg">
@@ -486,7 +494,7 @@
                             </div>
 
                             <input type="hidden" name="Ms_id" value="@Model.MScore.Ms_id" />
-                            
+                            <input type="hidden" name="Commentid2" value="@p.Ms_commentid" />
 
                             <div class="fabiao huifu aclick">
                                 <div style="float:right"><a class="">回复</a></div>
@@ -494,7 +502,7 @@
                             </div>
 
                             <div class="comment">
-                                @foreach (MusicCommentReplyViewModel m in Model.MSR)
+                                @foreach (MusicCommentReplyViewModel m in Model.MSR.Where(n=>n.Ms_commentid==p.Ms_commentid))
                                 {
                                     <input type="hidden" name="Commentid1" value="@p.Ms_commentid" />
                                     <div class="huifui1">
