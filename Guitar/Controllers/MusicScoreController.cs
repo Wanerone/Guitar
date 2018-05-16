@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Guitar.Models;
 using Guitar.ViewModel;
+using PagedList;
 
 namespace Guitar.Controllers
 {
@@ -204,6 +205,7 @@ namespace Guitar.Controllers
                           User_name=q.User_name,
                           User_img=q.User_img
                       });
+
             int commentid = Convert.ToInt32(Request["Commentid1"]);
             var msrr= from m in db.MusicScoreReply.Where(p=>p.Ms_commentid==commentid).OrderByDescending(p => p.Addtime) select m;
             //var msta = from m in db.MusicScoreStatistics.Where(p => p.Ms_id == id) select m;
@@ -215,11 +217,58 @@ namespace Guitar.Controllers
                 MScore1 = ms1,
                 MSStatistics = msta,
                 MSC=msc,
-                MSR=msr,
-                Msr=msrr,
+                MSR = msr,
+                //Msr=msrr,
             };
+
             return View(index);
         }
+        //public ActionResult Reply()
+        //{
+        //    int commentid = Convert.ToInt32(Request["Commentid1"]);
+        //    int Ms_id = Convert.ToInt32(Request["Ms_idd"]);
+        //    var ms = from m in db.MusicScoreReply.Where(p => p.Ms_commentid == commentid).Where(p => p.Ms_id == Ms_id).OrderByDescending(p => p.Addtime) select m;
+        //    var msr = (from n in ms
+        //               join q in db.Users on n.User_id equals q.User_id
+        //               select new MusicCommentReplyViewModel
+        //               {
+        //                   Ms_replyid = n.Ms_replyid,
+        //                   content = n.content,
+        //                   Addtime = n.Addtime,
+        //                   Ms_id = n.Ms_id,
+        //                   Ms_commentid = n.Ms_commentid,
+        //                   User_id = n.User_id,
+        //                   User_name = q.User_name,
+        //                   User_img = q.User_img
+        //               });
+        //    var index = new Guitar.ViewModel.MusicDetailsViewModel()
+        //    {
+        //        MSR = msr,
+        //    };
+        //    return RedirectToAction("Display", "MusicScore");
+        //}
+        //public ActionResult LoadData()
+        //{
+        //    int offset = int.Parse(Request.QueryString["page"].ToString());
+        //    int limit = 2;
+        //    List<MyObject> list = new List<MyObject>();
+        //    for (int i = 0; i < 10; i++)
+        //    {
+        //        list.Add(new MyObject() { Id = (i + 1), Name = "Yangxu" });
+        //    }
+        //    List<MyObject> result = new List<MyObject>();
+        //    for (int i = limit * (offset - 1); i < offset * limit; i++)
+        //    {
+        //        result.Add(list[i]);
+        //    }
+        //    //var total = result.Count;
+        //    //var rows = result.Skip(offset).Take(limit).ToList();
+        //    //return Json(new { total = total, rows = rows }, JsonRequestBehavior.AllowGet);
+
+        //    //var total = list.Count;
+        //    //var rows = list.Skip(offset).Take(limit).ToList();
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
         [HttpPost]
         public ActionResult Comment(MusicScoreComment msc)
         {

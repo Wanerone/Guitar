@@ -1,6 +1,8 @@
 ﻿@using Guitar.Models
 @using Guitar.ViewModel
+@using MvcSiteMapProvider.Web.Html
 @model Guitar.ViewModel.MusicDetailsViewModel
+
 @{
     ViewBag.Title = "Display";
     Layout = "~/Views/Shared/_LayoutPage3.cshtml";
@@ -313,6 +315,7 @@
 <p></p>
 
 <div class="container">
+    <div>@Html.MvcSiteMap().SiteMapPath()</div>
     <div class="image">
         @Html.Raw(@Model.MScore.Score)
         @*<img src="~/Images/head.jpg" class="img img-responsive"/>*@
@@ -464,6 +467,7 @@
             </tbody>
         </table>
     </div>
+
     @foreach (MusicScoreComment p in Model.MSC)
     {
         <div class="pinlun">
@@ -485,7 +489,7 @@
                                 @p.content
                             </div>
 
-                            <input type="hidden" name="Ms_id" value="@Model.MScore.Ms_id" />
+                            <input type="hidden" name="Ms_idd" value="@Model.MScore.Ms_id" />
                             
 
                             <div class="fabiao huifu aclick">
@@ -541,6 +545,7 @@
             </table>
         </div>
     }
+
     <div class="pinlun">
         <table cellspacing="0" cellpadding="0">
             <tbody>
