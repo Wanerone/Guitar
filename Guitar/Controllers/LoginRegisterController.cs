@@ -128,23 +128,29 @@ namespace Guitar.Controllers
                 //{
                 //    return RedirectToAction("Login", "LoginRegister");
                 //}
-                var users = db.Users.Where(o => o.User_email == user.User_email).Where(o => o.User_password == user.User_password).FirstOrDefault();
-                if (users != null)
+                var users = db.Users.Where(o => o.User_email == user.User_email).FirstOrDefault();
+                var user2 = db.Users.Where(o => o.User_email == user.User_email).Where(o => o.User_password == user.User_password).FirstOrDefault();
+                if (users == null)
                 {
-
+                    return Content("<script>;alert('该账号不存在!');history.go(-1)</script>");
+                }
+                if (user2== null)
+                {
+                    return Content("<script>;alert('密码不正确!');history.go(-1)</script>");
                     //以下代码将权限保存到Session
                     // var current_user = db.Users.Where(o => o.UserName == user.UserName).FirstOrDefault();
+                    
+
+                }
+                else
+                {
+                    //return Content("<script>;alert('该账号不存在!');history.go(-1)</script>");
                     HttpContext.Session["Users_id"] = users.User_id;
                     HttpContext.Session["User_name"] = users.User_name;
                     HttpContext.Session["User_email"] = users.User_email;
                     HttpContext.Session["User_img"] = users.User_img;
 
                     return Content("<script>;alert('登录成功!返回首页!');window.location.href='/Home/Index'</script>");
-
-                }
-                else
-                {
-                    return Content("<script>;alert('该账号不存在!');history.go(-1)</script>");
                 }
 
                 //}

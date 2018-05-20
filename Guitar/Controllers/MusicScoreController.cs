@@ -261,20 +261,65 @@ namespace Guitar.Controllers
             return RedirectToAction("Display", "MusicScore");
         }
         [HttpPost]
-        public ActionResult Collection(MusicScoreCollection msc)
+        public ActionResult Collection(MusicScoreCollection msc,MusicScoreStatistics mss)
         {
-            int Ms_id = Convert.ToInt32(Request["Ms_id3"]);
-            int User_id = Convert.ToInt32(Session["User_id"]);
-            if (ModelState.IsValid)
+            if (Session["Users_id"] != null)
             {
-                msc.Ms_id = Ms_id;
-                msc.User_id = User_id;
-                msc.State = 1;
-                db.MusicScoreCollection.Add(msc);
-                db.SaveChanges();
-                return Content("<script>;alert('收藏成功!');history.go(-1)</script>");
-            }
+                     int Ms_id = Convert.ToInt32(Request["Ms_id4"]);
+                    int User_id = Convert.ToInt32(Session["Users_id"]);
+                    var msc1=db.MusicScoreCollection.Where(o => o.User_id==User_id).Where(o => o.Ms_id== Ms_id).FirstOrDefault();
+                    if (msc1 == null)
+                    {
+                        if (ModelState.IsValid)
+                                    {
+                                        msc.Ms_id = Ms_id;
+                                        msc.User_id = User_id;
+                                        msc.State = 1;
+                                        db.MusicScoreCollection.Add(msc);
+                                        db.SaveChanges();
+                                        var collection = db.MusicScoreStatistics.Find(Ms_id);
+                                        collection.Collection = collection.Collection + 1;
+                                        db.SaveChanges();
+                            return Content("<script>;alert('收藏成功!');history.go(-1)</script>");
+                        //return Content("<script>;alert('登录成功!返回首页!');window.location.href='/Home/Index'</script>");
+                        //return Content("<script>alert('请收藏成功');window.location.href='~/MusicScore/Display';</script>");
+                        //return Content("<script>;alert('收藏成功!');</script>");
 
+                        //return Content("<script language='javascript' type='text/javascript'>alert('收藏成功!！');history.go(-1);location.reload();</script>");
+                    }
+                    }
+                    else
+                    {
+                        if (msc1.State == 0)
+                        {
+                            var collection = db.MusicScoreStatistics.Find(Ms_id);
+                            collection.Collection = collection.Collection + 1;
+                            db.SaveChanges();
+                            msc1.State = 1;
+                            db.SaveChanges();
+                            return Content("<script>;alert('收藏成功!');history.go(-1)</script>");
+                        }
+                        if (msc1.State == 1)
+                        {
+                            var collection = db.MusicScoreStatistics.Find(Ms_id);
+                            collection.Collection = collection.Collection - 1;
+                            db.SaveChanges();
+                            msc1.State = 0;
+                            db.SaveChanges();
+                            //return Content("<script>;alert('收藏成功!');history.go(-1)</script>");
+                            //return Content("<script>alert('请收藏成功');window.location.href='~/MusicScore/Display';</script>");
+                            return Content("<script>;alert('取消收藏成功!');history.go(-1)</script>");
+                        }
+                    }
+            }
+            else
+            {
+                return Content("<script>;alert('请先登录!');history.go(-1)</script>");
+            }
+            
+            
+            //UpdateModel(owner); 
+            //更新submit所有字段db.SaveChanges();
             return RedirectToAction("Display", "MusicScore");
         }
         public ActionResult UserIndex(int User_Id)
