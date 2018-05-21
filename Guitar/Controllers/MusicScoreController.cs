@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Guitar.Models;
 using Guitar.ViewModel;
+using PagedList;
 
 namespace Guitar.Controllers
 {
@@ -284,6 +285,47 @@ namespace Guitar.Controllers
             //UpdateModel(owner); 
             //更新submit所有字段db.SaveChanges();
             return RedirectToAction("Display", "MusicScore");
+        }
+        #endregion
+        public IEnumerable<MusicScoreComment> GetComment(int Ms_id) 
+        {
+            var psr = from po in db.MusicScoreComment
+                      where po.Ms_id== Ms_id
+                      orderby po.Addtime descending
+                      select po;
+            return psr;
+        }
+        #region 评论展示
+        public ActionResult GetAllComment(int Ms_id, int? page)
+        {
+            ViewBag.Ms_id = Ms_id;
+            //var postreply = GetComment(Ms_id);
+
+            var msc = from m in db.MusicScoreComment.Where(p => p.Ms_id == Ms_id).OrderByDescending(p => p.Addtime) select m;
+            var msr = (from n in db.MusicScoreReply
+                       join m in msc on n.Ms_commentid equals m.Ms_commentid
+                       join q in db.Users on n.User_id equals q.User_id
+                       select new MusicCommentReplyViewModel
+                       {
+                           Ms_replyid = n.Ms_replyid,
+                           Ms_commentid = m.Ms_commentid,
+                           content = n.content,
+                           Addtime = n.Addtime,
+                           Ms_id = m.Ms_id,
+                           User_id = n.User_id,
+                           User_name = q.User_name,
+                           User_img = q.User_img
+                       });
+            var index = new Guitar.ViewModel.MusicDetailsViewModel()
+            {
+                MSC = msc,
+                MSR = msr,
+
+            };
+            //var index1 = from m in index select m;
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(msc.ToPagedList(pageNumber, pageSize));
         }
         #endregion
         public ActionResult UserIndex(int User_Id)

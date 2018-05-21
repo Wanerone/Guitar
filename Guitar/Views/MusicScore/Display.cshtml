@@ -572,14 +572,16 @@ div.menu ul li a:active
                             }
                         </td>
                         <td class="ta2">
-                            @using (Html.BeginForm("Comment", "MusicScore", FormMethod.Post, new { id = "pinglun", @class = "postbox" }))
+                            @*@using (Html.BeginForm("Comment", "MusicScore", FormMethod.Post, new { id = "pinglun", @class = "postbox" }))*@
+                            @using (Ajax.BeginForm("Comment", "MusicScore", new AjaxOptions { HttpMethod = "post", UpdateTargetId = "PLhidden" }))
                             {
                                 <div class="textera">
                                     <textarea class="textarea" name="pingluntextarea"></textarea>
                                 </div>
                                 <input type="hidden" name="Ms_id" value="@Model.MScore.Ms_id" />
                                 <div class="fabaio">
-                                    <a href="javascript:document.getElementById('pinglun').submit()" onclick="display()" class="btn btn-info">发表评论</a>
+                                    @*<a href="javascript:document.getElementById('pinglun').submit()" onclick="display()" class="btn btn-info">发表评论</a>*@
+                                    <input value="发表评论" class="btn btn-info" type="submit"  />
                                 </div>
                             }
 
@@ -588,6 +590,7 @@ div.menu ul li a:active
                 </tbody>
             </table>
         </div>
+    <lable id="PLhidden" style=""></lable>
         @foreach (MusicScoreComment p in Model.MSC)
         {
             <div class="pinlun">
