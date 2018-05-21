@@ -345,6 +345,9 @@
     <Content Include="Content\One.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\port.css" />
+    <Content Include="Controllers\head3.jpg" />
+    <Content Include="Controllers\head4.jpg" />
+    <Content Include="Controllers\head5.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -362,6 +365,9 @@
     <Content Include="Images\g6.jpg" />
     <Content Include="Images\head.jpg" />
     <Content Include="Images\head2.jpg" />
+    <Content Include="Images\head3.jpg" />
+    <Content Include="Images\head4.jpg" />
+    <Content Include="Images\head5.jpg" />
     <Content Include="Images\img-1.jpg" />
     <Content Include="Images\jtb.gif" />
     <Content Include="Images\lunbo.jpg" />

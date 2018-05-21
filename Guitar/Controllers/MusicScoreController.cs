@@ -22,21 +22,7 @@ namespace Guitar.Controllers
             return View(musicScore.ToList());
         }
 
-        // GET: MusicScore/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MusicScore musicScore = db.MusicScore.Find(id);
-            if (musicScore == null)
-            {
-                return HttpNotFound();
-            }
-            return View(musicScore);
-        }
-
+        #region 发布乐谱
         // GET: MusicScores/Create
         public ActionResult Create()
         {
@@ -102,40 +88,8 @@ namespace Guitar.Controllers
 
             return View();
         }
-
-        // GET: MusicScore/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MusicScore musicScore = db.MusicScore.Find(id);
-            if (musicScore == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.User_id = new SelectList(db.Users, "User_id", "User_name", musicScore.User_id);
-            return View(musicScore);
-        }
-
-        // POST: MusicScore/Edit/5
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Ms_id,User_id,Ms_title,Score,Ms_img,Ms_label,Ms_addtime")] MusicScore musicScore)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(musicScore).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.User_id = new SelectList(db.Users, "User_id", "User_name", musicScore.User_id);
-            return View(musicScore);
-        }
-
+        #endregion
+        #region 删除乐谱
         // GET: MusicScore/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -170,6 +124,8 @@ namespace Guitar.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
+        #region  乐谱展示
         public ActionResult Display(int? id)
         {
             if (id == null)
@@ -220,6 +176,9 @@ namespace Guitar.Controllers
             };
             return View(index);
         }
+        #endregion 
+
+        #region 评论乐谱
         [HttpPost]
         public ActionResult Comment(MusicScoreComment msc, MusicScoreStatistics mss)
         {
@@ -238,6 +197,8 @@ namespace Guitar.Controllers
 
             return RedirectToAction("Display", "MusicScore");
         }
+        #endregion
+        #region 回复乐谱
         [HttpPost]
         public ActionResult Reply(MusicScoreReply msr)
         {
@@ -260,6 +221,8 @@ namespace Guitar.Controllers
 
             return RedirectToAction("Display", "MusicScore");
         }
+        #endregion
+        #region 收藏乐谱
         [HttpPost]
         public ActionResult Collection(MusicScoreCollection msc,MusicScoreStatistics mss)
         {
@@ -322,6 +285,7 @@ namespace Guitar.Controllers
             //更新submit所有字段db.SaveChanges();
             return RedirectToAction("Display", "MusicScore");
         }
+        #endregion
         public ActionResult UserIndex(int User_Id)
         {
             Users users = db.Users.Find(User_Id);
