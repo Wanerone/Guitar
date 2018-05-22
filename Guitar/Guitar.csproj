@@ -322,6 +322,7 @@
     <Compile Include="ViewModel\IndexViewModel.cs" />
     <Compile Include="ViewModel\MusicCommentReplyViewModel.cs" />
     <Compile Include="ViewModel\MusicDetailsViewModel.cs" />
+    <Compile Include="ViewModel\MusicScoreCommentViewModel.cs" />
     <Compile Include="ViewModel\MusicViewModel.cs" />
     <Compile Include="ViewModel\UsersViewModel.cs" />
     <Compile Include="YZM\ValidateCode.cs" />

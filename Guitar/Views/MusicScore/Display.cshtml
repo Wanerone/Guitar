@@ -431,7 +431,7 @@ div.menu ul li a:active
             @*<img src="~/Images/head.jpg" class="img img-responsive"/>*@
         </div>
         @*@Ajax.ActionLink("收藏", "Collection", new AjaxOptions { UpdateTargetId = "collection", InsertionMode = InsertionMode.Replace,HttpMethod="get" });*@
-        <input type="hidden" name="Ms_id3" value="@Model.MScore.Ms_id" />
+        <input type="hidden" name="Ms_id3" value="@Model.MScore.Ms_id" class="Ms_id" />
 
         <div class="details">
             <div class="loca">
@@ -581,7 +581,7 @@ div.menu ul li a:active
                                 <input type="hidden" name="Ms_id" value="@Model.MScore.Ms_id" />
                                 <div class="fabaio">
                                     @*<a href="javascript:document.getElementById('pinglun').submit()" onclick="display()" class="btn btn-info">发表评论</a>*@
-                                    <input value="发表评论" class="btn btn-info" type="submit"  />
+                                    <input value="发表评论" class="btn btn-info" type="submit" id="queding"  />
                                 </div>
                             }
 
@@ -591,7 +591,12 @@ div.menu ul li a:active
             </table>
         </div>
     <lable id="PLhidden" style=""></lable>
-        @foreach (MusicScoreComment p in Model.MSC)
+
+    <div id="GetAllComment">
+        
+        @{Html.RenderAction("GetAllComment","MusicScore");}
+    </div>
+        @*@foreach (MusicScoreComment p in Model.MSC)
         {
             <div class="pinlun">
                 <table cellspacing="0" cellpadding="0">
@@ -667,90 +672,8 @@ div.menu ul li a:active
                     </tbody>
                 </table>
             </div>
-        }
-        <div class="pinlun">
-            <table cellspacing="0" cellpadding="0">
-                <tbody>
-                    <tr>
-                        <td class="ta1">
-                            <div class="taimg">
-                                <img src="~/Images/head.jpg" class="img-responsive img-rounded" />
-                            </div>
-                            <div class="taname">@Model.Us.User_name</div>
-                        </td>
-                        <td class="ta2">
-                            <div class="taa1">
-                                <i class="fa fa-user-circle" aria-hidden="true"></i> 发表于  2015奶奶vvvvvvvv
-                            </div>
-                            <div class="taa2">
-                                dfgdfgdfgdfgd
-                            </div>
-                            <input type="hidden" name="Ms_id" value="@Model.MScore.Ms_id" />
-
-                            <div class="fabiao huifu aclick">
-                                <div style="float:right"><a class="">回复</a></div>
-                                <div style="clear:both"></div>
-                            </div>
-
-                            <div class="comment">
-                                <div class="huifui1">
-                                    <div class="hui1">
-                                        <div class="huiimg">
-                                            <a><img src="~/Images/head.jpg" class="img-responsive img-rounded" /></a>
-                                        </div>
-                                        <div class="huiother">
-                                            <div class="r1"><a>天行九歌</a>  发表于  2014-8-10 16:35</div>
-                                            <div class="r2">dsfdsfdsfffffffffffffffffffffffffffffffffffffffffffffffffffff</div>
-                                        </div>
-                                        <div style="clear:both"></div>
-                                    </div>
-                                </div>
-                                <div class="huifui1">
-                                    <div class="hui1">
-                                        <div class="huiimg">
-                                            <a><img src="~/Images/head.jpg" class="img-responsive img-rounded" /></a>
-                                        </div>
-                                        <div class="huiother">
-                                            <div class="r1"><a>天行九歌</a>  发表于  2014-8-10 16:35</div>
-                                            <div class="r2">dsfdsfdsfffffffffffffffffffffffffffffffffffffffffffffffffffff</div>
-                                        </div>
-                                        <div style="clear:both"></div>
-                                    </div>
-                                </div>
-                                <div class="huifui1">
-                                    <div class="hui1">
-                                        <div class="huiimg">
-                                            <a><img src="~/Images/head.jpg" class="img-responsive img-rounded" /></a>
-                                        </div>
-                                        <div class="huiother">
-                                            <div class="r1"><a>天行九歌</a>  发表于  2014-8-10 16:35</div>
-                                            <div class="r2">dsfdsfdsfffffffffffffffffffffffffffffffffffffffffffffffffffff</div>
-                                        </div>
-                                        <div style="clear:both"></div>
-                                    </div>
-                                </div>
-                                <div class="m aclick">
-                                    <div style="float:right"><a class="">我也来说一句</a></div>
-                                    <div style="clear:both"></div>
-                                </div>
-                                <div class="myreply">
-                                    <div class="myimg">
-                                        <img src="~/Images/head.jpg" class="img-responsive img-rounded" />
-                                    </div>
-                                    <div class="mycontent">
-                                        <textarea class="textarea2" name="pingluntextarea2"></textarea>
-                                        <div class="fabiao2">
-                                            <a href="javascript:document.getElementById('pinglun').submit()" class="btn btn-info">回复</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        }*@
+      
 
 
     </div>
@@ -759,5 +682,30 @@ div.menu ul li a:active
         $(".aclick a").click(function () {
             $(".myreply").toggle();
         });
+    });
+    
+    $("#queding").click(function () { //提交评论                   
+        //var time = setInterval 
+        //clearInterval(time);     
+        setTimeout(function () {
+            var plHidden = $("#PLhidden").text();
+            if (plHidden == "aa") {
+                $.ajax({
+                    type: "post",
+                    url: "/MusicScore/GetAllComment",
+                    data: { Ms_id: $(".Ms_id").val()},
+                    success: function (data) {
+                        $("#getAllComment").html(data);
+                        //回到顶部
+                        $('body,html').animate({ scrollTop: 200 }, 1000);
+                        $('body,html').off("mousewheel", preventScroll); //去除scrollTop=0对滚动的限制
+                        //$(".plcg").show().delay(2000).hide(300);
+                    }
+                });
+            } else {
+            }
+
+        }, 1000);
+
     });
 </script>

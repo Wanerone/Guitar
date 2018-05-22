@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Guitar.Models;
 using Guitar.ViewModel;
 using PagedList;
+//using Guitar.Attributes;
 
 namespace Guitar.Controllers
 {
@@ -181,6 +182,7 @@ namespace Guitar.Controllers
 
         #region 评论乐谱
         [HttpPost]
+        //[Login]
         public ActionResult Comment(MusicScoreComment msc, MusicScoreStatistics mss)
         {
             string pingluntextarea = Request["pingluntextarea"];
@@ -194,9 +196,14 @@ namespace Guitar.Controllers
                 db.MusicScoreComment.Add(msc);
                 db.SaveChanges();
                 return Content("<script>;alert('评论成功!');history.go(-1)</script>");
+                //return RedirectToAction("Display", "MusicScore");
+            }
+            else {
+                //return Content("bb");
+                return RedirectToAction("Display", "MusicScore");
             }
 
-            return RedirectToAction("Display", "MusicScore");
+            //return RedirectToAction("Display", "MusicScore");
         }
         #endregion
         #region 回复乐谱
@@ -296,36 +303,26 @@ namespace Guitar.Controllers
             return psr;
         }
         #region 评论展示
-        public ActionResult GetAllComment(int Ms_id, int? page)
+        public ActionResult GetAllComment( int? page)
         {
+            int Ms_id= Convert.ToInt32(Request["Ms_id3"]);
             ViewBag.Ms_id = Ms_id;
-            //var postreply = GetComment(Ms_id);
-
-            var msc = from m in db.MusicScoreComment.Where(p => p.Ms_id == Ms_id).OrderByDescending(p => p.Addtime) select m;
-            var msr = (from n in db.MusicScoreReply
-                       join m in msc on n.Ms_commentid equals m.Ms_commentid
-                       join q in db.Users on n.User_id equals q.User_id
-                       select new MusicCommentReplyViewModel
-                       {
-                           Ms_replyid = n.Ms_replyid,
-                           Ms_commentid = m.Ms_commentid,
-                           content = n.content,
-                           Addtime = n.Addtime,
-                           Ms_id = m.Ms_id,
-                           User_id = n.User_id,
-                           User_name = q.User_name,
-                           User_img = q.User_img
-                       });
-            var index = new Guitar.ViewModel.MusicDetailsViewModel()
-            {
-                MSC = msc,
-                MSR = msr,
-
-            };
-            //var index1 = from m in index select m;
+            var comment = from m in db.MusicScoreComment
+                            join n in db.Users on m.User_id equals n.User_id
+                            select new MusicScoreCommentViewModel
+                            {
+                                Ms_commentid = m.Ms_commentid,
+                                Ms_id = m.Ms_id,
+                                content = m.content,
+                                Addtime = m.Addtime,
+                                User_id = n.User_id,
+                                User_name = n.User_name,
+                                User_img = n.User_img,
+                            };
+            var comment1 = from o in comment.OrderByDescending(p => p.Addtime) select o;
             int pageSize = 3;
             int pageNumber = (page ?? 1);
-            return View(msc.ToPagedList(pageNumber, pageSize));
+            return View(comment1.ToPagedList(pageNumber, pageSize));
         }
         #endregion
         public ActionResult UserIndex(int User_Id)

@@ -1,12 +1,11 @@
 ﻿@using PagedList.Mvc;
 @using PagedList
-@using Guitar.Models
-@using Guitar.ViewModel
-@model PagedList.IPagedList<Guitar.ViewModel.MusicDetailsViewModel>
+@model PagedList.IPagedList<Guitar.ViewModel.MusicScoreCommentViewModel>
 @{
     Layout = null;
 }
-@foreach (MusicScoreComment p in Model.MSC)
+
+@foreach (var p in Model)
 {
     <div class="pinlun">
         <table cellspacing="0" cellpadding="0">
@@ -14,10 +13,10 @@
                 <tr>
                     <td class="ta1">
                         <div class="taimg">
-                            <a href="@Url.Action("UserIndex", new { User_Id = p.Users.User_id })"><img src="@p.Users.User_img" class="img-responsive img-rounded" /></a>
+                            <a href="@Url.Action("UserIndex", new { User_Id = p.User_id })"><img src="@p.User_img" class="img-responsive img-rounded" /></a>
 
                         </div>
-                        <div class="taname"><a href="@Url.Action("UserIndex", new { User_Id = p.Users.User_id })"></a>@p.Users.User_name</div>
+                        <div class="taname"><a href="@Url.Action("UserIndex", new { User_Id = p.User_id })"></a>@p.User_name</div>
                     </td>
                     <td class="ta2">
                         <div class="taa1">
@@ -27,8 +26,8 @@
                             @p.content
                         </div>
 
-                        <input type="hidden" name="Ms_id" value="@Model.MScore.Ms_id" />
-                        <input type="hidden" name="Commentid2" value="@p.Ms_commentid" />
+                        @*<input type="hidden" name="Ms_id" value="@Model.MScore.Ms_id" />
+                        <input type="hidden" name="Commentid2" value="@p.Ms_commentid" />*@
 
                         <div class="fabiao huifu aclick">
                             <div style="float:right"><a class="">回复</a></div>
@@ -36,7 +35,7 @@
                         </div>
 
                         <div class="comment">
-                            @foreach (MusicCommentReplyViewModel m in Model.MSR.Where(n => n.Ms_commentid == p.Ms_commentid))
+                            @*@foreach (MusicCommentReplyViewModel m in Model.MSR.Where(n => n.Ms_commentid == p.Ms_commentid))
                             {
                                 <input type="hidden" name="Commentid1" value="@p.Ms_commentid" />
                                         <div class="huifui1">
@@ -51,7 +50,7 @@
                                                 <div style="clear:both"></div>
                                             </div>
                                         </div>
-                            }
+                            }*@
 
 
                             <div class="m aclick">
@@ -64,8 +63,8 @@
                                     <div class="myimg">
                                         <img src="@Session["User_img"]" class="img-responsive img-rounded" />
                                     </div>
-                                            <input type="hidden" name="Ms_id2" value="@Model.MScore.Ms_id" />
-                                            <input type="hidden" name="Commentid" value="@p.Ms_commentid" />
+                                            @*<input type="hidden" name="Ms_id2" value="@Model.MScore.Ms_id" />
+                                            <input type="hidden" name="Commentid" value="@p.Ms_commentid" />*@
                                             <div class="mycontent">
                                                 <textarea class="textarea2" name="pingluntextarea2"></textarea>
                                                 <div class="fabiao2">
@@ -84,33 +83,6 @@
     </div>
 }
 
-
-
-@foreach (var apr in Model)
-{
-    <div class="reply">
-        <div class="reuserimage">
-            <img id="Image1" src="@apr.UserImage1" style="width: 100%; height: 100%;" />
-        </div>
-        <a href="@Url.Action("UserCenter","UserInfo",new {Users_id = @apr.Users_id1})"><div class="repostname">@apr.UserName1</div></a>
-        <div class="reposttime">@apr.ReplyTime1</div>
-        @{if (@apr.ReReply_id1 != null)
-            {
-                <div class="rereplycontent">
-                    <a href="@Url.Action("UserCenter","UserInfo",new {Users_id = @apr.Users_id2})"><span style="display: block; margin-left: 10px; color: rgb(153, 153, 153);">@apr.UserName2</span></a>
-                    <span style="display: block; margin-left: 10px; color: rgb(81, 81, 81);">@Html.Raw(apr.ReplyContent2)</span>
-                </div>
-            }
-        }
-
-        <div class="ReplyContent">@Html.Raw(apr.ReplyContent1) </div>
-        <input id="btnReply3" class="cssbtnReply" value="回复" readonly="readonly" type="submit" />
-        <input type="hidden" class="huifuHidden" id="HiddenField1" value="@apr.Reply_id1" />
-        <hr style="border-bottom: 1px solid #E6E6E6; display: block; float: right; margin: 25px 0px 0px; width: 100%;" />
-    </div>
-            }
-
-
 <div class="row page-list">
     @*<div class="col-xs-4 col-sm-6 col-md-6 pagejiye"></div>*@
     <div class="col-xs-6 col-sm-4 col-md-4 pagejiye" style="width: 100%; ">
@@ -118,9 +90,10 @@
         @*@Html.PagedListPager(Model, page => Url.Action("PostDetails", "LunTan", new {page, luntanId = @ViewBag.LunTan_id, postId = @ViewBag.Post_id }), new PagedListRenderOptions {LinkToFirstPageFormat = "首页", LinkToLastPageFormat = "尾页", MaximumPageNumbersToDisplay = 5})*@
 
 
-        @Html.PagedListPager(Model, page => Url.Action("GetAllPostReply", "LunTan", new { page, luntanId = @ViewBag.LunTan_id, postId = @ViewBag.Post_id }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions { LinkToFirstPageFormat = "首页", LinkToLastPageFormat = "尾页", MaximumPageNumbersToDisplay = 5 }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "getAllPostReply" }))
+        @Html.PagedListPager(Model, page => Url.Action("GetAllComment", "MusicScore", new { page,  Ms_id = @ViewBag.Ms_id }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions { LinkToFirstPageFormat = "首页", LinkToLastPageFormat = "尾页", MaximumPageNumbersToDisplay = 5 }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "getAllPostReply" }))
     </div>
 </div>
 <div class="col-xs-2 col-sm-2 col-md-2 pageje">
     @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
 </div>
+
