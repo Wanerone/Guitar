@@ -17,13 +17,28 @@ namespace Guitar.Controllers
     {
         private GuitarEntities db = new GuitarEntities();
 
-        // GET: MusicScore
+        #region 吉他谱
         public ActionResult Index()
         {
-            var musicScore = db.MusicScore.Include(m => m.Users);
-            return View(musicScore.ToList());
+            //var str1 = "古典吉他";
+            var users = (from m in db.Users.OrderByDescending(p => p.User_addtime) select m).Take(6);
+            var score1 = (from m in db.MusicScore.Where(p => p.Ms_label == "古典吉他").OrderByDescending(p => p.Ms_addtime) select m).Take(10);
+            var score2 = (from m in db.MusicScore.Where(p => p.Ms_label == "民谣吉他").OrderByDescending(p => p.Ms_addtime) select m).Take(10);
+            var score3 = (from m in db.MusicScore.Where(p => p.Ms_label == "电吉他").OrderByDescending(p => p.Ms_addtime) select m).Take(10);
+            var score4 =( from m in db.MusicScore.Where(p => p.Ms_label == "尤克里里").OrderByDescending(p => p.Ms_addtime) select m).Take(10);
+            var score5 = (from m in db.MusicScore.Where(p => p.Ms_label == "其他").OrderByDescending(p => p.Ms_addtime) select m).Take(10);
+            var index = new Guitar.ViewModel.MusicDetailsViewModel()
+            {
+                MScore1 = score1,
+                MScore2 = score2,
+                MScore3 = score3,
+                MScore4 = score4,
+                MScore5=score5,
+                Us2 = users,
+            };
+            return View(index);
         }
-
+        #endregion
         #region 发布乐谱
         // GET: MusicScores/Create
         public ActionResult Create()
@@ -39,7 +54,7 @@ namespace Guitar.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult Create(MusicScore musicScore)
         {
-            var sel = Request["sel"];
+            var sel = Request["sel"].Trim();
             HttpPostedFileBase postimageBase = Request.Files["Image1"];
             //HttpFileCollectionBase files = Request.Files;
             //HttpPostedFileBase postimageBase = files["Image1"];//获取上传的文件
@@ -303,10 +318,10 @@ namespace Guitar.Controllers
             return psr;
         }
         #region 评论展示
-        public ActionResult GetAllComment( int? page)
+        public ActionResult GetAllComment(int? page)
         {
-            int Ms_id= Convert.ToInt32(Request["Ms_id3"]);
-            ViewBag.Ms_id = Ms_id;
+            int Ms_id1 = Convert.ToInt32(Request["Ms_id3"]);
+            ViewBag.Ms_id = Ms_id1;
             var comment = from m in db.MusicScoreComment
                             join n in db.Users on m.User_id equals n.User_id
                             select new MusicScoreCommentViewModel
@@ -319,10 +334,10 @@ namespace Guitar.Controllers
                                 User_name = n.User_name,
                                 User_img = n.User_img,
                             };
-            var comment1 = from o in comment.OrderByDescending(p => p.Addtime) select o;
+            var comment1 = from o in comment.Where(p=>p.Ms_id==Ms_id1).OrderByDescending(p => p.Addtime) select o;
             int pageSize = 3;
             int pageNumber = (page ?? 1);
-            return View(comment1.ToPagedList(pageNumber, pageSize));
+            return PartialView(comment1.ToPagedList(pageNumber, pageSize));
         }
         #endregion
         public ActionResult UserIndex(int User_Id)

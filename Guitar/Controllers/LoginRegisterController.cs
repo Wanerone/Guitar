@@ -217,7 +217,7 @@ namespace Guitar.Controllers
             //}
             userInfo.User_addtime = DateTime.Now;
             userInfo.User_password = userInfo.User_password;
-            userInfo.User_img = "~/Images/head.jpg";
+            userInfo.User_img = "/Images/headimg/head.jpg";
             try
             {
                 db.Users.Add(userInfo);

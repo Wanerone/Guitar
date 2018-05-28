@@ -37,9 +37,11 @@ namespace Guitar.Controllers
                               User_id = s.User_id,
                               ReadCount = s.ReadCount
                           });
+            var users = from m in db.Users.OrderByDescending(p => p.User_addtime) select m;
             var score2 = new Guitar.ViewModel.IndexViewModel()
             {
                 MScore = scores,
+                Us=users,
                 MScore1 = score1,
                 MusicViewModel1=musicviewmodel1,
             };

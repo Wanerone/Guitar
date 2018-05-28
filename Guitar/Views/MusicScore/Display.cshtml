@@ -594,7 +594,7 @@ div.menu ul li a:active
 
     <div id="GetAllComment">
         
-        @{Html.RenderAction("GetAllComment","MusicScore");}
+        @{Html.RenderAction("GetAllComment");}
     </div>
         @*@foreach (MusicScoreComment p in Model.MSC)
         {
@@ -684,12 +684,17 @@ div.menu ul li a:active
         });
     });
     
+    //$("#queding").click(function () {
+    //    $("#data").load("/MusicScore/GetAllComment", { "message": $("#txt").val() }, function () {
+    //        alert("提交成功");
+    //    });
+    //});
     $("#queding").click(function () { //提交评论                   
         //var time = setInterval 
         //clearInterval(time);     
         setTimeout(function () {
             var plHidden = $("#PLhidden").text();
-            if (plHidden == "aa") {
+            //if (plHidden == "aa") {
                 $.ajax({
                     type: "post",
                     url: "/MusicScore/GetAllComment",
@@ -702,8 +707,8 @@ div.menu ul li a:active
                         //$(".plcg").show().delay(2000).hide(300);
                     }
                 });
-            } else {
-            }
+            //} else {
+            //}
 
         }, 1000);
 

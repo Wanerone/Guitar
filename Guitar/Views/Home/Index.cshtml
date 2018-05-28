@@ -2,7 +2,7 @@
 @using Guitar.ViewModel
 @model  Guitar.ViewModel.IndexViewModel
 @{
-    ViewBag.Title = "Guitar";
+    ViewBag.Title = "首页Guitar";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 @Styles.Render("~/bootstrap-3.3.7-dist/css/bootstrap.min.css")
@@ -116,11 +116,15 @@
             <!--案例3-->
             <div class="product">
                 <ul class="cf">
-                    <li >
-                        <a href="" class="imgwrap"> <img class="img-responsive" src="~/Images/s22.jpg"> </a>
-                        <p class="mt10"> <a href="">站logo... </a></p>
-                        <p class="pb10">行业类</p>
-                    </li>
+                    @foreach (Users p in Model.Us)
+                    {
+                        <li>
+                            <a href="" class="imgwrap"> <img class="img-responsive" src="@p.User_img"> </a>
+                            <p class="mt10"> <a href="">@p.User_name </a></p>
+                            <p class="pb10">@p.User_sign</p>
+                        </li>
+                    }
+                    
 
                 </ul>
             </div>
