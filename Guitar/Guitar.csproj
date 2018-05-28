@@ -383,7 +383,7 @@
     <Content Include="Images\s5.jpg" />
     <Content Include="Images\weixin.jpg" />
     <Content Include="Images\weixin.png" />
-    <Content Include="Images\小埋.jpg" />
+    <Content Include="Images\headimg\小埋.jpg" />
     <Content Include="Images\微信.png" />
     <Content Include="Images\微博.png" />
     <Content Include="Images\手机.png" />

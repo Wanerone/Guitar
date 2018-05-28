@@ -54,7 +54,8 @@ namespace Guitar.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult Create(MusicScore musicScore)
         {
-            var sel = Request["sel"].Trim();
+            var sel1 = Request["sel"];
+            var sel = sel1.Trim();
             HttpPostedFileBase postimageBase = Request.Files["Image1"];
             //HttpFileCollectionBase files = Request.Files;
             //HttpPostedFileBase postimageBase = files["Image1"];//获取上传的文件
