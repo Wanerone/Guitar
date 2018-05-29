@@ -596,20 +596,33 @@ div.menu ul li a:active
                 </tbody>
             </table>
         </div>
-    <div id="articless">
-        @{Html.RenderAction("GetAllComment");}
+    <div id="articles">
+        @*@{Html.RenderAction("GetAllComment");}*@
+        @*@{Html.RenderPartial("GetAllComment",Model.msc11);}*@
+        @Html.Partial("_PartialPage1", Model.msc11)
+        <div class="text-center">
+            @Ajax.Pager(Model.msc11, new PagerOptions
+                {
+                    PageIndexParameterName = "md",
+                    ContainerTagName = "ul",
+                    CssClass = "pagination",
+                    CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
+                    DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
+                    PagerItemTemplate = "<li>{0}</li>"
+                }).AjaxOptions(a => a.SetUpdateTargetId("articles"))
+        </div>
     </div>
-    @*@section Scripts{@{Html.RegisterMvcPagerScriptResource();}
+    @section Scripts{@{Html.RegisterMvcPagerScriptResource();}
     <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
-    }*@
+    }
     @*<div> <span style="background-color: rgb(255, 255, 102);">id="articles"</span> style="width: 100%">
         @Html.Partial("GetAllComment", Model)
     </div>
     <span style="color:#ff0000;background-color: rgb(51, 255, 51);">
         @section Scripts{@{Html.RegisterMvcPagerScriptResource();}
         <script src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    }*@
-</span>
+    }
+</span>*@
     @*<lable id="PLhidden" style=""></lable>
 
     <div id="GetAllComment">

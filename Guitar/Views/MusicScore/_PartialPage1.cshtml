@@ -1,10 +1,12 @@
 ﻿@using Webdiyer.WebControls.Mvc
 @model Webdiyer.WebControls.Mvc.PagedList<Guitar.ViewModel.MusicScoreCommentViewModel>
+@{ int i = 0;}
 @foreach (var p in Model)
 {
     <div class="pinlun">
         <table cellspacing="0" cellpadding="0">
             <tbody>
+                @*<tr>@(Model.StartItemIndex + i++)</tr>*@
                 <tr>
                     <td class="ta1">
                         <div class="taimg">
@@ -30,6 +32,7 @@
                         </div>
 
                         <div class="comment">
+
                             @*@foreach (MusicCommentReplyViewModel m in Model.MSR.Where(n => n.Ms_commentid == p.Ms_commentid))
                                 {
                                     <input type="hidden" name="Commentid1" value="@p.Ms_commentid" />

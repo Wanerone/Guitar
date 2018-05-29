@@ -11,10 +11,11 @@
 
 <div id="articles">
     @Html.Partial("_PartialPage1", Model)
-    <div class="text-center">
-        @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>" }).AjaxOptions(a => a.SetUpdateTargetId("articles"))
+    <div style="width:100%;overflow:auto;">
+        <div style="float:right">跳转到第<select id="pib"></select>页</div>
+        @Ajax.Pager(Model).Options(o => o.SetId("mypager").SetPageIndexParameterName("id").SetPageIndexBoxId("pib").SetPagerItemTemplate("{0}&nbsp;")).AjaxOptions(a => a.SetUpdateTargetId("articles").EnablePartialLoading())
     </div>
-</div>
+    </div>
 @section Scripts{@{Html.RegisterMvcPagerScriptResource();}}
 
 

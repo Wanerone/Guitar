@@ -145,7 +145,7 @@ namespace Guitar.Controllers
         }
         #endregion
         #region  乐谱展示
-        public ActionResult Display(int? id)
+        public ActionResult Display(int? id, int md = 1)
         {
             //const int pageSize = 5;
             if (id == null)
@@ -168,18 +168,18 @@ namespace Guitar.Controllers
             //var us=from m in db.Users.Where(p=>p.User_id==usid) select m;
             var ms1 = (from m in db.MusicScore.Where(p => p.User_id == usid).OrderByDescending(p => p.Ms_addtime) select m).Take(5);
             var msc = from m in db.MusicScoreComment.Where(p => p.Ms_id == id).OrderByDescending(p => p.Addtime) select m;
-            //var comment = from m in db.MusicScoreComment
-            //              join n in db.Users on m.User_id equals n.User_id
-            //              select new MusicScoreCommentViewModel
-            //              {
-            //                  Ms_commentid = m.Ms_commentid,
-            //                  Ms_id = m.Ms_id,
-            //                  content = m.content,
-            //                  Addtime = m.Addtime,
-            //                  User_id = n.User_id,
-            //                  User_name = n.User_name,
-            //                  User_img = n.User_img,
-            //              };
+            var comment = from m in db.MusicScoreComment
+                          join n in db.Users on m.User_id equals n.User_id
+                          select new MusicScoreCommentViewModel
+                          {
+                              Ms_commentid = m.Ms_commentid,
+                              Ms_id = m.Ms_id,
+                              content = m.content,
+                              Addtime = m.Addtime,
+                              User_id = n.User_id,
+                              User_name = n.User_name,
+                              User_img = n.User_img,
+                          };
             //var comment1 = .ToPagedList(idd, pageSize);
             var msr = (from n in db.MusicScoreReply
                        join m in msc on n.Ms_commentid equals m.Ms_commentid
@@ -197,6 +197,7 @@ namespace Guitar.Controllers
                        });
             int commentid = Convert.ToInt32(Request["Commentid1"]);
             var msrr = from m in db.MusicScoreReply.Where(p => p.Ms_commentid == commentid).OrderByDescending(p => p.Addtime) select m;
+            var comment1 = from m in comment.Where(p => p.Ms_id == id).OrderByDescending(p => p.Addtime) select m;
             //var msta = from m in db.MusicScoreStatistics.Where(p => p.Ms_id == id) select m;
             //var msta = from m in db.MusicScoreStatistics where m.Ms_id == id select m;
             var index = new Guitar.ViewModel.MusicDetailsViewModel()
@@ -208,7 +209,10 @@ namespace Guitar.Controllers
                 MSC = msc,
                 MSR = msr,
                 Msr = msrr,
+                msc11=comment1.ToPagedList(md,3)
             };
+            //if (Request.IsAjaxRequest())
+            //    return PartialView("_PartialPage1", comment.OrderByDescending(a => a.Addtime).ToPagedList(md, 3));
             return View(index);
         }
         #endregion 
@@ -335,6 +339,30 @@ namespace Guitar.Controllers
                       select po;
             return psr;
         }
+        #region 回复显示
+        public ActionResult _PartialPage2()
+        {
+            var se = TempData["Ms_idd"];
+            int Ms_id1 = Convert.ToInt32(se);
+            var msc = from m in db.MusicScoreComment.Where(p => p.Ms_id == Ms_id1).OrderByDescending(p => p.Addtime) select m;
+            var msr = (from n in db.MusicScoreReply
+                       join m in msc on n.Ms_commentid equals m.Ms_commentid
+                       join q in db.Users on n.User_id equals q.User_id
+                       select new MusicCommentReplyViewModel
+                       {
+                           Ms_replyid = n.Ms_replyid,
+                           Ms_commentid = m.Ms_commentid,
+                           content = n.content,
+                           Addtime = n.Addtime,
+                           Ms_id = m.Ms_id,
+                           User_id = n.User_id,
+                           User_name = q.User_name,
+                           User_img = q.User_img
+                       });
+            var reply = (from m in msr.OrderByDescending(p => p.Addtime) select m);
+            return View(reply);
+        }
+        #endregion
         #region 评论展示
         public ActionResult GetAllComment(int id = 1)
         {
@@ -359,7 +387,7 @@ namespace Guitar.Controllers
             //return PartialView(comment1.ToPagedList(pageNumber, pageSize));
             //var model = comment.OrderByDescending(a => a.Addtime).ToPagedList(id, 5);
             //if (Request.IsAjaxRequest())
-            //    return PartialView("_ArticleList", model);
+            //    return PartialView("_PartialPage2", model);
             //return View(model);
             return View(comment.OrderByDescending(a => a.Addtime).ToPagedList(id, 5));
         }

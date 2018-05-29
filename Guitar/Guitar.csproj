@@ -811,6 +811,7 @@
     <Content Include="Views\MusicScore\GetAllComment.cshtml" />
     <Content Include="Views\MusicScore\_MSCommentList.cshtml" />
     <Content Include="Views\MusicScore\_PartialPage1.cshtml" />
+    <Content Include="Views\MusicScore\_PartialPage2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
