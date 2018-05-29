@@ -1,11 +1,16 @@
 ﻿@using Guitar.Models
 @using Guitar.ViewModel
 @model Guitar.ViewModel.MusicDetailsViewModel
+@using Webdiyer.WebControls.Mvc;
+@*@model Webdiyer.WebControls.Mvc.PagedList<Guitar.ViewModel.MusicDetailsViewModel>*@
+
 @{
     ViewBag.Title = "Display";
     Layout = "~/Views/Shared/_LayoutPage3.cshtml";
 }
-
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+@{Html.RegisterMvcPagerScriptResource();}
 <style>
     .loca {
         margin: 50px 0px;
@@ -573,8 +578,9 @@ div.menu ul li a:active
                         </td>
                         <td class="ta2">
                             @*@using (Html.BeginForm("Comment", "MusicScore", FormMethod.Post, new { id = "pinglun", @class = "postbox" }))*@
-                            @using (Ajax.BeginForm("Comment", "MusicScore", new AjaxOptions { HttpMethod = "post", UpdateTargetId = "PLhidden" }))
-                            {
+                            @*@using (Ajax.BeginForm("Comment", "MusicScore", new AjaxOptions { HttpMethod = "post", UpdateTargetId = "PLhidden" }))*@
+@using (Ajax.BeginForm("Comment", "MusicScore", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "articles", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" } }))
+{
                                 <div class="textera">
                                     <textarea class="textarea" name="pingluntextarea"></textarea>
                                 </div>
@@ -590,12 +596,26 @@ div.menu ul li a:active
                 </tbody>
             </table>
         </div>
-    <lable id="PLhidden" style=""></lable>
+    <div id="articless">
+        @{Html.RenderAction("GetAllComment");}
+    </div>
+    @*@section Scripts{@{Html.RegisterMvcPagerScriptResource();}
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+    }*@
+    @*<div> <span style="background-color: rgb(255, 255, 102);">id="articles"</span> style="width: 100%">
+        @Html.Partial("GetAllComment", Model)
+    </div>
+    <span style="color:#ff0000;background-color: rgb(51, 255, 51);">
+        @section Scripts{@{Html.RegisterMvcPagerScriptResource();}
+        <script src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    }*@
+</span>
+    @*<lable id="PLhidden" style=""></lable>
 
     <div id="GetAllComment">
         
         @{Html.RenderAction("GetAllComment");}
-    </div>
+    </div>*@
         @*@foreach (MusicScoreComment p in Model.MSC)
         {
             <div class="pinlun">

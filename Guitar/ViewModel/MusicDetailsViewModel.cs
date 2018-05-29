@@ -1,8 +1,10 @@
 ﻿using Guitar.Models;
+//using MvcPager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Webdiyer.WebControls.Mvc;
 
 namespace Guitar.ViewModel
 {
@@ -13,6 +15,7 @@ namespace Guitar.ViewModel
         //public IEnumerable<Users> Us { set; get; }
         //public IEnumerable<MusicScoreStatistics> MSStatistics { get; set; }
         public IEnumerable<Users> Us2 { get; set; }
+        public PagedList<MusicScoreCommentViewModel> msc11 { get; set; }
         public MusicScoreStatistics MSStatistics { get; set; }
         public IEnumerable<MusicScore> MScore1 { get; set; }
         public IEnumerable<MusicScore> MScore2 { get; set; }

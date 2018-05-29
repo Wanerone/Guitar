@@ -8,7 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Guitar.Models;
 using Guitar.ViewModel;
-using PagedList;
+//using MvcPager;
+using Webdiyer.WebControls.Mvc;
 //using Guitar.Attributes;
 
 namespace Guitar.Controllers
@@ -146,10 +147,13 @@ namespace Guitar.Controllers
         #region  乐谱展示
         public ActionResult Display(int? id)
         {
+            //const int pageSize = 5;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            TempData["Ms_idd"] = id;
+            ViewBag.Msid= id;
             MusicScore ms = db.MusicScore.Find(id);
             MusicScoreStatistics msta = db.MusicScoreStatistics.Find(id);
             var usid = (from m in db.MusicScore.Where(p => p.Ms_id == id) select m.User_id).FirstOrDefault();
@@ -164,6 +168,19 @@ namespace Guitar.Controllers
             //var us=from m in db.Users.Where(p=>p.User_id==usid) select m;
             var ms1 = (from m in db.MusicScore.Where(p => p.User_id == usid).OrderByDescending(p => p.Ms_addtime) select m).Take(5);
             var msc = from m in db.MusicScoreComment.Where(p => p.Ms_id == id).OrderByDescending(p => p.Addtime) select m;
+            //var comment = from m in db.MusicScoreComment
+            //              join n in db.Users on m.User_id equals n.User_id
+            //              select new MusicScoreCommentViewModel
+            //              {
+            //                  Ms_commentid = m.Ms_commentid,
+            //                  Ms_id = m.Ms_id,
+            //                  content = m.content,
+            //                  Addtime = m.Addtime,
+            //                  User_id = n.User_id,
+            //                  User_name = n.User_name,
+            //                  User_img = n.User_img,
+            //              };
+            //var comment1 = .ToPagedList(idd, pageSize);
             var msr = (from n in db.MusicScoreReply
                        join m in msc on n.Ms_commentid equals m.Ms_commentid
                        join q in db.Users on n.User_id equals q.User_id
@@ -319,9 +336,10 @@ namespace Guitar.Controllers
             return psr;
         }
         #region 评论展示
-        public ActionResult GetAllComment(int? page)
+        public ActionResult GetAllComment(int id = 1)
         {
-            int Ms_id1 = Convert.ToInt32(Request["Ms_id3"]);
+            var se = TempData["Ms_idd"];
+            int Ms_id1 = Convert.ToInt32(se);
             ViewBag.Ms_id = Ms_id1;
             var comment = from m in db.MusicScoreComment
                             join n in db.Users on m.User_id equals n.User_id
@@ -336,9 +354,14 @@ namespace Guitar.Controllers
                                 User_img = n.User_img,
                             };
             var comment1 = from o in comment.Where(p=>p.Ms_id==Ms_id1).OrderByDescending(p => p.Addtime) select o;
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            return PartialView(comment1.ToPagedList(pageNumber, pageSize));
+            //int pageSize = 3;
+            //int pageNumber = (page ?? 1);
+            //return PartialView(comment1.ToPagedList(pageNumber, pageSize));
+            //var model = comment.OrderByDescending(a => a.Addtime).ToPagedList(id, 5);
+            //if (Request.IsAjaxRequest())
+            //    return PartialView("_ArticleList", model);
+            //return View(model);
+            return View(comment.OrderByDescending(a => a.Addtime).ToPagedList(id, 5));
         }
         #endregion
         public ActionResult UserIndex(int User_Id)

@@ -18,11 +18,10 @@ namespace Guitar
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-            //routes.MapRoute(
-            //    name: "MSDefault",
-            //    url: "/{name}",
-            //    defaults: new { controller = "MusicScore", action = "Display", name = UrlParameter.Optional }
-            //);
+            routes.MapRoute(
+                name: "MSDefault",
+                url: "{controller}/{action}"
+            );
         }
     }
 }
