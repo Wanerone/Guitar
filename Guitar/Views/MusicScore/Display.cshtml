@@ -6,11 +6,11 @@
 
 @{
     ViewBag.Title = "Display";
+
     Layout = "~/Views/Shared/_LayoutPage3.cshtml";
 }
 <script src="~/Scripts/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
-@{Html.RegisterMvcPagerScriptResource();}
+
 <style>
     .loca {
         margin: 50px 0px;
@@ -599,7 +599,7 @@ div.menu ul li a:active
     <div id="articles">
         @*@{Html.RenderAction("GetAllComment");}*@
         @*@{Html.RenderPartial("GetAllComment",Model.msc11);}*@
-        @Html.Partial("_PartialPage1", Model.msc11)
+        @Html.Partial("MsComment", Model.msc11)
         <div class="text-center">
             @Ajax.Pager(Model.msc11, new PagerOptions
                 {

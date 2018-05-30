@@ -331,18 +331,35 @@ namespace Guitar.Controllers
             return RedirectToAction("Display", "MusicScore");
         }
         #endregion
-        public IEnumerable<MusicScoreComment> GetComment(int Ms_id) 
-        {
-            var psr = from po in db.MusicScoreComment
-                      where po.Ms_id== Ms_id
-                      orderby po.Addtime descending
-                      select po;
-            return psr;
-        }
+        //public IEnumerable<MusicCommentReplyViewModel> MsReply(int Ms_id) 
+        //{
+        //    var se = TempData["Ms_idd"];
+        //    int Ms_id1 = Convert.ToInt32(se);
+        //    var msc = from m in db.MusicScoreComment.Where(p => p.Ms_id == Ms_id1).OrderByDescending(p => p.Addtime) select m;
+        //    var msr = (from n in db.MusicScoreReply
+        //               join m in msc on n.Ms_commentid equals m.Ms_commentid
+        //               join q in db.Users on n.User_id equals q.User_id
+        //               select new MusicCommentReplyViewModel
+        //               {
+        //                   Ms_replyid = n.Ms_replyid,
+        //                   Ms_commentid = m.Ms_commentid,
+        //                   content = n.content,
+        //                   Addtime = n.Addtime,
+        //                   Ms_id = m.Ms_id,
+        //                   User_id = n.User_id,
+        //                   User_name = q.User_name,
+        //                   User_img = q.User_img
+        //               });
+        //    var reply = (from m in msr.OrderByDescending(p => p.Addtime) select m);
+        //    return reply;
+        //}
         #region 回复显示
-        public ActionResult _PartialPage2()
+        [ChildActionOnly]
+        public ActionResult MsReply(int param1, int md = 1)
         {
+            //var mdd = ViewData["md"];
             var se = TempData["Ms_idd"];
+            //int mm = param1;
             int Ms_id1 = Convert.ToInt32(se);
             var msc = from m in db.MusicScoreComment.Where(p => p.Ms_id == Ms_id1).OrderByDescending(p => p.Addtime) select m;
             var msr = (from n in db.MusicScoreReply
@@ -359,8 +376,8 @@ namespace Guitar.Controllers
                            User_name = q.User_name,
                            User_img = q.User_img
                        });
-            var reply = (from m in msr.OrderByDescending(p => p.Addtime) select m);
-            return View(reply);
+            var reply = (from m in msr.Where(p=>p.Ms_commentid== param1).OrderByDescending(p => p.Addtime) select m);
+            return PartialView(reply.ToPagedList(md,5));
         }
         #endregion
         #region 评论展示
