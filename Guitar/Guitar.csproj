@@ -745,7 +745,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -810,8 +809,9 @@
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\MusicScore\GetAllComment.cshtml" />
     <Content Include="Views\MusicScore\_MSCommentList.cshtml" />
-    <Content Include="Views\MusicScore\_PartialPage1.cshtml" />
-    <Content Include="Views\MusicScore\_PartialPage2.cshtml" />
+    <Content Include="Views\MusicScore\MsComment.cshtml" />
+    <Content Include="Views\MusicScore\MsReply.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

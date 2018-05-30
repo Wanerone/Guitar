@@ -1,6 +1,6 @@
 ﻿@using Webdiyer.WebControls.Mvc
 @model Webdiyer.WebControls.Mvc.PagedList<Guitar.ViewModel.MusicScoreCommentViewModel>
-@{ int i = 0;}
+
 @foreach (var p in Model)
 {
     <div class="pinlun">
@@ -30,9 +30,9 @@
                             <div style="float:right"><a class="">回复</a></div>
                             <div style="clear:both"></div>
                         </div>
-
+                        @{ int md = p.Ms_commentid; }
                         <div class="comment">
-
+                            @*@{Html.RenderAction("MsReply","MusicScore", new { param1 = p.Ms_commentid });}*@
                             @*@foreach (MusicCommentReplyViewModel m in Model.MSR.Where(n => n.Ms_commentid == p.Ms_commentid))
                                 {
                                     <input type="hidden" name="Commentid1" value="@p.Ms_commentid" />

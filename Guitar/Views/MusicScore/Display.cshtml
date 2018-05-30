@@ -6,11 +6,11 @@
 
 @{
     ViewBag.Title = "Display";
+
     Layout = "~/Views/Shared/_LayoutPage3.cshtml";
 }
 <script src="~/Scripts/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
-@{Html.RegisterMvcPagerScriptResource();}
+
 <style>
     .loca {
         margin: 50px 0px;
@@ -579,7 +579,7 @@ div.menu ul li a:active
                         <td class="ta2">
                             @*@using (Html.BeginForm("Comment", "MusicScore", FormMethod.Post, new { id = "pinglun", @class = "postbox" }))*@
                             @*@using (Ajax.BeginForm("Comment", "MusicScore", new AjaxOptions { HttpMethod = "post", UpdateTargetId = "PLhidden" }))*@
-@using (Ajax.BeginForm("Comment", "MusicScore", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "articles", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" } }))
+@using (Ajax.BeginForm("Comment", "MusicScore", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "PLhidden", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" } }))
 {
                                 <div class="textera">
                                     <textarea class="textarea" name="pingluntextarea"></textarea>
@@ -596,10 +596,11 @@ div.menu ul li a:active
                 </tbody>
             </table>
         </div>
+    <input type="hidden" id="PLhidden" />
     <div id="articles">
         @*@{Html.RenderAction("GetAllComment");}*@
         @*@{Html.RenderPartial("GetAllComment",Model.msc11);}*@
-        @Html.Partial("_PartialPage1", Model.msc11)
+        @Html.Partial("MsComment", Model.msc11)
         <div class="text-center">
             @Ajax.Pager(Model.msc11, new PagerOptions
                 {
@@ -727,21 +728,22 @@ div.menu ul li a:active
         //clearInterval(time);     
         setTimeout(function () {
             var plHidden = $("#PLhidden").text();
-            //if (plHidden == "aa") {
-                $.ajax({
-                    type: "post",
-                    url: "/MusicScore/GetAllComment",
-                    data: { Ms_id: $(".Ms_id").val()},
-                    success: function (data) {
-                        $("#getAllComment").html(data);
-                        //回到顶部
-                        $('body,html').animate({ scrollTop: 200 }, 1000);
-                        $('body,html').off("mousewheel", preventScroll); //去除scrollTop=0对滚动的限制
-                        //$(".plcg").show().delay(2000).hide(300);
-                    }
-                });
-            //} else {
-            //}
+            if (plHidden == "aa") {
+                location.reload(true);
+                //$.ajax({
+                //    type: "post",
+                //    url: "/MusicScore/GetAllComment",
+                //    data: { Ms_id: $(".Ms_id").val()},
+                //    success: function (data) {
+                //        $("#getAllComment").html(data);
+                //        //回到顶部
+                //        $('body,html').animate({ scrollTop: 200 }, 1000);
+                //        $('body,html').off("mousewheel", preventScroll); //去除scrollTop=0对滚动的限制
+                //        //$(".plcg").show().delay(2000).hide(300);
+                //    }
+                //});
+            } else {
+            }
 
         }, 1000);
 

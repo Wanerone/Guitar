@@ -1,9 +1,9 @@
-﻿@using PagedList.Mvc;
-@using PagedList
-@model PagedList <Guitar.ViewModel.MusicCommentReplyViewModel> 
+﻿
+@using Webdiyer.WebControls.Mvc
+@model Webdiyer.WebControls.Mvc.PagedList<Guitar.ViewModel.MusicCommentReplyViewModel>
 @*@model Guitar.ViewModel.MusicCommentReplyViewModel*@
 
-@foreach (var m in Model.Where)
+@foreach (var m in Model.Where(n => n.Ms_commentid ==1 ))
     {
         <input type="hidden" name="Commentid1" value="" />
                 <div class="huifui1">
