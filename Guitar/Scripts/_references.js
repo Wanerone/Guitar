@@ -3,6 +3,7 @@
 /// <reference path="../bootstrap-3.3.7-dist/js/bootstrap-fileinput.js" />
 /// <reference path="../bootstrap-3.3.7-dist/js/npm.js" />
 /// <reference path="bootstrap.js" />
+/// <reference path="demo.js" />
 /// <reference path="jquery.unobtrusive-ajax.min.js" />
 /// <reference path="jquery.validate.js" />
 /// <reference path="jquery.validate.unobtrusive.js" />

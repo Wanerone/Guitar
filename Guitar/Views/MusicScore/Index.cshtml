@@ -1,6 +1,7 @@
 ﻿@using Guitar.Models
 @using Guitar.ViewModel
 @model Guitar.ViewModel.MusicDetailsViewModel
+@using Webdiyer.WebControls.Mvc;
 
 @{
     ViewBag.Title = "吉他谱";
@@ -12,6 +13,9 @@
 @Scripts.Render("~/Scripts/jquery-3.3.1.min.js")
 @Scripts.Render("~/Scripts/lanrenzhijia.js")
 @Styles.Render("~/Content/lanrenzhijia.css")
+<script src="/demos/googlegg.js"></script>
+<script src="~/Scripts/demo.js"></script>
+<link href="~/Content/demo.css" rel="stylesheet" />
 <link href="~/Content/port.css" rel="stylesheet" />
 <link href="~/Content/One.css" rel="stylesheet" />
 <script src="~/Scripts/One.js"></script>
@@ -93,9 +97,7 @@ div.menu ul li a:active
             
         </div>
     </div>
-    <div class="yiren">
-        <h3>热门吉他谱</h3>
-    </div>
+   
     <div class="yuepu">
         <div class="lanrenzhijia">
             <div class="title cf">
@@ -173,4 +175,36 @@ div.menu ul li a:active
             </div>
         </div>
     </div>
-</div>
+
+    <div class="yiren">
+        <h3>热门吉他谱</h3>
+        <div id="mscore">
+            @Html.Partial("_Index1", Model.MScore6)
+        </div>
+        @section scripts{@{Html.RegisterMvcPagerScriptResource();}}
+        
+        @*<div class="wrapper">
+            <ul>
+                @foreach (MusicScore m in Model.MScore6)
+                {
+                    <li>
+                        <div class='picBox'>
+                            <div class='showww'>
+                                <image height='180px' width='180px' src='@m.Ms_img'></image>
+                            </div>
+                            <div class='hidee'>
+                                <h3>
+                                    @m.Ms_title
+                                </h3>
+                            </div>
+                        </div>
+                    </li>
+                }
+               
+            </ul>
+            </div>*@
+        </div>
+    <script src="~/Scripts/demo.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    </div>
+@Scripts.Render("~/bundles/jquery")

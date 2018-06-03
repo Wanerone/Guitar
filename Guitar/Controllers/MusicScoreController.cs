@@ -19,15 +19,27 @@ namespace Guitar.Controllers
         private GuitarEntities db = new GuitarEntities();
 
         #region 吉他谱
-        public ActionResult Index()
+        public ActionResult Index(int id = 1, int pageIndex = 1, int page = 1)
         {
             //var str1 = "古典吉他";
             var users = (from m in db.Users.OrderByDescending(p => p.User_addtime) select m).Take(6);
+
             var score1 = (from m in db.MusicScore.Where(p => p.Ms_label == "古典吉他").OrderByDescending(p => p.Ms_addtime) select m).Take(10);
             var score2 = (from m in db.MusicScore.Where(p => p.Ms_label == "民谣吉他").OrderByDescending(p => p.Ms_addtime) select m).Take(10);
             var score3 = (from m in db.MusicScore.Where(p => p.Ms_label == "电吉他").OrderByDescending(p => p.Ms_addtime) select m).Take(10);
             var score4 =( from m in db.MusicScore.Where(p => p.Ms_label == "尤克里里").OrderByDescending(p => p.Ms_addtime) select m).Take(10);
             var score5 = (from m in db.MusicScore.Where(p => p.Ms_label == "其他").OrderByDescending(p => p.Ms_addtime) select m).Take(10);
+            var score6 = (from m in db.MusicScore.OrderByDescending(p => p.ReadCount) select m);
+            const int pageSize = 20;
+            if (Request.IsAjaxRequest())
+            {
+                var target = Request.QueryString["target"];
+                if (target == "mscore")
+                {
+                    return PartialView("_Index1",score6.ToPagedList(id, pageSize));
+                }
+            }
+          
             var index = new Guitar.ViewModel.MusicDetailsViewModel()
             {
                 MScore1 = score1,
@@ -35,6 +47,7 @@ namespace Guitar.Controllers
                 MScore3 = score3,
                 MScore4 = score4,
                 MScore5=score5,
+                MScore6=score6.ToPagedList(page, pageSize),
                 Us2 = users,
             };
             return View(index);
@@ -145,7 +158,7 @@ namespace Guitar.Controllers
         }
         #endregion
         #region  乐谱展示
-        public ActionResult Display(int? id, int md = 1)
+        public ActionResult Display(int? id, int md = 1, int pageIndex = 1, int page = 1)
         {
             //const int pageSize = 5;
             if (id == null)
@@ -154,6 +167,7 @@ namespace Guitar.Controllers
             }
             TempData["Ms_idd"] = id;
             ViewBag.Msid= id;
+            TempData["Ms_id2"] = id;
             MusicScore ms = db.MusicScore.Find(id);
             MusicScoreStatistics msta = db.MusicScoreStatistics.Find(id);
             var usid = (from m in db.MusicScore.Where(p => p.Ms_id == id) select m.User_id).FirstOrDefault();
@@ -197,9 +211,19 @@ namespace Guitar.Controllers
                        });
             int commentid = Convert.ToInt32(Request["Commentid1"]);
             var msrr = from m in db.MusicScoreReply.Where(p => p.Ms_commentid == commentid).OrderByDescending(p => p.Addtime) select m;
+          
             var comment1 = from m in comment.Where(p => p.Ms_id == id).OrderByDescending(p => p.Addtime) select m;
             //var msta = from m in db.MusicScoreStatistics.Where(p => p.Ms_id == id) select m;
             //var msta = from m in db.MusicScoreStatistics where m.Ms_id == id select m;
+            const int pageSize = 5;
+            if (Request.IsAjaxRequest())
+            {
+                var target = Request.QueryString["target"];
+                if (target == "articles")
+                {
+                    return PartialView("_display1",comment1.ToPagedList(md, pageSize));
+                }
+            }
             var index = new Guitar.ViewModel.MusicDetailsViewModel()
             {
                 Us = us,
@@ -209,7 +233,7 @@ namespace Guitar.Controllers
                 MSC = msc,
                 MSR = msr,
                 Msr = msrr,
-                msc11=comment1.ToPagedList(md,3)
+                msc11=comment1.ToPagedList(page, pageSize),
             };
             //if (Request.IsAjaxRequest())
             //    return PartialView("_PartialPage1", comment.OrderByDescending(a => a.Addtime).ToPagedList(md, 3));
@@ -232,12 +256,14 @@ namespace Guitar.Controllers
                 msc.Addtime = System.DateTime.Now;
                 db.MusicScoreComment.Add(msc);
                 db.SaveChanges();
-                return Content("<script>;alert('评论成功!');history.go(-1)</script>");
+                return Content("<script>;alert('评论成功!');");
                 //return RedirectToAction("Display", "MusicScore");
+                //return "aa";
             }
             else {
                 //return Content("bb");
                 return RedirectToAction("Display", "MusicScore");
+                //return "bb";
             }
 
             //return RedirectToAction("Display", "MusicScore");
@@ -248,10 +274,11 @@ namespace Guitar.Controllers
         public ActionResult Reply(MusicScoreReply msr)
         {
             string pingluntextarea = Request["pingluntextarea2"];
-            int Ms_id = Convert.ToInt32(Request["Ms_id2"]);
+            var se = TempData["Ms_id2"];
+            int Ms_id = Convert.ToInt32(se);
+            //int Ms_id = Convert.ToInt32(Request["Ms_id2"]);
             int commentid = Convert.ToInt32(Request["Commentid"]);
-            int commentid1 = Convert.ToInt32(Request["Commentid1"]);
-            int commentid2 = Convert.ToInt32(Request["Commentid2"]);
+
             if (ModelState.IsValid)
             {
                 msr.Ms_id = Ms_id;
@@ -331,35 +358,13 @@ namespace Guitar.Controllers
             return RedirectToAction("Display", "MusicScore");
         }
         #endregion
-        //public IEnumerable<MusicCommentReplyViewModel> MsReply(int Ms_id) 
-        //{
-        //    var se = TempData["Ms_idd"];
-        //    int Ms_id1 = Convert.ToInt32(se);
-        //    var msc = from m in db.MusicScoreComment.Where(p => p.Ms_id == Ms_id1).OrderByDescending(p => p.Addtime) select m;
-        //    var msr = (from n in db.MusicScoreReply
-        //               join m in msc on n.Ms_commentid equals m.Ms_commentid
-        //               join q in db.Users on n.User_id equals q.User_id
-        //               select new MusicCommentReplyViewModel
-        //               {
-        //                   Ms_replyid = n.Ms_replyid,
-        //                   Ms_commentid = m.Ms_commentid,
-        //                   content = n.content,
-        //                   Addtime = n.Addtime,
-        //                   Ms_id = m.Ms_id,
-        //                   User_id = n.User_id,
-        //                   User_name = q.User_name,
-        //                   User_img = q.User_img
-        //               });
-        //    var reply = (from m in msr.OrderByDescending(p => p.Addtime) select m);
-        //    return reply;
-        //}
         #region 回复显示
         [ChildActionOnly]
         public ActionResult MsReply(int param1, int md = 1)
         {
             //var mdd = ViewData["md"];
             var se = TempData["Ms_idd"];
-            //int mm = param1;
+            ViewData["mscommentid"] = param1;
             int Ms_id1 = Convert.ToInt32(se);
             var msc = from m in db.MusicScoreComment.Where(p => p.Ms_id == Ms_id1).OrderByDescending(p => p.Addtime) select m;
             var msr = (from n in db.MusicScoreReply

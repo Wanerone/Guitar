@@ -348,6 +348,7 @@
     <Content Include="bootstrap-3.3.7-dist\js\npm.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\demo.css" />
     <Content Include="Content\lanrenzhijia.css" />
     <Content Include="Content\leftnav.css" />
     <Content Include="Content\Login.css" />
@@ -433,6 +434,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -812,6 +814,9 @@
     <Content Include="Views\MusicScore\MsComment.cshtml" />
     <Content Include="Views\MusicScore\MsReply.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\MusicScore\_Index1.cshtml" />
+    <Content Include="Views\MusicScore\_Index2.cshtml" />
+    <Content Include="Views\MusicScore\_display1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
