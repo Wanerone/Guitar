@@ -585,7 +585,7 @@ div.menu ul li a:active
                 {
                     HttpMethod = "Post",
                     //InsertionMode = InsertionMode.Replace,
-                    UpdateTargetId = "articles",
+                    UpdateTargetId = "PLhidden",
                     //OnComplete = "ajaxComplete"
                 }))
 {
@@ -724,24 +724,30 @@ div.menu ul li a:active
             alert("评论成功！");
         }
 
-    //$("#queding").click(function () { //提交评论                   
-    //    var time = setInterval 
-    //    clearInterval(time);     
-    //    setTimeout(function () {
-    //        var plHidden = $("#PLhidden").text();
-    //        if (plHidden == "aa") {
-    //            $.ajax({
-    //                type: "post",
-    //                url: "/MusicScore/MsComment",
-    //                data: { Ms_id: $(".Ms_id").val()},
-    //                success: function (data) {
-    //                    $("#articles").html(data);
-    //                }
-    //            });
-    //        } else {
-    //        }
+    $("#queding").click(function () { //提交评论                   
+        var time = setInterval 
+        clearInterval(time);     
+        setTimeout(function () {
+            var plHidden = $("#PLhidden").text();
+            if (plHidden == "aa") {
+                //$.ajax({
+                //    type: "post",
+                //    url: "/MusicScore/MsComment",
+                //    data: { Ms_id: $(".Ms_id").val()},
+                //    success: function (data) {
+                //        $("#articles").html(data);
+                //    }
+                //});
+                alert("评论成功！");
+                location.reload(true);
+            }
+            else if (plHidden == "kong") {
+                alert('评论不能为空！');
+            }
+            else {
+            }
 
-    //    }, 1000);
+        }, 1000);
 
-    //});
+    });
 </script>

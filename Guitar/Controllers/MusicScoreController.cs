@@ -244,10 +244,14 @@ namespace Guitar.Controllers
         #region 评论乐谱
         [HttpPost]
         //[Login]
-        public ActionResult Comment(MusicScoreComment msc, MusicScoreStatistics mss)
+        public string Comment(MusicScoreComment msc, MusicScoreStatistics mss)
         {
             string pingluntextarea = Request["pingluntextarea"];
             int Ms_id = Convert.ToInt32(Request["Ms_id"]);
+            if (pingluntextarea == "")
+            {
+                return "kong";
+            }
             if (ModelState.IsValid)
             {
                 msc.Ms_id = Ms_id;
@@ -256,14 +260,14 @@ namespace Guitar.Controllers
                 msc.Addtime = System.DateTime.Now;
                 db.MusicScoreComment.Add(msc);
                 db.SaveChanges();
-                return Content("<script>;alert('评论成功!');");
+                //return Content("<script>;alert('评论成功!');");
                 //return RedirectToAction("Display", "MusicScore");
-                //return "aa";
+                return "aa";
             }
             else {
                 //return Content("bb");
-                return RedirectToAction("Display", "MusicScore");
-                //return "bb";
+                //return RedirectToAction("Display", "MusicScore");
+                return "bb";
             }
 
             //return RedirectToAction("Display", "MusicScore");
@@ -271,14 +275,17 @@ namespace Guitar.Controllers
         #endregion
         #region 回复乐谱
         [HttpPost]
-        public ActionResult Reply(MusicScoreReply msr)
+        public string Reply(MusicScoreReply msr)
         {
             string pingluntextarea = Request["pingluntextarea2"];
             var se = TempData["Ms_id2"];
             int Ms_id = Convert.ToInt32(se);
             //int Ms_id = Convert.ToInt32(Request["Ms_id2"]);
             int commentid = Convert.ToInt32(Request["Commentid"]);
-
+            //if (pingluntextarea =="")
+            //{
+            //    return "kong";
+            //}
             if (ModelState.IsValid)
             {
                 msr.Ms_id = Ms_id;
@@ -288,10 +295,16 @@ namespace Guitar.Controllers
                 msr.Addtime = System.DateTime.Now;
                 db.MusicScoreReply.Add(msr);
                 db.SaveChanges();
-                return Content("<script>;alert('回复成功!');history.go(-1)</script>");
+                //return Content("<script>;alert('回复成功!');history.go(-1)</script>");
+                return "aa";
             }
-
-            return RedirectToAction("Display", "MusicScore");
+            else
+            {
+                //return Content("bb");
+                //return RedirectToAction("Display", "MusicScore");
+                return "bb";
+            }
+            //return RedirectToAction("Display", "MusicScore");
         }
         #endregion
         #region 收藏乐谱
