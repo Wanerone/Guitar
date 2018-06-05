@@ -2,6 +2,7 @@
 using Guitar.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -29,6 +30,49 @@ namespace Guitar.Controllers
             int id = 2; /*Convert.ToInt32(Session["User_id"]);*/
             var user = db.Users.Find(id);
             return View(user);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SavaInfo(Users user)
+        {
+            int id = 2;/*Convert.ToInt32(Session["User_id"]);*/
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            var birth = Request["birthday"];
+            var address = Request["city"];
+            HttpPostedFileBase postimageBase = Request.Files["Image1"];
+            var sex = Request["Status"];
+            var a = 5;
+          
+            if (!ModelState.IsValid)
+            {
+
+                if (postimageBase != null)
+                {
+                    string filePath = postimageBase.FileName;
+                    string filename = filePath.Substring(filePath.LastIndexOf("\\") + 1);
+                    string serverpath = Server.MapPath(@"/Images/headimg/") + filename;
+                    string relativepath = @"/Images/headimg/" + filename;
+                    postimageBase.SaveAs(serverpath);
+                    user.User_img= relativepath;
+                }
+
+                else
+                {
+                    user.User_img = Session["User_img"].ToString();
+
+                }
+                user.User_password = db.Users.Find(id).User_password;
+                user.User_addtime = db.Users.Find(id).User_addtime;
+                user.User_birthday = birth;
+                user.User_addr = address;
+                //db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return Content("<script>;alert('修改成功!');history.go(-1)</script>");
+            }
+            else
+            {
+                return Content("<script>;alert('失败,请重试!');history.go(-1)</script>");
+            }
         }
         //获得乐谱
         public ActionResult DisplayScore()

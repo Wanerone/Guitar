@@ -7,6 +7,8 @@
 <script src="~/Scripts/city.json.js"></script>
 <script src="~/Scripts/citySet.js"></script>
 <script src="~/Scripts/Popt.js"></script>
+<link href="~/bootstrap-3.3.7-dist/css/bootstrap-fileinput.css" rel="stylesheet" />
+<script src="~/bootstrap-3.3.7-dist/js/bootstrap-fileinput.js"></script>
 <style>
     #info{
        background-color: #00a1d6;
@@ -52,30 +54,71 @@ s{position:absolute;top:1px;right:0;width:32px;height:32px;background:url("~/Ima
 
 <div class="tou"><span>信息设置</span></div>
 <div class="xia">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("SavaInfo", "Users", FormMethod.Post, new { @class = "", enctype = "multipart/form-data" }))
     {
+        @Html.AntiForgeryToken()
     <table class="table table-bordered">
         <tr>
-            <td>邮箱</td>
+            <td><h4>邮箱</h4></td>
             <td>
-                @Model.User_email
+                @*@Model.User_email*@
+                @Html.EditorFor(model => model.User_email, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
             </td>
         </tr>
         <tr>
             <td>昵称</td>
             <td>
-                @Html.EditorFor(model => model.User_name, new { htmlAttributes = new { @class = "form-control", @placeholder = "不超过八个字符" } })
+                @Html.EditorFor(model => model.User_name, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
                 @Html.ValidationMessageFor(model => model.User_name, "", new { @class = "text-danger" })
             </td>
         </tr>
         <tr>
-            <td>性别</td>
+            <td><h4>密码</h4></td>
             <td>
-                
+                @Html.EditorFor(model => model.User_password, new { htmlAttributes = new { @class = "form-control", @placeholder = "",@style="display:none;"} })
+                *********
             </td>
         </tr>
         <tr>
-            <td>出生日期</td>
+            <td><h4>性别</h4></td>
+            <td>
+                @Html.RadioButtonFor(model => model.User_sex, true, new { @id = "radio1", @name = "Status", @checked="checked" })
+                <label for="radio1">男</label>
+                @Html.RadioButtonFor(model => model.User_sex, false, new { @id = "radio2", @name = "Status" })
+                <label for="radio2">女</label>
+                @Html.ValidationMessageFor(model => model.User_sex, "", new { @class = "text-danger" })
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>选择封面</h4>
+            </td>
+            <td>
+                @*<input type="file" name="Image1" />*@
+                @*@Html.EditorFor(model => model.Ms_img, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Ms_img, "", new { @class = "text-danger" })*@
+                <div class="form-group" id="uploadForm" enctype='multipart/form-data'>
+                    <div class="h4">图片预览</div>
+                    <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
+                        <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                            <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" src="images/noimage.png" alt="" />
+                        </div>
+                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                        <div>
+                            <span class="btn btn-primary btn-file">
+                                <span class="fileinput-new">选择文件</span>
+                                <span class="fileinput-exists">换一张</span>
+                                <input type="file" name="Image1" id="Image1" accept="image/gif,image/jpeg,image/x-png">
+                            </span>
+                            <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><h4>出生日期</h4></td>
             <td>
                 @*<div id="birth">
                     <input class="jcDate" style="width:200px; height:20px; line-height:20px; padding:4px;" />
@@ -88,13 +131,13 @@ s{position:absolute;top:1px;right:0;width:32px;height:32px;background:url("~/Ima
             </td>
         </tr>
         <tr>
-            <td>住址</td>
+            <td><h4>住址</h4></td>
             <td>
-                <div class="wrap"><input class="input" name="" id="city" type="text" placeholder="请选择" autocomplete="off" readonly="true"><s></s></div>
+                <div class="wrap"><input class="input" name="city" id="city" type="text" placeholder="请选择" autocomplete="off" readonly="true"><s></s></div>
             </td>
         </tr>
         <tr>
-            <td>个性签名</td>
+            <td><h4>个人说明</h4></td>
             <td>
                 @Html.TextAreaFor(model => model.User_sign, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.User_sign, "", new { @class = "text-danger" })
