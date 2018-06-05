@@ -3,9 +3,13 @@
 @model Webdiyer.WebControls.Mvc.PagedList<Guitar.ViewModel.MusicCommentReplyViewModel>
 @*@model Guitar.ViewModel.MusicCommentReplyViewModel*@
 
-@foreach (var m in Model.Where(n => n.Ms_commentid ==1 ))
+@{ int mm =Convert.ToInt32(ViewData["mscommentid"]);
+    int a = 7;}
+@*@foreach (var m in Model.Where((n => n.Ms_commentid == mm)))*@
+@foreach (var m in Model)
     {
-        <input type="hidden" name="Commentid1" value="" />
+   
+        <input type="hidden" name="Commentid1" value="@m.Ms_commentid" />
                 <div class="huifui1">
                     <div class="hui1">
                         <div class="huiimg">

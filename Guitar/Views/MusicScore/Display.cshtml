@@ -10,7 +10,7 @@
     Layout = "~/Views/Shared/_LayoutPage3.cshtml";
 }
 <script src="~/Scripts/jquery-3.3.1.js"></script>
-
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <style>
     .loca {
         margin: 50px 0px;
@@ -579,7 +579,15 @@ div.menu ul li a:active
                         <td class="ta2">
                             @*@using (Html.BeginForm("Comment", "MusicScore", FormMethod.Post, new { id = "pinglun", @class = "postbox" }))*@
                             @*@using (Ajax.BeginForm("Comment", "MusicScore", new AjaxOptions { HttpMethod = "post", UpdateTargetId = "PLhidden" }))*@
-@using (Ajax.BeginForm("Comment", "MusicScore", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "PLhidden", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" } }))
+@*@using (Ajax.BeginForm("Comment", "MusicScore", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "articles", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" } }))*@
+@using (Ajax.BeginForm("Comment", "MusicScore",
+                new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    //InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "PLhidden",
+                    //OnComplete = "ajaxComplete"
+                }))
 {
                                 <div class="textera">
                                     <textarea class="textarea" name="pingluntextarea"></textarea>
@@ -591,31 +599,19 @@ div.menu ul li a:active
                                 </div>
                             }
 
+
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    <input type="hidden" id="PLhidden" />
+    <lable id="PLhidden" style="display: none;"></lable>
     <div id="articles">
         @*@{Html.RenderAction("GetAllComment");}*@
         @*@{Html.RenderPartial("GetAllComment",Model.msc11);}*@
-        @Html.Partial("MsComment", Model.msc11)
-        <div class="text-center">
-            @Ajax.Pager(Model.msc11, new PagerOptions
-                {
-                    PageIndexParameterName = "md",
-                    ContainerTagName = "ul",
-                    CssClass = "pagination",
-                    CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
-                    DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
-                    PagerItemTemplate = "<li>{0}</li>"
-                }).AjaxOptions(a => a.SetUpdateTargetId("articles"))
-        </div>
+        @Html.Partial("_display1", Model.msc11)
     </div>
-    @section Scripts{@{Html.RegisterMvcPagerScriptResource();}
-    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
-    }
+    @section scripts{@{Html.RegisterMvcPagerScriptResource();}}
     @*<div> <span style="background-color: rgb(255, 255, 102);">id="articles"</span> style="width: 100%">
         @Html.Partial("GetAllComment", Model)
     </div>
@@ -717,32 +713,38 @@ div.menu ul li a:active
             $(".myreply").toggle();
         });
     });
-    
+
     //$("#queding").click(function () {
     //    $("#data").load("/MusicScore/GetAllComment", { "message": $("#txt").val() }, function () {
     //        alert("提交成功");
     //    });
     //});
+
+        function ajaxComplete() {
+            alert("评论成功！");
+        }
+
     $("#queding").click(function () { //提交评论                   
-        //var time = setInterval 
-        //clearInterval(time);     
+        var time = setInterval 
+        clearInterval(time);     
         setTimeout(function () {
             var plHidden = $("#PLhidden").text();
             if (plHidden == "aa") {
-                location.reload(true);
                 //$.ajax({
                 //    type: "post",
-                //    url: "/MusicScore/GetAllComment",
+                //    url: "/MusicScore/MsComment",
                 //    data: { Ms_id: $(".Ms_id").val()},
                 //    success: function (data) {
-                //        $("#getAllComment").html(data);
-                //        //回到顶部
-                //        $('body,html').animate({ scrollTop: 200 }, 1000);
-                //        $('body,html').off("mousewheel", preventScroll); //去除scrollTop=0对滚动的限制
-                //        //$(".plcg").show().delay(2000).hide(300);
+                //        $("#articles").html(data);
                 //    }
                 //});
-            } else {
+                alert("评论成功！");
+                location.reload(true);
+            }
+            else if (plHidden == "kong") {
+                alert('评论不能为空！');
+            }
+            else {
             }
 
         }, 1000);

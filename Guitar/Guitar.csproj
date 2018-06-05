@@ -348,12 +348,15 @@
     <Content Include="bootstrap-3.3.7-dist\js\npm.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\demo.css" />
+    <Content Include="Content\jcDate.css" />
     <Content Include="Content\lanrenzhijia.css" />
     <Content Include="Content\leftnav.css" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\One.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\port.css" />
+    <Content Include="Images\arrow.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -407,6 +410,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\birth.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -433,6 +437,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\city.json.js" />
+    <Content Include="Scripts\citySet.js" />
+    <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -440,6 +447,7 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jQuery-jcDate.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -450,6 +458,7 @@
     <Content Include="Scripts\leftnav.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\One.js" />
+    <Content Include="Scripts\Popt.js" />
     <Content Include="Scripts\Register.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -807,11 +816,17 @@
     <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
-    <Content Include="Views\MusicScore\GetAllComment.cshtml" />
-    <Content Include="Views\MusicScore\_MSCommentList.cshtml" />
     <Content Include="Views\MusicScore\MsComment.cshtml" />
     <Content Include="Views\MusicScore\MsReply.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\MusicScore\_Index1.cshtml" />
+    <Content Include="Views\MusicScore\_Index2.cshtml" />
+    <Content Include="Views\MusicScore\_display1.cshtml" />
+    <Content Include="Views\Users\UserIndex.cshtml" />
+    <Content Include="Views\Shared\_UserCenter.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\InfoSet.cshtml" />
+    <Content Include="Views\Users\Headimg.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
