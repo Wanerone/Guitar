@@ -30,10 +30,12 @@ namespace Guitar.Models
         public virtual DbSet<MusicScoreCollection> MusicScoreCollection { get; set; }
         public virtual DbSet<MusicScoreComment> MusicScoreComment { get; set; }
         public virtual DbSet<MusicScoreReply> MusicScoreReply { get; set; }
+        public virtual DbSet<MusicScoreStatistics> MusicScoreStatistics { get; set; }
         public virtual DbSet<Post> Post { get; set; }
         public virtual DbSet<PostCollection> PostCollection { get; set; }
         public virtual DbSet<PostComment> PostComment { get; set; }
         public virtual DbSet<PostReply> PostReply { get; set; }
+        public virtual DbSet<PostStatistics> PostStatistics { get; set; }
         public virtual DbSet<t_comment> t_comment { get; set; }
         public virtual DbSet<t_customer> t_customer { get; set; }
         public virtual DbSet<t_item> t_item { get; set; }
@@ -42,8 +44,6 @@ namespace Guitar.Models
         public virtual DbSet<VideoCollection> VideoCollection { get; set; }
         public virtual DbSet<VideoComment> VideoComment { get; set; }
         public virtual DbSet<VideoReply> VideoReply { get; set; }
-        public virtual DbSet<MusicScoreStatistics> MusicScoreStatistics { get; set; }
-        public virtual DbSet<PostStatistics> PostStatistics { get; set; }
         public virtual DbSet<VideoStatistics> VideoStatistics { get; set; }
     }
 }

@@ -360,6 +360,7 @@
     <Content Include="Content\Login.css" />
     <Content Include="Content\One.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\plyr.css" />
     <Content Include="Content\port.css" />
     <Content Include="Content\sitelogo.css" />
     <Content Include="font-awesome-4.7.0\css\font-awesome.css" />
@@ -436,13 +437,6 @@
     <Content Include="bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff2" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Mvc.sitemap" />
     <Content Include="font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
     <Content Include="font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
@@ -477,6 +471,13 @@
     <Content Include="font-awesome-4.7.0\scss\_screen-reader.scss" />
     <Content Include="font-awesome-4.7.0\scss\_stacked.scss" />
     <Content Include="font-awesome-4.7.0\scss\_variables.scss" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -504,6 +505,7 @@
     <Content Include="Scripts\leftnav.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\One.js" />
+    <Content Include="Scripts\plyr.js" />
     <Content Include="Scripts\Popt.js" />
     <Content Include="Scripts\Register.js" />
     <Content Include="Scripts\respond.js" />
@@ -791,7 +793,13 @@
     <Content Include="ueditor\ueditor.config.js" />
     <Content Include="ueditor\ueditor.parse.js" />
     <Content Include="ueditor\ueditor.parse.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Video\0.mp4" />
+    <Content Include="Video\1.mp4" />
+    <Content Include="Video\2.mp4" />
+    <Content Include="Video\movie.mp4" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -879,7 +887,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\FM\" />
     <Folder Include="MusicScore\FM\" />
-    <Folder Include="Video\" />
     <Folder Include="Views\YZM\" />
   </ItemGroup>
   <ItemGroup>

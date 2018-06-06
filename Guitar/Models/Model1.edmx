@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GuitarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="GuitarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Friend">
           <Key>
             <PropertyRef Name="id" />
@@ -171,7 +171,6 @@
           <Property Name="Vi_title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Vi_description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Vi_img" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Vi_type" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Vi_label" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Vi_addtime" Type="datetime" Nullable="false" />
           <Property Name="ReadCount" Type="int" Nullable="false" />
@@ -631,7 +630,8 @@
             <End Role="VideoReply" EntitySet="VideoReply" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GuitarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -699,6 +699,14 @@
           <NavigationProperty Name="MusicScoreComment" Relationship="Self.FK_MusicScoreReply_MusicScoreComment" FromRole="MusicScoreReply" ToRole="MusicScoreComment" />
           <NavigationProperty Name="Users" Relationship="Self.FK_MusicScoreReply_Users" FromRole="MusicScoreReply" ToRole="Users" />
         </EntityType>
+        <EntityType Name="MusicScoreStatistics">
+          <Key>
+            <PropertyRef Name="Ms_id" />
+          </Key>
+          <Property Name="Ms_id" Type="Int32" Nullable="false" />
+          <Property Name="ReadCount" Type="Int32" Nullable="false" />
+          <Property Name="Collection" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Post">
           <Key>
             <PropertyRef Name="Po_id" />
@@ -754,6 +762,14 @@
           <NavigationProperty Name="Post" Relationship="Self.FK_PostReply_Post" FromRole="PostReply" ToRole="Post" />
           <NavigationProperty Name="PostComment" Relationship="Self.FK_PostReply_PostComment" FromRole="PostReply" ToRole="PostComment" />
           <NavigationProperty Name="Users" Relationship="Self.FK_PostReply_Users" FromRole="PostReply" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="PostStatistics">
+          <Key>
+            <PropertyRef Name="Po_id" />
+          </Key>
+          <Property Name="Po_id" Type="Int32" Nullable="false" />
+          <Property Name="ReadCount" Type="Int32" Nullable="false" />
+          <Property Name="Collection" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="t_comment">
           <Key>
@@ -829,7 +845,6 @@
           <NavigationProperty Name="VideoCollection" Relationship="Self.FK_VideoCollection_Video" FromRole="Video" ToRole="VideoCollection" />
           <NavigationProperty Name="VideoComment" Relationship="Self.FK_VideoComment_Video" FromRole="Video" ToRole="VideoComment" />
           <NavigationProperty Name="VideoReply" Relationship="Self.FK_VideoReply_Video" FromRole="Video" ToRole="VideoReply" />
-          <Property Name="Vi_type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="VideoCollection">
           <Key>
@@ -868,6 +883,16 @@
           <NavigationProperty Name="Users" Relationship="Self.FK_VideoReply_Users" FromRole="VideoReply" ToRole="Users" />
           <NavigationProperty Name="Video" Relationship="Self.FK_VideoReply_Video" FromRole="VideoReply" ToRole="Video" />
           <NavigationProperty Name="VideoComment" Relationship="Self.FK_VideoReply_VideoComment" FromRole="VideoReply" ToRole="VideoComment" />
+        </EntityType>
+        <EntityType Name="VideoStatistics">
+          <Key>
+            <PropertyRef Name="Vi_id" />
+            <PropertyRef Name="ReadCount" />
+            <PropertyRef Name="Collection" />
+          </Key>
+          <Property Name="Vi_id" Type="Int32" Nullable="false" />
+          <Property Name="ReadCount" Type="Int32" Nullable="false" />
+          <Property Name="Collection" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_MusicScore_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
@@ -1163,10 +1188,12 @@
           <EntitySet Name="MusicScoreCollection" EntityType="Self.MusicScoreCollection" />
           <EntitySet Name="MusicScoreComment" EntityType="Self.MusicScoreComment" />
           <EntitySet Name="MusicScoreReply" EntityType="Self.MusicScoreReply" />
+          <EntitySet Name="MusicScoreStatistics" EntityType="Self.MusicScoreStatistics" />
           <EntitySet Name="Post" EntityType="Self.Post" />
           <EntitySet Name="PostCollection" EntityType="Self.PostCollection" />
           <EntitySet Name="PostComment" EntityType="Self.PostComment" />
           <EntitySet Name="PostReply" EntityType="Self.PostReply" />
+          <EntitySet Name="PostStatistics" EntityType="Self.PostStatistics" />
           <EntitySet Name="t_comment" EntityType="Self.t_comment" />
           <EntitySet Name="t_customer" EntityType="Self.t_customer" />
           <EntitySet Name="t_item" EntityType="Self.t_item" />
@@ -1175,6 +1202,7 @@
           <EntitySet Name="VideoCollection" EntityType="Self.VideoCollection" />
           <EntitySet Name="VideoComment" EntityType="Self.VideoComment" />
           <EntitySet Name="VideoReply" EntityType="Self.VideoReply" />
+          <EntitySet Name="VideoStatistics" EntityType="Self.VideoStatistics" />
           <AssociationSet Name="FK_MusicScore_Users" Association="Self.FK_MusicScore_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="MusicScore" EntitySet="MusicScore" />
@@ -1271,36 +1299,7 @@
             <End Role="VideoComment" EntitySet="VideoComment" />
             <End Role="VideoReply" EntitySet="VideoReply" />
           </AssociationSet>
-          <EntitySet Name="MusicScoreStatistics" EntityType="GuitarModel.MusicScoreStatistics" />
-          <EntitySet Name="PostStatistics" EntityType="GuitarModel.PostStatistics" />
-          <EntitySet Name="VideoStatistics" EntityType="GuitarModel.VideoStatistics" />
         </EntityContainer>
-        <EntityType Name="MusicScoreStatistics">
-          <Key>
-            <PropertyRef Name="Ms_id" />
-          </Key>
-          <Property Name="Ms_id" Type="Int32" Nullable="false" />
-          <Property Name="ReadCount" Type="Int32" Nullable="false" />
-          <Property Name="Collection" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PostStatistics">
-          <Key>
-            <PropertyRef Name="Po_id" />
-          </Key>
-          <Property Name="Po_id" Type="Int32" Nullable="false" />
-          <Property Name="ReadCount" Type="Int32" Nullable="false" />
-          <Property Name="Collection" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="VideoStatistics">
-          <Key>
-            <PropertyRef Name="Vi_id" />
-            <PropertyRef Name="ReadCount" />
-            <PropertyRef Name="Collection" />
-          </Key>
-          <Property Name="Vi_id" Type="Int32" Nullable="false" />
-          <Property Name="ReadCount" Type="Int32" Nullable="false" />
-          <Property Name="Collection" Type="Int32" Nullable="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1364,6 +1363,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MusicScoreStatistics">
+            <EntityTypeMapping TypeName="GuitarModel.MusicScoreStatistics">
+              <MappingFragment StoreEntitySet="MusicScoreStatistics">
+                <ScalarProperty Name="Ms_id" ColumnName="Ms_id" />
+                <ScalarProperty Name="ReadCount" ColumnName="ReadCount" />
+                <ScalarProperty Name="Collection" ColumnName="Collection" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Post">
             <EntityTypeMapping TypeName="GuitarModel.Post">
               <MappingFragment StoreEntitySet="Post">
@@ -1409,6 +1417,15 @@
                 <ScalarProperty Name="content" ColumnName="content" />
                 <ScalarProperty Name="Addtime" ColumnName="Addtime" />
                 <ScalarProperty Name="User_id" ColumnName="User_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostStatistics">
+            <EntityTypeMapping TypeName="GuitarModel.PostStatistics">
+              <MappingFragment StoreEntitySet="PostStatistics">
+                <ScalarProperty Name="Po_id" ColumnName="Po_id" />
+                <ScalarProperty Name="ReadCount" ColumnName="ReadCount" />
+                <ScalarProperty Name="Collection" ColumnName="Collection" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1463,7 +1480,6 @@
           <EntitySetMapping Name="Video">
             <EntityTypeMapping TypeName="GuitarModel.Video">
               <MappingFragment StoreEntitySet="Video">
-                <ScalarProperty Name="Vi_type" ColumnName="Vi_type" />
                 <ScalarProperty Name="Vi_id" ColumnName="Vi_id" />
                 <ScalarProperty Name="User_id" ColumnName="User_id" />
                 <ScalarProperty Name="Vi_url" ColumnName="Vi_url" />
@@ -1510,30 +1526,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MusicScoreStatistics">
-            <EntityTypeMapping TypeName="GuitarModel.MusicScoreStatistics">
-              <MappingFragment StoreEntitySet="MusicScoreStatistics">
-                <ScalarProperty Name="Collection" ColumnName="Collection" />
-                <ScalarProperty Name="ReadCount" ColumnName="ReadCount" />
-                <ScalarProperty Name="Ms_id" ColumnName="Ms_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PostStatistics">
-            <EntityTypeMapping TypeName="GuitarModel.PostStatistics">
-              <MappingFragment StoreEntitySet="PostStatistics">
-                <ScalarProperty Name="Collection" ColumnName="Collection" />
-                <ScalarProperty Name="ReadCount" ColumnName="ReadCount" />
-                <ScalarProperty Name="Po_id" ColumnName="Po_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VideoStatistics">
             <EntityTypeMapping TypeName="GuitarModel.VideoStatistics">
               <MappingFragment StoreEntitySet="VideoStatistics">
-                <ScalarProperty Name="Collection" ColumnName="Collection" />
-                <ScalarProperty Name="ReadCount" ColumnName="ReadCount" />
                 <ScalarProperty Name="Vi_id" ColumnName="Vi_id" />
+                <ScalarProperty Name="ReadCount" ColumnName="ReadCount" />
+                <ScalarProperty Name="Collection" ColumnName="Collection" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

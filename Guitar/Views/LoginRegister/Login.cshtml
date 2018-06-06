@@ -98,10 +98,10 @@
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-6">
-                @*@Html.CheckBoxFor(model => model.User_email)*@
-                @*@Html.CheckBoxFor(m => m.RememberMe)*@
-
-                <span>记住我</span>
+                @*@Html.CheckBoxFor(model => model)*@
+                @Html.RadioButtonFor(model => model.User_password, true, new { @id = "radio1", @name = "Status",  })
+                <label for="radio1">记住我</label>
+                @*<span>记住我</span>*@
                 <span style="padding-left:155px"><a style="text-decoration:none">忘记密码?</a></span>
             </div>
         </div>

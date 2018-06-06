@@ -4,24 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="caaa1c54671244c0b30a675b42d1e53a" Name="Diagram1">
+      <Diagram DiagramId="4f3dc188d6bf486089fd791a997d5cc1" Name="Diagram1">
         <EntityTypeShape EntityType="GuitarModel.Friend" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GuitarModel.MusicScore" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GuitarModel.MusicScoreCollection" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="GuitarModel.MusicScoreComment" Width="1.5" PointX="8.25" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GuitarModel.MusicScoreReply" Width="1.5" PointX="10.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.MusicScoreStatistics" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GuitarModel.Post" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="GuitarModel.PostCollection" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GuitarModel.PostComment" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="GuitarModel.PostReply" Width="1.5" PointX="10.5" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GuitarModel.t_comment" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GuitarModel.t_customer" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GuitarModel.t_item" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.PostStatistics" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.t_comment" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.t_customer" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.t_item" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GuitarModel.Users" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GuitarModel.Video" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GuitarModel.VideoCollection" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
         <EntityTypeShape EntityType="GuitarModel.VideoComment" Width="1.5" PointX="8.25" PointY="15.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GuitarModel.VideoReply" Width="1.5" PointX="13.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuitarModel.VideoStatistics" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="GuitarModel.FK_MusicScore_Users" ManuallyRouted="false" />
         <AssociationConnector Association="GuitarModel.FK_MusicScoreCollection_MusicScore" ManuallyRouted="false" />
         <AssociationConnector Association="GuitarModel.FK_MusicScoreComment_MusicScore" ManuallyRouted="false" />
@@ -46,9 +49,6 @@
         <AssociationConnector Association="GuitarModel.FK_VideoComment_Video" ManuallyRouted="false" />
         <AssociationConnector Association="GuitarModel.FK_VideoReply_Video" ManuallyRouted="false" />
         <AssociationConnector Association="GuitarModel.FK_VideoReply_VideoComment" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="GuitarModel.MusicScoreStatistics" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="GuitarModel.PostStatistics" Width="1.5" PointX="8.375" PointY="3.75" />
-        <EntityTypeShape EntityType="GuitarModel.VideoStatistics" Width="1.5" PointX="9.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

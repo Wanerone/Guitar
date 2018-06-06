@@ -32,7 +32,6 @@ namespace Guitar.Models
         public System.DateTime Vi_addtime { get; set; }
         public int ReadCount { get; set; }
         public int Collection { get; set; }
-        public string Vi_type { get; set; }
     
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
