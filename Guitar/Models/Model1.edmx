@@ -171,6 +171,7 @@
           <Property Name="Vi_title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Vi_description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Vi_img" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Vi_type" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Vi_label" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Vi_addtime" Type="datetime" Nullable="false" />
           <Property Name="ReadCount" Type="int" Nullable="false" />
@@ -828,6 +829,7 @@
           <NavigationProperty Name="VideoCollection" Relationship="Self.FK_VideoCollection_Video" FromRole="Video" ToRole="VideoCollection" />
           <NavigationProperty Name="VideoComment" Relationship="Self.FK_VideoComment_Video" FromRole="Video" ToRole="VideoComment" />
           <NavigationProperty Name="VideoReply" Relationship="Self.FK_VideoReply_Video" FromRole="Video" ToRole="VideoReply" />
+          <Property Name="Vi_type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="VideoCollection">
           <Key>
@@ -1461,6 +1463,7 @@
           <EntitySetMapping Name="Video">
             <EntityTypeMapping TypeName="GuitarModel.Video">
               <MappingFragment StoreEntitySet="Video">
+                <ScalarProperty Name="Vi_type" ColumnName="Vi_type" />
                 <ScalarProperty Name="Vi_id" ColumnName="Vi_id" />
                 <ScalarProperty Name="User_id" ColumnName="User_id" />
                 <ScalarProperty Name="Vi_url" ColumnName="Vi_url" />

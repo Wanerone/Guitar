@@ -12,5 +12,6 @@ namespace Guitar.ViewModel
         public IEnumerable<Users> Us { set; get; }
         public IEnumerable<MusicScore> MScore1 { get; set; }
         public IEnumerable<MusicViewModel> MusicViewModel1 { get; set; }
+        public IEnumerable<Video> Videos { get; set; }
     }
 }

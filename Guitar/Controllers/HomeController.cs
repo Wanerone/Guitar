@@ -38,12 +38,14 @@ namespace Guitar.Controllers
                               ReadCount = s.ReadCount
                           });
             var users = from m in db.Users.OrderByDescending(p => p.User_addtime) select m;
+            var video = (from m in db.Video.OrderByDescending(p => p.Vi_addtime) select m).Take(10);
             var score2 = new Guitar.ViewModel.IndexViewModel()
             {
                 MScore = scores,
                 Us=users,
                 MScore1 = score1,
                 MusicViewModel1=musicviewmodel1,
+                Videos=video,
             };
             //var score = (from s in (from p in db.MusicScore join o in db.MusicScoreStatistics on p.Ms_id equals o.Ms_id select new { p.Ms_id, p.Ms_title, p.Ms_img, p.Ms_label, o.ReadCount }) orderby s.ReadCount descending select s).Take(3).ToList();
 

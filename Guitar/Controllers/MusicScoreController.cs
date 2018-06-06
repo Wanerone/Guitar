@@ -169,12 +169,12 @@ namespace Guitar.Controllers
             ViewBag.Msid= id;
             TempData["Ms_id2"] = id;
             MusicScore ms = db.MusicScore.Find(id);
-            MusicScoreStatistics msta = db.MusicScoreStatistics.Find(id);
+            //MusicScoreStatistics msta = db.MusicScoreStatistics.Find(id);
             var usid = (from m in db.MusicScore.Where(p => p.Ms_id == id) select m.User_id).FirstOrDefault();
             Users us = db.Users.Find(usid);
             //MusicScoreStatistics msta = db.MusicScoreStatistics.Find(id);
 
-            if (ms == null && msta == null && us == null)
+            if (ms == null  && us == null)
             {
                 return HttpNotFound();
             }
@@ -215,6 +215,7 @@ namespace Guitar.Controllers
             var comment1 = from m in comment.Where(p => p.Ms_id == id).OrderByDescending(p => p.Addtime) select m;
             //var msta = from m in db.MusicScoreStatistics.Where(p => p.Ms_id == id) select m;
             //var msta = from m in db.MusicScoreStatistics where m.Ms_id == id select m;
+            //分页数据
             const int pageSize = 5;
             if (Request.IsAjaxRequest())
             {
@@ -229,7 +230,6 @@ namespace Guitar.Controllers
                 Us = us,
                 MScore = ms,
                 MScore1 = ms1,
-                MSStatistics = msta,
                 MSC = msc,
                 MSR = msr,
                 Msr = msrr,
@@ -325,7 +325,7 @@ namespace Guitar.Controllers
                                         msc.State = 1;
                                         db.MusicScoreCollection.Add(msc);
                                         db.SaveChanges();
-                                        var collection = db.MusicScoreStatistics.Find(Ms_id);
+                                        var collection = db.MusicScore.Find(Ms_id);
                                         collection.Collection = collection.Collection + 1;
                                         db.SaveChanges();
                             return Content("<script>;alert('收藏成功!');history.go(-1)</script>");
@@ -340,7 +340,7 @@ namespace Guitar.Controllers
                     {
                         if (msc1.State == 0)
                         {
-                            var collection = db.MusicScoreStatistics.Find(Ms_id);
+                            var collection = db.MusicScore.Find(Ms_id);
                             collection.Collection = collection.Collection + 1;
                             db.SaveChanges();
                             msc1.State = 1;
@@ -349,7 +349,7 @@ namespace Guitar.Controllers
                         }
                         if (msc1.State == 1)
                         {
-                            var collection = db.MusicScoreStatistics.Find(Ms_id);
+                            var collection = db.MusicScore.Find(Ms_id);
                             collection.Collection = collection.Collection - 1;
                             db.SaveChanges();
                             msc1.State = 0;

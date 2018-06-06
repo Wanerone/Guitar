@@ -35,44 +35,57 @@ namespace Guitar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SavaInfo(Users user)
         {
-            int id = 2;/*Convert.ToInt32(Session["User_id"]);*/
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
-            var birth = Request["birthday"];
-            var address = Request["city"];
-            HttpPostedFileBase postimageBase = Request.Files["Image1"];
-            var sex = Request["Status"];
-            var a = 5;
-          
-            if (!ModelState.IsValid)
+            if(Session["User_id"]!=null)
             {
+                int id =Convert.ToInt32(Session["User_id"]);
+                user = db.Users.Find(id);
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                var birth = Request["birthday"];
+                var address = Request["city"];
+                var name = Request["usename"];
+                var sign = Request["sign"];
+                var sex = Request["browser"];
+                //HttpPostedFileBase postimageBase = Request.Files["Image1"];
 
-                if (postimageBase != null)
+                if (ModelState.IsValid)
                 {
-                    string filePath = postimageBase.FileName;
-                    string filename = filePath.Substring(filePath.LastIndexOf("\\") + 1);
-                    string serverpath = Server.MapPath(@"/Images/headimg/") + filename;
-                    string relativepath = @"/Images/headimg/" + filename;
-                    postimageBase.SaveAs(serverpath);
-                    user.User_img= relativepath;
-                }
 
+                    //if (postimageBase != null)
+                    //{
+                    //    string filePath = postimageBase.FileName;
+                    //    string filename = filePath.Substring(filePath.LastIndexOf("\\") + 1);
+                    //    string serverpath = Server.MapPath(@"/Images/headimg/") + filename;
+                    //    string relativepath = @"/Images/headimg/" + filename;
+                    //    postimageBase.SaveAs(serverpath);
+                    //    user.User_img= relativepath;
+                    //}
+
+                    //else
+                    //{
+                    //    user.User_img = Session["User_img"].ToString();
+
+                    //}
+                    //user.User_name = name;
+                    //user.User_sign = sign;
+                    user.User_birthday = birth;
+                    user.User_addr = address;
+                    user.User_name = name;
+                    user.User_sex = sex;
+                    user.User_sign = sign;
+                    //db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Content("<script>;alert('修改成功!');history.go(-1)</script>");
+                }
                 else
                 {
-                    user.User_img = Session["User_img"].ToString();
-
+                    return Content("<script>;alert('失败,请重试!');history.go(-1)</script>");
                 }
-                user.User_password = db.Users.Find(id).User_password;
-                user.User_addtime = db.Users.Find(id).User_addtime;
-                user.User_birthday = birth;
-                user.User_addr = address;
-                //db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return Content("<script>;alert('修改成功!');history.go(-1)</script>");
             }
             else
             {
-                return Content("<script>;alert('失败,请重试!');history.go(-1)</script>");
+                return Content("<script>;alert('请先登录!');history.go(-1)</script>");
             }
+            
         }
         //获得乐谱
         public ActionResult DisplayScore()

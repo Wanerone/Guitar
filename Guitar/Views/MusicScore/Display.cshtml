@@ -397,8 +397,7 @@ div.menu ul li
 div.menu ul li a, div.menu ul li a:visited
 {
     cursor:pointer;
-    /*background-color: #465c71; /* 背景色 */*/
-    /*border: 1px #4e667d solid; /* 边框 */*/
+
     color: #dde4ec; /* 文字颜色 */
     display: block; /* 此元素将显示为块级元素，此元素前后会带有换行符 */
     line-height: 1.35em; /* 行高 */
@@ -441,7 +440,7 @@ div.menu ul li a:active
         <div class="details">
             <div class="loca">
                 <div class="btn btn-default bt" href="#">
-                    <i class="fa fa-eye" aria-hidden="true"></i>阅读 <a>@Model.MSStatistics.ReadCount</a>
+                    <i class="fa fa-eye" aria-hidden="true"></i>阅读 <a>@Model.MScore.ReadCount</a>
                 </div>
 
                 <div class="btn btn-default bt coll" href="#">
@@ -450,7 +449,7 @@ div.menu ul li a:active
                     {
                         <input type="hidden" name="Ms_id4" value="@Model.MScore.Ms_id" />
                         <a href="javascript:document.getElementById('collection').submit()" onclick="display()">收藏</a>
-                        <a>@Model.MSStatistics.Collection</a>
+                        <a>@Model.MScore.Collection</a>
                     }
 
                 </div>

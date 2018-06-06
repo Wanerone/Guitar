@@ -58,46 +58,59 @@ s{position:absolute;top:1px;right:0;width:32px;height:32px;background:url("~/Ima
     {
         @Html.AntiForgeryToken()
     <table class="table table-bordered">
+        @*<tr>
+            <td>@Html.LabelFor(model => model.User_id, "id", new { htmlAttributes = new { } })</td>
+            <td>
+
+                @Html.EditorFor(model => model.User_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.User_id, "", new { @class = "text-danger" })
+            </td>
+        </tr>*@
         <tr>
             <td><h4>邮箱</h4></td>
             <td>
-                @*@Model.User_email*@
-                @Html.EditorFor(model => model.User_email, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
+                @Model.User_email
+                @*@Html.EditorFor(model => model.User_email, new { htmlAttributes = new { @class = "form-control", @placeholder = "",@id="email" } })*@
             </td>
         </tr>
         <tr>
-            <td>昵称</td>
+            @*<td>@Html.LabelFor(model => model.User_name,"昵称", new { htmlAttributes = new { } })</td>
             <td>
-                @Html.EditorFor(model => model.User_name, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
+
+                @Html.EditorFor(model => model.User_name, new { htmlAttributes = new { @class = "form-control", @placeholder = "" ,@id="usename"} })
                 @Html.ValidationMessageFor(model => model.User_name, "", new { @class = "text-danger" })
-            </td>
-        </tr>
-        <tr>
+            </td>*@
+            <td><h4>昵称</h4></td>
+            <td><input type="text" value="@{@Model.User_name.Trim();} " name="usename" id="usename" /></td>
+</tr>
+        @*<tr>
             <td><h4>密码</h4></td>
             <td>
                 @Html.EditorFor(model => model.User_password, new { htmlAttributes = new { @class = "form-control", @placeholder = "",@style="display:none;"} })
-                *********
+                **********
             </td>
-        </tr>
+        </tr>*@
         <tr>
             <td><h4>性别</h4></td>
             <td>
-                @Html.RadioButtonFor(model => model.User_sex, true, new { @id = "radio1", @name = "Status", @checked="checked" })
+                @*@Html.RadioButtonFor(model => model.User_sex, true, new { @id = "radio1", @name = "Status", @checked="checked" })
                 <label for="radio1">男</label>
                 @Html.RadioButtonFor(model => model.User_sex, false, new { @id = "radio2", @name = "Status" })
                 <label for="radio2">女</label>
-                @Html.ValidationMessageFor(model => model.User_sex, "", new { @class = "text-danger" })
-
+                @Html.ValidationMessageFor(model => model.User_sex, "", new { @class = "text-danger" })*@
+                <input list="browsers" name="browser" id="browser" value="@Model.User_sex" >
+                <datalist id="browsers">
+                    <option value="男">
+                    <option value="女">
+                    <option value="保密">
+                </datalist>
             </td>
         </tr>
-        <tr>
+        @*<tr>
             <td>
                 <h4>选择封面</h4>
             </td>
             <td>
-                @*<input type="file" name="Image1" />*@
-                @*@Html.EditorFor(model => model.Ms_img, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ms_img, "", new { @class = "text-danger" })*@
                 <div class="form-group" id="uploadForm" enctype='multipart/form-data'>
                     <div class="h4">图片预览</div>
                     <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
@@ -116,15 +129,10 @@ s{position:absolute;top:1px;right:0;width:32px;height:32px;background:url("~/Ima
                     </div>
                 </div>
             </td>
-        </tr>
+        </tr>*@
         <tr>
             <td><h4>出生日期</h4></td>
             <td>
-                @*<div id="birth">
-                    <input class="jcDate" style="width:200px; height:20px; line-height:20px; padding:4px;" />
-                </div>
-                <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-                <script src="~/Scripts/jQuery-jcDate.js"></script>*@
                 <input name="birthday" type="text" id="birthday" title="点击选择" onClick="javascript:ShowCalendar(this.id)" size="20">
                 <input type="button" name="Submit" value="选 择" onClick="javascript:ShowCalendar('birthday')">
                 <script src="~/Scripts/birth.js"></script>
@@ -139,8 +147,9 @@ s{position:absolute;top:1px;right:0;width:32px;height:32px;background:url("~/Ima
         <tr>
             <td><h4>个人说明</h4></td>
             <td>
-                @Html.TextAreaFor(model => model.User_sign, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User_sign, "", new { @class = "text-danger" })
+                <input type="text" value="@Model.User_sign" name="sign" id="sign" class="form-control" />
+                @*@Html.TextAreaFor(model => model.User_sign, new { htmlAttributes = new { @class = "form-control",@id="sign" } })
+                @Html.ValidationMessageFor(model => model.User_sign, "", new { @class = "text-danger" })*@
             </td>
         </tr>
         <tr><td></td><td><input type="submit" class="btn btn-info" value="更改" /></td></tr>
