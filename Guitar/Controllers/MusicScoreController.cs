@@ -244,7 +244,7 @@ namespace Guitar.Controllers
         #region 评论乐谱
         [HttpPost]
         //[Login]
-        public string Comment(MusicScoreComment msc, MusicScoreStatistics mss)
+        public string Comment(MusicScoreComment msc)
         {
             string pingluntextarea = Request["pingluntextarea"];
             int Ms_id = Convert.ToInt32(Request["Ms_id"]);
@@ -309,7 +309,7 @@ namespace Guitar.Controllers
         #endregion
         #region 收藏乐谱
         [HttpPost]
-        public ActionResult Collection(MusicScoreCollection msc,MusicScoreStatistics mss)
+        public ActionResult Collection(MusicScoreCollection msc)
         {
             if (Session["Users_id"] != null)
             {

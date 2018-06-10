@@ -50,7 +50,7 @@ namespace Guitar.Controllers
         [ValidateInput(false)]
         public ActionResult Create(Post post)
         {
-            var sel= Request["sel"];
+            var label= Request["label"];
             HttpPostedFileBase postimageBase = Request.Files["Image1"];
             //HttpFileCollectionBase files = Request.Files;
             //HttpPostedFileBase postimageBase = files["Image1"];//获取上传的文件
@@ -77,7 +77,7 @@ namespace Guitar.Controllers
                         }
                         post.User_id = 1;/*Convert.ToInt32(Session["Users_id"].ToString());*/
                         post.Po_addtime = System.DateTime.Now;
-                        post.Po_label = sel;
+                        post.Po_label = label;
                         db.Post.Add(post);
                         db.SaveChanges();
                         //return Content("<script>;alert('发布成功!');window.location.href='/Publish_Food/Index_PF'</script>");
@@ -85,7 +85,7 @@ namespace Guitar.Controllers
                     }
                     else
                     {
-                        return Content("<script>;alert('发布失败！');history.go(-1)</script>");
+                        return Content("<script>;alert('发布失败');history.go(-1)</script>");
                     }
                 }
                 catch (Exception ex)

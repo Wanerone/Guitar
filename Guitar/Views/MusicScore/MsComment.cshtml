@@ -58,12 +58,10 @@
                             <lable id="HFhidden" style="display: none;"></lable>
                             <div class="myreply">
                                 @*@using (Html.BeginForm("Reply", "MusicScore", FormMethod.Post, new { id = "pinglung", @class = "postbox" }))*@
-                                @using (Ajax.BeginForm("Reply", "MusicScore", new AjaxOptions
+                                @using (Ajax.BeginForm("Reply", "Video", new AjaxOptions
                                 {
                                     HttpMethod = "Post",
-                                    //InsertionMode = InsertionMode.Replace,
                                     UpdateTargetId = "HFhidden",
-                                    //OnComplete = "ajaxComplete2"
                                 }))
                                 {
                                     <div class="myimg">

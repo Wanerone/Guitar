@@ -331,8 +331,12 @@
     <Compile Include="ViewModel\MusicCommentReplyViewModel.cs" />
     <Compile Include="ViewModel\MusicDetailsViewModel.cs" />
     <Compile Include="ViewModel\MusicScoreCommentViewModel.cs" />
-    <Compile Include="ViewModel\MusicViewModel.cs" />
+    <Compile Include="ViewModel\PostUserViewModel.cs" />
     <Compile Include="ViewModel\UsersViewModel.cs" />
+    <Compile Include="ViewModel\VideoCommentReplyViewModel.cs" />
+    <Compile Include="ViewModel\VideoCommentViewModel.cs" />
+    <Compile Include="ViewModel\VideoDetailsViewModel.cs" />
+    <Compile Include="ViewModel\VideoUserViewModel.cs" />
     <Compile Include="YZM\ValidateCode.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -363,6 +367,9 @@
     <Content Include="Content\plyr.css" />
     <Content Include="Content\port.css" />
     <Content Include="Content\sitelogo.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Images\addd.jpg" />
+    <Content Include="Images\addv.jpg" />
     <Content Include="font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="font-awesome-4.7.0\css\font-awesome.min.css" />
     <Content Include="font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
@@ -372,11 +379,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\1.jpg" />
-    <Content Include="Images\2.jpg" />
-    <Content Include="Images\3.jpg" />
-    <Content Include="Images\4.jpg" />
-    <Content Include="Images\5.jpg" />
     <Content Include="Images\g1.jpg" />
     <Content Include="Images\g2.jpg" />
     <Content Include="Images\g3.jpg" />
@@ -396,19 +398,15 @@
     <Content Include="Images\lunbo2.jpg" />
     <Content Include="Images\noimage.png" />
     <Content Include="Images\qq.png" />
-    <Content Include="Images\s1.jpg" />
-    <Content Include="Images\s11.jpg" />
-    <Content Include="Images\s2.jpg" />
-    <Content Include="Images\s22.jpg" />
-    <Content Include="Images\s3.jpg" />
-    <Content Include="Images\s4.png" />
-    <Content Include="Images\s5.jpg" />
+    <Content Include="Images\web_heart_animation.png" />
     <Content Include="Images\weixin.jpg" />
     <Content Include="Images\weixin.png" />
     <Content Include="Images\headimg\小埋.jpg" />
     <Content Include="Images\微信.png" />
     <Content Include="Images\微博.png" />
     <Content Include="Images\手机.png" />
+    <Content Include="Images\收藏.png" />
+    <Content Include="Images\收藏选中.png" />
     <Content Include="Images\注册.png" />
     <Content Include="Images\登录.png" />
     <Content Include="Models\Model1.Context.tt">
@@ -793,9 +791,8 @@
     <Content Include="ueditor\ueditor.config.js" />
     <Content Include="ueditor\ueditor.parse.js" />
     <Content Include="ueditor\ueditor.parse.min.js" />
-    <Content Include="Video\0.mp4" />
-    <Content Include="Video\1.mp4" />
     <Content Include="Video\2.mp4" />
+    <Content Include="Video\3.mp4" />
     <Content Include="Video\movie.mp4" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -882,6 +879,9 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\InfoSet.cshtml" />
     <Content Include="Views\Users\Headimg.cshtml" />
+    <Content Include="Views\Video\_details1.cshtml" />
+    <Content Include="Views\Video\VidComment.cshtml" />
+    <Content Include="Views\Video\VidReply.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

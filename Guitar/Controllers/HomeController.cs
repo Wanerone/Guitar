@@ -15,93 +15,49 @@ namespace Guitar.Controllers
         {
             var scores = db.MusicScore.OrderByDescending(p => p.Ms_addtime).FirstOrDefault();
             var score1 = (from p in db.MusicScore select p).OrderByDescending(p => p.Ms_addtime).Take(10);
-            var musicviewmodel = (from s in (from p in db.MusicScore
-                                    join o in db.MusicScoreStatistics on p.Ms_id equals o.Ms_id
-                                    select new
-                                    {
-                                        Ms_id = p.Ms_id,
-                                        Ms_title = p.Ms_title,
-                                        Ms_img = p.Ms_img,
-                                        Ms_label = p.Ms_label,
-                                        User_id = p.User_id,
-                                        ReadCount = o.ReadCount
-                                    })
-                         select s).OrderByDescending(s => s.ReadCount).Take(10);
-            var musicviewmodel1 = (from s in musicviewmodel
-                                   select new MusicViewModel
-                          {
-                              Ms_id = s.Ms_id,
-                              Ms_title = s.Ms_title,
-                              Ms_img = s.Ms_img,
-                              Ms_label = s.Ms_label,
-                              User_id = s.User_id,
-                              ReadCount = s.ReadCount
-                          });
+            var score2= (from p in db.MusicScore select p).OrderByDescending(p => p.ReadCount).Take(10);
+            var video = from m in db.Video
+                     join n in db.Users on m.User_id equals n.User_id
+                     select new VideoUserViewModel
+                     {
+                         Vi_id=m.Vi_id,
+                         Vi_title = m.Vi_title,
+                         Vi_addtime = m.Vi_addtime,
+                         Vi_label=m.Vi_label,
+                         Vi_img=m.Vi_img,
+                         User_id = n.User_id,
+                         User_name = n.User_name,
+                     };
             var users = from m in db.Users.OrderByDescending(p => p.User_addtime) select m;
-            var video = (from m in db.Video.OrderByDescending(p => p.Vi_addtime) select m).Take(10);
-            var score2 = new Guitar.ViewModel.IndexViewModel()
+            var video1 = (from m in video.Where(p=>p.Vi_label=="教学").OrderByDescending(p => p.Vi_addtime) select m).Take(8);
+            var video2 = (from m in video.Where(p => p.Vi_label == "评测").OrderByDescending(p => p.Vi_addtime) select m).Take(10);
+            var video3 = (from m in video.Where(p => p.Vi_label == "专辑").OrderByDescending(p => p.Vi_addtime) select m).Take(10);
+            var post = from m in db.Post
+                        join n in db.Users on m.User_id equals n.User_id
+                        select new PostUserViewModel
+                        {
+                            Po_id = m.Po_id,
+                            Po_title = m.Po_title,
+                            Po_addtime = m.Po_addtime,
+                            Po_label = m.Po_label,
+                            Po_img = m.Po_img,
+                            User_id = n.User_id,
+                            User_name = n.User_name,
+                        };
+            var posts = (from m in post.OrderByDescending(p => p.Po_addtime) select m).Take(12);
+            var index = new Guitar.ViewModel.IndexViewModel()
             {
                 MScore = scores,
                 Us=users,
                 MScore1 = score1,
-                MusicViewModel1=musicviewmodel1,
-                Videos=video,
+                MScore2=score2,
+                Videos1=video1,
+                Videos2=video2,
+                Videos3=video3,
+                Posts=posts,
             };
-            //var score = (from s in (from p in db.MusicScore join o in db.MusicScoreStatistics on p.Ms_id equals o.Ms_id select new { p.Ms_id, p.Ms_title, p.Ms_img, p.Ms_label, o.ReadCount }) orderby s.ReadCount descending select s).Take(3).ToList();
 
-            //ViewData["ss"] = score;
-            //orderby s.ReadCount descending
-            //select s).Take(10);
-            //var score1 = (from s in score
-            //              select new
-            //              {
-            //                  Ms_id = s.Ms_id,
-            //                  Ms_title = s.Ms_title,
-            //                  Ms_img = s.Ms_img,
-            //                  Ms_label = s.Ms_label,
-            //                  User_id = s.User_id,
-            //                  Score = s.Score,
-            //                  Ms_addtime = s.Ms_addtime,
-            //                  //ReadCount = s.ReadCount
-            //              }).ToList();
-
-            //ViewData["scored"] = score;
-            //List<MusicViewModel> lstProduct = new List<MusicViewModel>();
-            //foreach (var s in score1)
-            //{
-            //    MusicViewModel p = new MusicViewModel();
-            //    p.Ms_id = s.Ms_id;
-            //    p.Ms_title = s.Ms_title;
-            //    p.Ms_img = s.Ms_img;
-            //    p.Ms_label = s.Ms_label;
-            //    p.ReadCount = s.ReadCount;
-            //    lstProduct.Add(p);
-            //}
-
-            //var score1 = new Guitar.ViewModel.MusicViewModel();
-            //score1 = score;
-            //{
-            //    //Score = score;
-            //    Ms_id = score.Ms_id,
-            //    Ms_title = x.Ms_title,
-            //    Ms_img = x.Ms_img,
-            //    Ms_label = x.Ms_label,
-            //    ReadCount = x.ReadCount
-            //};
-            //List<MusicScore> musicView = new List<MusicScore>();
-            //var score = (new MusicViewModel()
-            //{
-            //    //Ms_id = x.Ms_id,
-            //    //Ms_title = x.Ms_title,
-            //    //Ms_img = x.Ms_img,
-            //    //Ms_label = x.Ms_label,
-            //    //ReadCount = x.ReadCount
-            //    Score = score;
-            //    });
-
-            //return View(lstProduct);
-            return View(score2);
-            //return View();
+            return View(index);
         }
 
         //public IList<MusicViewModel> GetMusic()

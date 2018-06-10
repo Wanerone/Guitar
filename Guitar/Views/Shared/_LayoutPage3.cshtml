@@ -218,7 +218,7 @@
                     {
                         @Html.AntiForgeryToken()
                         <div class="headimg">
-                            <a class="headimage"><img src="~/Images/head.jpg" class="img-circle img-responsive"  /></a>
+                            <a class="headimage"><img src="@Session["User_img"]" class="img-circle img-responsive"  /></a>
                             <div class="userin">
                                 <div class="name"><a>[@Session["User_name"]]@*[慧然肯来]*@</a></div>
                                 <div class="use">

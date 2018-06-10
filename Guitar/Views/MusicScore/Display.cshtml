@@ -398,7 +398,7 @@ div.menu ul li a, div.menu ul li a:visited
 {
     cursor:pointer;
 
-    color: #dde4ec; /* 文字颜色 */
+   
     display: block; /* 此元素将显示为块级元素，此元素前后会带有换行符 */
     line-height: 1.35em; /* 行高 */
     padding: 4px 4px; /* 内部填充的距离 */
@@ -611,97 +611,6 @@ div.menu ul li a:active
         @Html.Partial("_display1", Model.msc11)
     </div>
     @section scripts{@{Html.RegisterMvcPagerScriptResource();}}
-    @*<div> <span style="background-color: rgb(255, 255, 102);">id="articles"</span> style="width: 100%">
-        @Html.Partial("GetAllComment", Model)
-    </div>
-    <span style="color:#ff0000;background-color: rgb(51, 255, 51);">
-        @section Scripts{@{Html.RegisterMvcPagerScriptResource();}
-        <script src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    }
-</span>*@
-    @*<lable id="PLhidden" style=""></lable>
-
-    <div id="GetAllComment">
-        
-        @{Html.RenderAction("GetAllComment");}
-    </div>*@
-        @*@foreach (MusicScoreComment p in Model.MSC)
-        {
-            <div class="pinlun">
-                <table cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <tr>
-                            <td class="ta1">
-                                <div class="taimg">
-                                    <a href="@Url.Action("UserIndex", new { User_Id = p.Users.User_id })"><img src="@p.Users.User_img" class="img-responsive img-rounded" /></a>
-
-                                </div>
-                                <div class="taname"><a href="@Url.Action("UserIndex", new { User_Id = p.Users.User_id })"></a>@p.Users.User_name</div>
-                            </td>
-                            <td class="ta2">
-                                <div class="taa1">
-                                    <i class="fa fa-user-circle" aria-hidden="true"></i> 发表于  @p.Addtime
-                                </div>
-                                <div class="taa2">
-                                    @p.content
-                                </div>
-
-                                <input type="hidden" name="Ms_id" value="@Model.MScore.Ms_id" />
-                                <input type="hidden" name="Commentid2" value="@p.Ms_commentid" />
-
-                                <div class="fabiao huifu aclick">
-                                    <div style="float:right"><a class="">回复</a></div>
-                                    <div style="clear:both"></div>
-                                </div>
-
-                                <div class="comment">
-                                    @foreach (MusicCommentReplyViewModel m in Model.MSR.Where(n => n.Ms_commentid == p.Ms_commentid))
-                                    {
-                                        <input type="hidden" name="Commentid1" value="@p.Ms_commentid" />
-                                        <div class="huifui1">
-                                            <div class="hui1">
-                                                <div class="huiimg">
-                                                    <a><img src="@m.User_img" class="img-responsive img-rounded" /></a>
-                                                </div>
-                                                <div class="huiother">
-                                                    <div class="r1"><a>@m.User_name</a>  发表于  @m.Addtime</div>
-                                                    <div class="r2">@m.content</div>
-                                                </div>
-                                                <div style="clear:both"></div>
-                                            </div>
-                                        </div>
-                                    }
-
-
-                                    <div class="m aclick">
-                                        <div style="float:right"><a class="">我也来说一句</a></div>
-                                        <div style="clear:both"></div>
-                                    </div>
-                                    <div class="myreply">
-                                        @using (Html.BeginForm("Reply", "MusicScore", FormMethod.Post, new { id = "pinglung", @class = "postbox" }))
-                                        {
-                                            <div class="myimg">
-                                                <img src="@Session["User_img"]" class="img-responsive img-rounded" />
-                                            </div>
-                                            <input type="hidden" name="Ms_id2" value="@Model.MScore.Ms_id" />
-                                            <input type="hidden" name="Commentid" value="@p.Ms_commentid" />
-                                            <div class="mycontent">
-                                                <textarea class="textarea2" name="pingluntextarea2"></textarea>
-                                                <div class="fabiao2">
-                                                    <a href="javascript:document.getElementById('pinglung').submit()" class="btn btn-info">回复</a>
-                                                </div>
-                                            </div>
-                                        }
-
-                                    </div>
-                                </div>
-
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        }*@
       
 
 
