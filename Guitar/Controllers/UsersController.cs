@@ -24,13 +24,52 @@ namespace Guitar.Controllers
         {
             return View();
         }
+        #region 头像更改
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SavaHead(Users user)
+        {
+            int id = 3; /*Convert.ToInt32(Session["User_id"]);*/
+            user = db.Users.Find(id);
+            HttpPostedFileBase postimageBase = Request.Files["Image1"];
+            if (ModelState.IsValid)
+            {
+                if (postimageBase != null)
+                {
+                    string filePath = postimageBase.FileName;
+                    string filename = filePath.Substring(filePath.LastIndexOf("\\") + 1);
+                    string serverpath = Server.MapPath(@"/Images/headimg/") + filename;
+                    string relativepath = @"/Images/headimg/" + filename;
+                    postimageBase.SaveAs(serverpath);
+                    user.User_img = relativepath;
+                }
 
+                else
+                {
+                    user.User_img = Session["User_img"].ToString();
+
+                }
+                db.SaveChanges();
+                return Content("<script>;alert('修改成功!');history.go(-1)</script>");
+
+            }
+            else
+            {
+                return Content("<script>;alert('失败,请重试!');history.go(-1)</script>");
+            }
+
+
+        }
+        #endregion
+            #region 个人基本信息设置
         public ActionResult InfoSet()
         {
             int id = 2; /*Convert.ToInt32(Session["User_id"]);*/
             var user = db.Users.Find(id);
             return View(user);
         }
+        #endregion
+        #region 保存信息修改
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SavaInfo(Users user)
@@ -49,24 +88,6 @@ namespace Guitar.Controllers
 
                 if (ModelState.IsValid)
                 {
-
-                    //if (postimageBase != null)
-                    //{
-                    //    string filePath = postimageBase.FileName;
-                    //    string filename = filePath.Substring(filePath.LastIndexOf("\\") + 1);
-                    //    string serverpath = Server.MapPath(@"/Images/headimg/") + filename;
-                    //    string relativepath = @"/Images/headimg/" + filename;
-                    //    postimageBase.SaveAs(serverpath);
-                    //    user.User_img= relativepath;
-                    //}
-
-                    //else
-                    //{
-                    //    user.User_img = Session["User_img"].ToString();
-
-                    //}
-                    //user.User_name = name;
-                    //user.User_sign = sign;
                     user.User_birthday = birth;
                     user.User_addr = address;
                     user.User_name = name;
@@ -87,6 +108,7 @@ namespace Guitar.Controllers
             }
             
         }
+        #endregion
         //获得乐谱
         public ActionResult DisplayScore()
         {

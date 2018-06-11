@@ -6,9 +6,11 @@
 
 <link href="~/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-<link href="~/Content/amazeui.cropper.css" rel="stylesheet" />
+@*<link href="~/Content/amazeui.cropper.css" rel="stylesheet" />
 <link href="~/Content/amazeui.min.css" rel="stylesheet" />
-<link href="~/Content/custom_up_img.css" rel="stylesheet" />
+<link href="~/Content/custom_up_img.css" rel="stylesheet" />*@
+<link href="~/bootstrap-3.3.7-dist/css/bootstrap-fileinput.css" rel="stylesheet" />
+<script src="~/bootstrap-3.3.7-dist/js/bootstrap-fileinput.js"></script>
 <style>
       #myheadimg{
        background-color: #00a1d6;
@@ -27,11 +29,40 @@
                 font-size: 18px;
                 cursor: default;
         }
+        .toubody{
+            margin-top:90px;
+            text-align:center;
+        }
         .up-img-cover {width: 100px;height: 100px;}
 	.up-img-cover img{width: 100%;}
 </style>
+@using (Html.BeginForm("SavaHead", "Users", new { area = "" }, FormMethod.Post, new { id = "", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
 <div class="tou"><span>我的头像</span></div>
-<center>
+    <div class="toubody">
+        <div class="form-group" id="uploadForm" enctype='multipart/form-data'>
+            <div class="h4">图片预览</div>
+            <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
+                <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                    <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" src="images/noimage.png" alt="" />
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                <div>
+                    <span class="btn btn-primary btn-file">
+                        <span class="fileinput-new">选择文件</span>
+                        <span class="fileinput-exists">换一张</span>
+                        <input type="file" name="Image1" id="Image1" accept="image/gif,image/jpeg,image/x-png">
+                    </span>
+                    <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="保存修改" class="btn btn-primary" />
+    </div>
+
+}
+@*<center>
     <div class="up-img-cover" id="up-img-touch">
         <img class="am-circle" alt="点击图片上传" src="~/Images/headimg/head.jpg" data-am-popover="{content: '点击上传', trigger: 'hover focus'}">
 
@@ -101,4 +132,4 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/amazeui.min.js"></script>
 <script src="~/Scripts/cropper.min.js"></script>
-<script src="~/Scripts/custom_up_img.js"></script>
+<script src="~/Scripts/custom_up_img.js"></script>*@

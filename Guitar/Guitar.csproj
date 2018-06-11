@@ -333,6 +333,7 @@
     <Compile Include="ViewModel\MusicScoreCommentViewModel.cs" />
     <Compile Include="ViewModel\PostUserViewModel.cs" />
     <Compile Include="ViewModel\UsersViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="ViewModel\VideoCommentReplyViewModel.cs" />
     <Compile Include="ViewModel\VideoCommentViewModel.cs" />
     <Compile Include="ViewModel\VideoDetailsViewModel.cs" />
@@ -882,6 +883,7 @@
     <Content Include="Views\Video\_details1.cshtml" />
     <Content Include="Views\Video\VidComment.cshtml" />
     <Content Include="Views\Video\VidReply.cshtml" />
+    <Content Include="ueditor\net\upload\image\20180610\6366426147541855353190588.jpg%40!img_thumb" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

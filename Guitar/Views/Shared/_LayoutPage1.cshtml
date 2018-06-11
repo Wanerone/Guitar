@@ -166,11 +166,6 @@
                     <li class="navfont">@Html.ActionLink("主页", "Index", "Home")</li>
                     <li class="dropdown navfont">
                         @Html.ActionLink("乐谱", "Index", "MusicScore")
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("热门谱子", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("最新谱子", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("热门关注", "Contact", "Home")</li>
-                        </ul>
                     </li>
                     <li class="navfont">@Html.ActionLink("视频", "About", "Home")</li>
                     <li class="navfont">@Html.ActionLink("攻略", "Contact", "Home")</li>
@@ -206,7 +201,7 @@
                                     </div>
                                     <div class="list-left" style="width:50%; float:left;">
                                         <div class="listall"><a href="#"><i class="fa fa-file-text-o fa-fw"></i> 发布管理</a></div>
-                                        <div class="listall"><a href="#"><i class="fa fa-cog fa-fw"></i> 设置中心</a></div>
+                                        <div class="listall"><a href="@Url.Action("InfoSet","Users")"><i class="fa fa-cog fa-fw"></i> 设置中心</a></div>
                                             </div>
                                 </div>
                                 <div class="footuse">

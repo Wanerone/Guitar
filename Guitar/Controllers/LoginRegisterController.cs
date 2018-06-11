@@ -7,7 +7,7 @@ using System.Net.Mail;
 using Guitar.Models;
 using System.Data.Entity.Validation;
 using System.Text;
-
+using Guitar.ViewModel;
 
 namespace Guitar.Controllers
 {
@@ -128,8 +128,17 @@ namespace Guitar.Controllers
                 //{
                 //    return RedirectToAction("Login", "LoginRegister");
                 //}
-                var users = db.Users.Where(o => o.User_email == user.User_email).FirstOrDefault();
-                var user2 = db.Users.Where(o => o.User_email == user.User_email).Where(o => o.User_password == user.User_password).FirstOrDefault();
+                var user1 = from m in db.Users
+                            select new UserViewModel
+                            {
+                                User_id = m.User_id,
+                                User_email = m.User_email,
+                                User_name = m.User_name,
+                                User_password = m.User_password,
+                                User_img=m.User_img,
+                            };
+                var users = user1.Where(o => o.User_email == user.User_email).FirstOrDefault();
+                var user2 = user1.Where(o => o.User_email == user.User_email).Where(o => o.User_password == user.User_password).FirstOrDefault();
                 if (users == null)
                 {
                     return Content("<script>;alert('该账号不存在!');history.go(-1)</script>");
@@ -203,9 +212,17 @@ namespace Guitar.Controllers
                 //return Content("<script>alert('验证码错误！';window.location.href='~/Register/Index')");
                 //return RedirectToAction("Index", "Register");
             }
-
-            var isUserExists = db.Users.Where(a => a.User_name == userInfo.User_name).FirstOrDefault();
-            var isEmailExists = db.Users.Where(a => a.User_email == userInfo.User_email).FirstOrDefault();
+            var user1 = from m in db.Users
+                        select new UserViewModel
+                        {
+                            User_id = m.User_id,
+                            User_email = m.User_email,
+                            User_name = m.User_name,
+                            User_password = m.User_password,
+                            User_img = m.User_img,
+                        };
+            var isUserExists = user1.Where(a => a.User_name == userInfo.User_name).FirstOrDefault();
+            var isEmailExists = user1.Where(a => a.User_email == userInfo.User_email).FirstOrDefault();
 
             if (isUserExists!=null) /*ModelState.AddModelError("User_name", "用户名已被占用");*/return Content("<script>;alert('用户名已被占用！');history.go(-1)</script>");
             if (isEmailExists!=null) /*ModelState.AddModelError("User_email", "邮箱已被注册");*/return Content("<script>;alert('邮箱已被注册！');history.go(-1)</script>");
@@ -226,7 +243,8 @@ namespace Guitar.Controllers
                 HttpContext.Session["User_name"] = userInfo.User_name;
                 HttpContext.Session["User_email"] = userInfo.User_email;
                 HttpContext.Session["User_img"] = userInfo.User_img;
-                return RedirectToAction("Index", "Home");
+                //return RedirectToAction("Index", "Home");
+                return Content("<script>;alert('注册成功!正在跳转到首页..');window.location.href='/Home/Index'</script>");
             }
             catch (DbEntityValidationException dbEx)
             {

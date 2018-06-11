@@ -456,8 +456,9 @@ div.menu ul li a:active
                 <div class="btn btn-default bt" href="#">
                     <i class="fa fa-reply-all" aria-hidden="true"></i> 回复
                 </div>
-                <div class="btn btn-default bt" href="#">
-                    <i class="fa fa-arrow-down" aria-hidden="true"></i> 下载
+                <div class="btn btn-default bt" href="#" id="btn2">
+                    <i class="fa fa-arrow-down" aria-hidden="true"></i> <a href="~/ueditor/net/upload/image/20180507/6366128073598594169974694.png" download="musicscore">下载</a>
+                    @*<i class="fa fa-download" aria-hidden="true" title="下载" onclick="window.open('')"></i>*@
                 </div>
             </div>
 
@@ -627,6 +628,16 @@ div.menu ul li a:active
     //        alert("提交成功");
     //    });
     //});
+//    var $eleBtn2 = $("#btn2");
+//    $eleBtn2.click(function () {
+//        var $eleForm = $("<form method='get'></form>");
+//$eleForm.attr("action", "Guitar\Guitar\ueditor\net\upload\image\20180507\6366128073598594169974694.png");
+
+//        $(document.body).append($eleForm);
+
+//        //提交表单，实现下载
+//        $eleForm.submit();
+//    });
 
         function ajaxComplete() {
             alert("评论成功！");

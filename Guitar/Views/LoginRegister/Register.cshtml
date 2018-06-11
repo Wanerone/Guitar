@@ -1,4 +1,5 @@
-﻿@model Guitar.Models.Users
+﻿@model Guitar.ViewModel.UserViewModel
+@using Guitar.ViewModel
 @{
     ViewBag.Title = "注册";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
@@ -27,6 +28,10 @@
         margin: 30px 0px;
         width: 100px;
         height: 100px;
+    }
+    .valid{
+        color:#ff7517;
+        font-family:'Comic Sans MS';
     }
 </style>
 <script>
@@ -68,7 +73,7 @@
             <div class="col-sm-6">
                 @Html.TextBoxFor(model => model.User_name, new { @class = "form-control", id = "username", style = "width: 300px;" })
                 @*<input style="width: 300px;" class="form-control" id="username">*@
-                @Html.ValidationMessageFor(model => model.User_name)
+                @Html.ValidationMessageFor(model => model.User_name,null,new { @class="valid"})
             </div>
         </div>
         <div class="form-group">
@@ -76,7 +81,7 @@
             <div class="col-sm-6">
                 @Html.TextBoxFor(model => model.User_password, new { @class = "form-control", placeholder = "Password", type = "password", id = "R_password", style = "width: 300px;" })
                 @*<input type="password" style="width: 300px;" class="form-control" id="" placeholder="Password">*@
-                @Html.ValidationMessageFor(model => model.User_password)
+                @Html.ValidationMessageFor(model => model.User_password, null, new { @class = "valid" })
             </div>
         </div>
         <div class="form-group">
@@ -84,7 +89,7 @@
             <div class="col-sm-6">
                 @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "ConfirmPassword", type = "password", id = "ChkUserPwd", name = "ChkUserPwd", style = "width: 300px;" })
                 @*<input type="password" style="width: 300px;" class="form-control" id="ChkUserPwd" name="ChkUserPwd" placeholder="Password">*@
-                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "valid" })
             </div>
         </div>
         <div class="form-group">
@@ -92,7 +97,7 @@
             <div class="col-sm-6">
                 <div style="float: left;">
                     @Html.TextBoxFor(model => model.User_email, new { @class = "form-control", type = "text", id = "phonum", style = "width: 300px;" })
-                    @Html.ValidationMessageFor(model => model.User_email)
+                    @Html.ValidationMessageFor(model => model.User_email, null, new { @class = "valid" })
                     @*<input id="phonum" type="text" class="form-control" style="width: 300px;">*@
                 </div>
                 @*<div style="float: left;">

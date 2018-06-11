@@ -376,9 +376,9 @@
                 </a>
             </div>
             <ul class="list-group">
-                <li><a class="list-group-item" id="zhuye" href="GeRenZhuYe.aspx">个人主页</a></li>
-                <li><a class="list-group-item" id="info" href="InfoSet.aspx">信息设置</a></li>
-                <li><a class="list-group-item" id="myheadimg" href="MyHeadimg.aspx">我的头像</a></li>
+                <li><a class="list-group-item" id="zhuye" href="@Url.Action("","")">个人主页</a></li>
+                <li><a class="list-group-item" id="info" href="@Url.Action("InfoSet","Users")">信息设置</a></li>
+                <li><a class="list-group-item" id="myheadimg" href="@Url.Action("Headimg","Users")">我的头像</a></li>
                 <li><a class="list-group-item" id="myguanzhu" href="MyFriend.aspx">我的关注</a></li>
                 <li><a class="list-group-item" id="mycollection" href="MyCollection.aspx">收藏夹</a></li>
                 <li><a class="list-group-item" id="secure" href="ChangPwd.aspx">安全设置</a></li>
